@@ -50,10 +50,25 @@ static void key_callback(GLFWwindow *window, int key, int scancode, int action, 
         glfwSetWindowShouldClose(window, GLFW_TRUE);
 }
 
+void SetUpProgram(GLuint* program){
+    GLuint vertex_shader = glCreateShader(GL_VERTEX_SHADER);
+    glShaderSource(vertex_shader, 1, &vertex_shader_text, NULL);
+    glCompileShader(vertex_shader);
+
+    GLuint fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(fragment_shader, 1, &fragment_shader_text, NULL);
+    glCompileShader(fragment_shader);
+
+    *program = glCreateProgram();
+    glAttachShader(*program, vertex_shader);
+    glAttachShader(*program, fragment_shader);
+    glLinkProgram(*program);   
+}
+
 int main(void)
 {
     GLFWwindow *window;
-    GLuint vertex_buffer, vertex_shader, fragment_shader, program;
+    GLuint vertex_buffer, program;
     GLint mvp_location, vpos_location, vcol_location;
 
     glfwSetErrorCallback(error_callback);
@@ -82,18 +97,7 @@ int main(void)
     glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    vertex_shader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertex_shader, 1, &vertex_shader_text, NULL);
-    glCompileShader(vertex_shader);
-
-    fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragment_shader, 1, &fragment_shader_text, NULL);
-    glCompileShader(fragment_shader);
-
-    program = glCreateProgram();
-    glAttachShader(program, vertex_shader);
-    glAttachShader(program, fragment_shader);
-    glLinkProgram(program);
+    SetUpProgram(&program);
 
     mvp_location = glGetUniformLocation(program, "MVP");
     vpos_location = glGetAttribLocation(program, "vPos");
