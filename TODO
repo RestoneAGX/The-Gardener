@@ -1,0 +1,15 @@
+- Start loading sprites
+- Shoot based on rotation
+- Game State
+- Timers
+- Integrating player into ECS
+
+- Implement entire ECS
+- Create Shooting {Rotating the guns around the points wanted}
+- Create hitboxes
+- Create cooldowns
+- Create melees
+
+- Creating an enemy
+- Spawning Enemies
+- Global State

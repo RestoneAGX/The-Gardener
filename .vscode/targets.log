@@ -1,0 +1,349 @@
+make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 3.81
+# Copyright (C) 2006  Free Software Foundation, Inc.
+# This is free software; see the source for copying conditions.
+# There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+# This program built for i386-pc-mingw32
+ 
+
+# Make data base, printed on Mon Jun 13 07:12:09 2022
+
+# Variables
+
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# automatic
+?F = $(notdir $?)
+# makefile
+MAKEFLAGS = Rrqp
+# environment
+VSCODE_LOG_NATIVE = false
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# environment
+HOMEDRIVE = C:
+# automatic
+@F = $(notdir $@)
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# makefile
+CURDIR := d:/Projects/C/The Gardener
+# default
+SHELL := sh.exe
+# environment
+WINDIR = C:\WINDOWS
+#  
+environment
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+# environment
+NVM_HOME = D:\Programs\nvm
+# environment
+PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+# makefile (from `makefile', line 1)
+MAKEFILE_LIST :=  makefile
+# environment
+FPS_BROWSER_USER_PROFILE_STRING = Default
+# environment
+TMP = C:\Users\redst\AppData\Local\Temp
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# environment
+PROGRAMW6432 = C:\Program Files
+# environment
+NVM_SYMLINK = C:\Program Files\nodejs
+# environment
+PROGRAMDATA = C:\ProgramData
+# environment
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-468090d0-a581-439a-b21d-6d021159e2f6-sock
+# environment
+VSCODE_CWD = D:\Programs\Microsoft VS Code
+# environment
+PATH = D:\Programs\JDK\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;D:\Programs\Git\cmd;C:\Program Files\dotnet\;C:\Program Files (x86)\GnuWin32\bin;D:\Programs\Programming\Go\bin;D:\Programs\nvm;C:\Program Files\nodejs;D:\Programs\Programming\Python\Scripts\;D:\Programs\Programming\Python\;C:\Users\redst\.cargo\bin;C:\Users\redst\AppData\Local\Microsoft\WindowsApps;D:\Programs\Microsoft VS Code\bin;D:\Programs\programming_language\msgw\x86_64-8.1.0\mingw64\bin;C:\Users\redst\.dotnet\tools;D:\Programs\Programming\Go\bin;D:\Programs\JetBrains\IntelliJ IDEA Community Edition 2022.1\bin;;C:\Users\redst\go\bin;D:\Programs\nvm;C:\Program Files\nodejs;D:\Programs\CMake\bin;
+# environment
+COMMONPROGRAMW6432 = C:\Program Files\Common Files
+# environment
+PROCESSOR_ARCHITECTURE = x86
+# environment
+ONEDRIVE = C:\Users\redst\OneDrive
+# environment
+USERPROFILE = C:\Users\redst
+# environment
+ALLUSERSPROFILE = C:\ProgramData
+# environment
+GOPATH = D:\Programs\programming_language\GoPath
+# environment
+VSCODE_LOG_STACK = false
+# environment
+NUMBER_OF_PROCESSORS = 12
+# environment
+ELECTRON_RUN_AS_NO 
+DE = 1
+# environment
+ANDROID_HOME = D:\Programs\Andriod\SDK
+# default
+.FEATURES := target-specific order-only second-expansion else-if archives
+# automatic
+%F = $(notdir $%)
+# environment
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_9272_IVFRXTJKWMMHJFAV
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+COMPUTERNAME = ASCENDING-BLADE
+# environment
+PROGRAMFILES = C:\Program Files (x86)
+# environment
+DRIVERDATA = C:\Windows\System32\Drivers\DriverData
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# environment
+USERNAME = redst
+# environment
+PUBLIC = C:\Users\Public
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+VSCODE_CODE_CACHE_PATH = C:\Users\redst\AppData\Roaming\Code\CachedData\4af164ea3a06f701fe3e89a2bcbb421d2026b68f
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# environment
+COMMONPROGRAMFILES = C:\Program Files (x86)\Common Files
+# environment
+LOGONSERVER = \\ASCENDING-BLADE
+# environment
+ONEDRIVECONSUMER = C:\Users\redst\OneDr 
+ive
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# environment
+USERDOMAIN = ASCENDING-BLADE
+# environment
+INTELLIJ IDEA COMMUNITY EDITION = D:\Programs\JetBrains\IntelliJ IDEA Community Edition 2022.1\bin;
+# default
+MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
+# environment
+JAVA_HOME = D:\Programs\JDK\
+# default
+MAKE_VERSION := 3.81
+# makefile
+.DEFAULT_GOAL := all
+# environment
+PROGRAMFILES(X86) = C:\Program Files (x86)
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# environment
+LOCALAPPDATA = C:\Users\redst\AppData\Local
+# environment
+PSMODULEPATH = C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
+# default
+MAKE_COMMAND := make.exe
+# environment
+PROCESSOR_ARCHITEW6432 = AMD64
+# default
+.VARIABLES := 
+# automatic
+*F = $(notdir $*)
+# environment
+PROCESSOR_IDENTIFIER = AMD64 Family 23 Model 8 Stepping 2, AuthenticAMD
+# environment
+OS = Windows_NT
+# environment
+VSCODE_IPC_HOOK = \\.\pipe\38868fae9532bae506ceecfd24fef13b-1.68.0-main-sock
+# environment
+HOME 
+PATH = \Users\redst
+# environment
+COMMONPROGRAMFILES(X86) = C:\Program Files (x86)\Common Files
+# environment
+PROMPT = $P$G
+# environment
+MFLAGS = -Rrqp
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+SYSTEMROOT = C:\WINDOWS
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# automatic
++F = $(notdir $+)
+# environment
+APPDATA = C:\Users\redst\AppData\Roaming
+# environment
+TEMP = C:\Users\redst\AppData\Local\Temp
+# environment
+AMDRMPATH = C:\Program Files\AMD\RyzenMaster\
+# environment
+COMSPEC = C:\WINDOWS\system32\cmd.exe
+# default
+MAKEFILES := 
+# automatic
+<F = $(notdir $<)
+# environment
+LC_ALL = C
+# automatic
+^F = $(notdir $^)
+# default
+SUFFIXES := 
+# environment
+SYSTEMDRIVE = C:
+# environment
+SESSIONNAME = Console
+# environment
+PROCESSOR_REVISION = 0802
+# environment
+MAKELEVEL := 0
+# environment
+LANG = C
+# environment
+PROCESSOR_LEVEL = 23
+# environment
+FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
+# environment
+VSCODE_PID = 9272
+# environment
+USERDOMAIN_ROAMINGPROFILE = ASCENDING-BLADE
+# variable s 
+et hash-table stats:
+# Load=96/1024=9%, Rehash=0, Collisions=12/118=10%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# : could not be stat'd.
+# D:\Programs\JDK\bin (key D:/Programs/JDK/bin, mtime 1654446719): 122 files, no impossibilities.
+# C:\Program Files\Common Files\Oracle\Java\javapath (key C:/Program Files/Common Files/Oracle/Java/javapath, mtime 1654445792): 6 files, no impossibilities.
+# D:\Programs\Git\cmd (key D:/Programs/Git/cmd, mtime 1648602290):  
+8 files, no impossibilities.
+# C:\WINDOWS\System32\WindowsPowerShell\v1.0\ (key C:/WINDOWS/System32/WindowsPowerShell/v1.0/, mtime 1648609456): 32 files, no impossibilities.
+# C:\WINDOWS\System32\Wbem (key C:/WINDOWS/System32/Wbem, mtime 1648609456): 155 files, no impossibilities.
+# . (key d:/Projects/C/The Gardener, mtime 1655090415): 11 files, no impossibilities.
+# D:\Programs\JetBrains\IntelliJ IDEA Community Edition 2022.1\bin (key D:/Programs/JetBrains/IntelliJ IDEA Community Edition 2022.1/bin, mtime  
+1651349133): 31 files, no impossibilities.
+# D:\Programs\programming_language\msgw\x86_64-8.1.0\mingw64\bin (key D:/Programs/programming_language/msgw/x86_64-8.1.0/mingw64/bin, mtime 1644112186): 58 files, no impossibilities.
+# C:\Program Files\dotnet\ (key C:/Program Files/dotnet/, mtime 1648941739): 13 files, no impossibilities.
+# C:\Program Files\nodejs (key C:/Program Files/nodejs, mtime 1653094863): 16 files, no impossibilities.
+# C:\Users\redst\.dotnet\tools: could not be stat'd.
+# D:\Programs\nvm (key D:/Programs/nvm, mtime 1653094598): 12 files, no impossibilities.
+# C:\WINDOWS\System32\OpenSSH\: could not be stat'd.
+# C:\Program Files (x86)\Common Files\Oracle\Java\javapath (key C:/Program Files (x86)/Common Files/Oracle/Java/javapath, mtime 1650715899): 5 files, no impossibilities.
+# D:\Programs\CMake\bin (key D:/Programs/CMake/bin, mtime 1654954996): 7 files, no impossibilities.
+# D:\Programs\Programming\Go\bin (key D:/Programs/Programming/Go/bin, mtime 1652533571): 21 files, no impossibilities.
+#  
+C:\WINDOWS (key C:/WINDOWS, mtime 1652405060): 106 files, no impossibilities.
+# C:\Users\redst\.cargo\bin (key C:/Users/redst/.cargo/bin, mtime 1648632463): 14 files, no impossibilities.
+# C:\Users\redst\AppData\Local\Microsoft\WindowsApps (key C:/Users/redst/AppData/Local/Microsoft/WindowsApps, mtime 1654821505): 13 files, no impossibilities.
+# D:\Programs\Microsoft VS Code\bin (key D:/Programs/Microsoft VS Code/bin, mtime 1654813677): 4 files, no impossibilities.
+# C:\WINDOWS\system32 (key C:/WINDOWS/syst 
+em32, mtime 1655089888): 2956 files, no impossibilities.
+# C:\Users\redst\go\bin: could not be stat'd.
+# D:\Programs\Programming\Python\ (key D:/Programs/Programming/Python/, mtime 1649203353): 19 files, no impossibilities.
+# D:\Programs\Programming\Python\Scripts\ (key D:/Programs/Programming/Python/Scripts/, mtime 1649203374): 6 files, no impossibilities.
+# C:\Program Files (x86)\GnuWin32\bin (key C:/Program Files (x86)/GnuWin32/bin, mtime 1651096729): 5 files, no impossibilities.
+
+# 3620 files, no imposs 
+ibilities in 26 directories.
+
+# Implicit Rules
+
+# No implicit rules.
+
+# Files
+
+all: main
+#  Command-line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/2=0%
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+platformer:
+#  Implicit rule search has not been done.
+#  Mo 
+dification time never checked.
+#  File has not been updated.
+#  commands to execute (from `makefile', line 9):
+	gcc -o platformer ./example/platformer.c -Wall -lmingw32 -lSDL2main -lSDL2
+	./platformer.exe
+	del platformer.exe
+	
+
+# Not a target:
+makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-12 14:29:02
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search ha 
+s not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+main:
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `'
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := main
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := 
+# automatic
+# | := 
+# automatic
+# < := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/10=10%
+#  commands t 
+o execute (from `makefile', line 4):
+	gcc -o main main.c -Wall -lmingw32 -lSDL2main -lSDL2
+	./main.exe
+	del main.exe
+	
+
+# files hash-table stats:
+# Load=6/1024=1%, Rehash=0, Collisions=0/20=0%
+# VPATH Search Paths
+
+# No `vpath' search paths.
+
+# No general (`VPATH' variable) search path.
+
+# # of strings in strcache: 1
+# # of strcache buffers: 1
+# strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
+# strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
+
+# Finished Make data base on Mon Jun 13 07:12:09 2022
+
+ 

@@ -1,15 +1,11 @@
-all: build run clean
+all: main
 
-build:
-	gcc -o test program.c ./tools/glad.c -lopengl32 -lglfw3 -lgdi32
+main:
+	gcc -o main main.c -Wall -lmingw32 -lSDL2main -lSDL2
+	./main.exe
+	del main.exe
 
-run:
-	./test.exe
-
-clean:
-	del test.exe
-
-simple:
-	gcc -o simple.exe ./Examples/simple.c ./tools/glad.c -lopengl32 -lglfw3 -lgdi32
-	./simple.exe
-	del simple.exe
+platformer:
+	gcc -o platformer ./example/platformer.c -Wall -lmingw32 -lSDL2main -lSDL2
+	./platformer.exe
+	del platformer.exe
