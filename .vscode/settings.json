@@ -1,6 +1,11 @@
 {
     "makefile.extensionOutputFolder": "./.vscode",
     "files.associations": {
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "sdl.h": "c",
+        "stdlib.h": "c",
+        "ecs.h": "c",
+        "*.tcc": "cpp",
+        "limits": "c"
     }
 }

@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <SDL2/SDL.h>
-#define WIDTH 640
-#define HEIGHT 480
+#define WIDTH 1048
+#define HEIGHT 680
 #define SIZE 200
 #define SPEED 600
 #define GRAVITY 60
@@ -109,12 +109,9 @@ int main(int argc, char* argv[])
     }
     x_pos += x_vel / 60;
     y_pos += y_vel / 60;
-    if (x_pos <= 0)
-      x_pos = 0;
-    if (x_pos >= WIDTH - rect.w)
-      x_pos = WIDTH - rect.w;
-    if (y_pos <= 0)
-      y_pos = 0;
+    if (x_pos <= 0) x_pos = 0;
+    if (x_pos >= WIDTH - rect.w) x_pos = WIDTH - rect.w;
+    if (y_pos <= 0)  y_pos = 0;
     if (y_pos >= HEIGHT - rect.h)
     {
       y_vel = 0;

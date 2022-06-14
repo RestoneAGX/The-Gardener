@@ -1,10 +1,19 @@
-- Start loading sprites
-- Shoot based on rotation
-- Game State
-- Timers
-- Integrating player into ECS
+TODO Tomorrow:
+> Work on Cooldowns
+> Make a weapon
+> Make hitboxes
+> Work on killing an enemy
+> Work on a death State and respawning
+> Work on enemy drops
 
-- Implement entire ECS
+Other:
+X Start loading sprites
+- Shoot based on rotation
+X Game State
+- Timers
+X Integrating player into ECS
+
+? Implement entire ECS
 - Create Shooting {Rotating the guns around the points wanted}
 - Create hitboxes
 - Create cooldowns
@@ -13,3 +22,4 @@
 - Creating an enemy
 - Spawning Enemies
 - Global State
+
