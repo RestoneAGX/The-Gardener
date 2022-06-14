@@ -17,12 +17,12 @@ void *texture_buffer[Texture_Buffer_Length];
 
 typedef struct entity{
     unsigned int indicator : 4;
-    unsigned char id;
+    unsigned int id;
     unsigned char *components;
     void * sprite;
 } entity;
 
-void init_entity(entity* e);
+int init_entity(entity* e);
 
 typedef struct world_array{
     int cap;
@@ -42,12 +42,13 @@ void expand_world(world_array *arr, size_t add_size){ //Watch this function for 
     if (arr->elements != NULL) arr->cap += add_size;
 }
 
-void add_element(world_array *arr, entity newValue){
-    if (arr->size < arr->cap){
-        arr->elements[arr->size] = newValue;
-        arr->size++;
-        init_entity(&arr->elements[arr->size]);
-    }else expand_world(arr, arr->size + 1);
+int add_element(world_array *arr, entity newValue){
+    if (arr->size + 1> arr->cap) expand_world(arr, 1);
+
+    arr->elements[arr->size] = newValue;
+    int err = init_entity(&arr->elements[arr->size]);
+    arr->size++;
+    return err;
 }
 
 int remove_element(world_array *arr, int index){
@@ -79,12 +80,16 @@ void render_world(world_array *arr, SDL_Renderer *renderer){
     // This may cause unexpect behavior due to a lack of testing and possibly weird pointer arithmatic
 }
 
-void init_entity(entity *e){
+int init_entity(entity *e){
     switch(e->id){
-        case 1: e->components = (unsigned char*) malloc(4); // HP, Atk, Def, Speed
-        case 0: e->components = (unsigned char*) malloc(10); //Allocate memory according to ID
+        case 1: e->components = (unsigned char*) calloc(4, 1); // HP, Atk, Def, Speed //Also Place default stats
+        e->components[0] = 20;
+        break;
+        case 0: e->components = (unsigned char*) calloc(10, 1); //Allocate memory according to ID
         break;
     }
+    if (e->components == NULL) return -1;
+    return 0;
 }
 
 void init_presets(void * renderer){

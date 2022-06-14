@@ -1,28 +1,12 @@
 #include <SDL2/SDL.h>
 #include "tools/ECS.h"
-
-// #define Create_Cooldown(offset, bit_to_check, name) \
-// Uint32 callback_##name (Uint32 interval, void * param){ \
-//     cooldowns = BitSet(cooldowns, bit_to_check); \
-// } \
-// SDL_TimerID cooldown_##name_id = SDL_AddTimer((Uint32) (offset), callback_##name, NULL);
+#include "game_state.h"
 
 enum inputs{Left, Right, Up, Down, Dash, Atk};
 
 unsigned char cooldowns = 0; // bits: 1 -> dash; 2 -> ?
 
-// SDL_TimerID dash_cooldown_id;
-
-// Uint32 dash_callback(Uint32 interval, void * param){ 
-//   cooldowns = BitSet(cooldowns, 0);
-//   return dash_cooldown_id;
-// }
-
-// Create_Cooldown((33/10) * 10, 0, dash);
-
-void UpdateTimers(){ //TODO: Add cooldowns here
-  // dash_cooldown_id = SDL_AddTimer((Uint32)30, 0, NULL);
-}
+void UpdateTimers(); //TODO: Add cooldowns here
 
 
 void handleInput(SDL_Event *event, int *game_active, int *keyInput)
@@ -91,9 +75,6 @@ void handleInput(SDL_Event *event, int *game_active, int *keyInput)
 
 void handlePlayerMovement(SDL_FRect *p_sprite, int *directional_inputs)
 {
-  // Take movement input
-  // Muliply by a few factors
-  // Scale those factors to time (slow decay over time or custom timer)
   int speed = 3;
 
   if(directional_inputs[Dash] > 0 && BitCheck(cooldowns, 0)){
@@ -105,4 +86,18 @@ void handlePlayerMovement(SDL_FRect *p_sprite, int *directional_inputs)
 
   p_sprite->x += (-directional_inputs[Left] + directional_inputs[Right]) * speed;
   p_sprite->y += (-directional_inputs[Up] + directional_inputs[Down]) * speed;
+}
+
+void handleCombat(world_array* world, int *inputs){
+  if (inputs[5] == 1){//If Attacking
+    for(int i = 0; i < world->size; i++)
+      if (BitCheck(world->elements[i].indicator, 1) == 0){
+        if((char)world->elements[i].components[0] - 10 > 0)
+          world->elements[i].components[0] -= 10;
+        else
+          remove_element(world, i);
+      }else{
+        add_item(inventory, Inventory_Slots, world->elements[i].id, world->elements[i].components[0]);
+      }
+    }
 }

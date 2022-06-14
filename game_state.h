@@ -15,8 +15,13 @@ enum armor_types {Accessory, Chest, Legs, Shoes};
 unsigned char game_state = 0;
 unsigned char game_location = 0;
 
-unsigned char *armor = (unsigned char *) malloc (Armor_Slots);
-unsigned char *inventory = (unsigned char *) malloc(Inventory_Slots);
+unsigned char *armor;
+unsigned char *inventory;
+
+void init_storage(){
+    armor = (unsigned char *) malloc (Armor_Slots);
+    inventory = (unsigned char *) malloc(Inventory_Slots);
+}
 
 void add_item(unsigned char *storage, size_t max, unsigned char id, unsigned char amount){
     for (int i = 0; i < max; i += 2)

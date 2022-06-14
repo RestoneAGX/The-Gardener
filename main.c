@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
   }
 
   int running = 1;
-  int directional_inputs[6] = {0, 0, 0, 0, 0, 0};
+  int player_inputs[6] = {0, 0, 0, 0, 0, 0};
   SDL_Event event;
 
 
@@ -41,33 +41,25 @@ int main(int argc, char *argv[])
 
   world_array world;
   init_world(&world, 1);
-  add_element(&world, (entity) {.id = 1, .indicator = Renderable,.sprite = &(SDL_FRect){.x = (W_WIDTH - 50) / 2, .y = (W_HEIGHT - 50) / 2, .w = 50, .h = 50}});
 
+  int err = add_element(&world, (entity) {.id = 1, .indicator = Renderable | Item,.sprite = &(SDL_FRect){.x = (W_WIDTH - 50) / 2, .y = (W_HEIGHT - 50) / 2, .w = 50, .h = 50}});
+  if (err == -1) printf("World ptr Init error");
+  
   init_presets(renderer);
+
+  init_storage();
+  
   while (running)
   {
     // UpdateTimers();
-    handleInput(&event, &running, directional_inputs);
-    handlePlayerMovement(player.sprite, directional_inputs);
-
-    // Combat Sys
-    // if (directional_inputs[5] == 1){//If Attacking
-    //   for(int i = 0; i < world.size; i++){
-    //   printf("Enemy HP: %d", world.elements[i].components[0]);
-    //     if (BitCheck(world.elements[i].indicator, 1) == 0){
-    //       if((char)world.elements[i].components[0] - 10 > 0)
-    //         world.elements[i].components[0] -= 10;
-    //       else
-    //         world.elements[i].components[0] = 0;}
-    //   printf("Enemy HP: %d", world.elements[i].components[0]);
-    //   }
-    // }
+    handleInput(&event, &running, player_inputs);
+    handlePlayerMovement(player.sprite, player_inputs);
+    handleCombat(&world, player_inputs);
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
 
     SDL_SetRenderDrawColor(renderer, 128, 235, 255, 255);
-    // SDL_RenderFillRectF(renderer, enemy.sprite);
     render_world(&world, renderer);
 
     SDL_RenderCopyF(renderer, texture_buffer[player.id], NULL, player.sprite);
