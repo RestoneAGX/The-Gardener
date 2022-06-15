@@ -18,6 +18,18 @@ unsigned char game_location = 0;
 unsigned char *armor;
 unsigned char *inventory;
 
+void switch_location(int i, void (*free_world)(void *), void * world){
+    if (game_location == Dungeon) free_world(world);
+    
+    if (i > Dungeon) game_location = Start;
+    else if (i < Start) game_location = Dungeon;
+    else game_location = i;
+
+    // Switch rendering to whichever buffer is needed
+    // Set World = {insert preset buffer or start dungeon generation}
+    // free the world and then init to the size you need
+}
+
 void init_storage(){
     armor = (unsigned char *) malloc (Armor_Slots);
     inventory = (unsigned char *) malloc(Inventory_Slots);
@@ -25,7 +37,7 @@ void init_storage(){
 
 void add_item(unsigned char *storage, size_t max, unsigned char id, unsigned char amount){
     for (int i = 0; i < max; i += 2)
-        if (storage[i] == 0){
+        if (!storage[i]){
             storage[i] = id;
             storage[i+1] = amount;
         }

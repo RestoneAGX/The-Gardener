@@ -1,0 +1,39 @@
+Things I don't like/could make better:
+> THe dashing mechanic (make it into the hold dash)
+X > No cooldown for attack and side
+
+Things I don't want to do:
+> Make levels (UGHGHHGHGHGHGHG)
+> Enemy AI ??? (I don't know about this one yet, it could be very fun)
+
+Things to get done:
+X> Character sprites
+> Multiplayer
+> Dungeon generation
+> Overworld
+> Gardening
+> Moving between the 3
+
+> Rendering method
+> Loot tables
+> Atk cooldown / fire-rate
+> Multiple characters
+> Weapon upgrades
+> Seed mixing
+> Potion crafting
+
+> UI
+> Inventory interface
+> Menus {Death, Starting and farming menus}
+
+> Farming system
+> Farming grid system
+> Farm saving
+> General saving
+> Time system for crops (based on dungeon crawls or some sort of event system)
+
+> Work on animations / visual affects (the sprites don't move, but there are animated vfx)
+> Balanced and fun gameplay with all characters
+> Boss fights
+> Proper collision
+> Room making (making an interpreter and dungeon generation system) (Probably loading a char array and finding a good way to interpret it, maybe make an editor in golang that maps with the sprite sheet)

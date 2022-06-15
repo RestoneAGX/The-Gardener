@@ -14,13 +14,13 @@
 
 typedef struct entity{
     unsigned int indicator : 4;
-    unsigned int id;
-    unsigned char *components;
+    unsigned int id : 8;
     SDL_FRect * sprite;
+    SDL_FRect * src;
+    unsigned char *components;
 } entity;
 
 int init_entity(entity *e, float x, float y){
-    // e->sprite = atlas_buffer[e->id].sprite;
     e->sprite->x = x;
     e->sprite->y = y;
 
@@ -44,11 +44,13 @@ typedef struct world_array{
     entity *elements;
 } world_array;
 
+world_array world;
+
 void init_world(world_array *arr, size_t length){
     arr->size = 0;
     arr->cap = length;
     arr->elements = (entity *) calloc(length, sizeof(*arr->elements));
-    if (arr->elements == NULL) return; //Return some sort of error indicating this
+    if (!arr->elements) return; //Return some sort of error indicating this
 }
 
 void expand_world(world_array *arr, size_t add_size){ //Watch this function for memory bugs [weird outputs]
@@ -85,4 +87,41 @@ void free_world(world_array *arr){
         free(arr->elements->components);
     
     free(arr->elements);
+}
+
+void enemy_loot(int id){
+    //TODO: Uncomment when you have all 3 plr characters
+    // if (id < 3){
+    //     //Drop inventory
+    // }else{}
+    switch(id){
+        case 1:
+        //Drop a basic seed       
+        break;
+        default:
+        break;
+    }
+}
+
+void die(entity *target, int i){
+    //TODO: Uncomment when you have all 3 plr characters
+    // if (target->id < 3){}
+    //     //Kill Player
+    // else{
+        enemy_loot(target->id);
+        remove_element(&world, i);
+    // }
+}
+
+void hitbox(entity *target, int i, int dmg, float hit_point, float range){
+  float target_point = target->sprite->x + target->sprite->y;
+
+  if(abs(target_point - hit_point) <= range){
+    printf("Enemy HP: %i, ", target->components[0]);
+    
+    if((int) target->components[0] - dmg > 0)
+      target->components[0] -= dmg;
+    else
+      die(target, i);
+  }
 }

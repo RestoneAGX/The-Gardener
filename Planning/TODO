@@ -1,0 +1,27 @@
+TODO Tomorrow:
+> Make gun {shooting mechanics, seeds and mob drops fully}
+> Make worlds {Hub, Dungeon, Garden} //Make buffers containing the content of each work (only dynamic is Dungeon so static presets for others)
+
+> Make a weapon {Guns, Sword,}
+X> Make hitboxes
+V> Work on enemy drops
+> Work on a death State and respawning
+
+Other:
+- Slash based on rotation
+
+- Create Shooting {Rotating the guns around the points wanted}
+X Create hitboxes
+
+- Global State
+
+Next Day:
+> Work on UI library
+> Work on setting up menus easily (Probably using some sort of debug tool)
+> Work on setting backgrounds
+> Work on the rendering priority system
+
+> Work on switching state
+> Work on collision
+X Work on hitboxes
+> Time system

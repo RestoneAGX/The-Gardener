@@ -1,0 +1,14 @@
+3 buffers for the world locations:
+> 0 is overworld -> static buffer that has the entrance for the other 2 worlds
+
+> 1 is garden -> static buffer that contains the entire data for the garden. Will contain basic plant containers for the data and the seeds and how long they take to reach their growing season (maybe second session for when they will die)
+
+> 2 is the Dungeon -> static buffer with slots for different rooms (rooms will have their tiles, entrences/entrences [links with other rooms], enemy spawn points [May just be random using any non, blocking tile as a possible spawn location])
+
+<--------------------------------------------------------------------------------->
+
+4 buffers for textures:
+> 0 is entity
+> 1 is tiles
+> 2 is Items
+> 3 is UI

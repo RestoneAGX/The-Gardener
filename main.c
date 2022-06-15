@@ -33,8 +33,8 @@ int main(int argc, char *argv[])
   }
 
   int running = 1;
-  int player_inputs[6] = {0, 0, 0, 0, 0, 0};
   SDL_Event event;
+  int player_inputs[6] = {0, 0, 0, 0, 0, 0};
 
   init_storage();
   init_textures(renderer);
@@ -42,11 +42,13 @@ int main(int argc, char *argv[])
   entity player = atlas_buffer[0]; // Put into an array for multiplayer purposes
   init_entity(&player, (W_WIDTH - 50) / 2, (W_HEIGHT - 50) / 2);
 
-  world_array world;
   init_world(&world, 1);
 
   int err = add_element(&world, atlas_buffer, 1, (W_WIDTH - 50) /2, (W_HEIGHT - 50) / 2);
-  if (err == -1) printf("World ptr Init error");
+  if (err) {
+    printf("World, new entity, ptr Init error");
+    running = 0;
+  }
  
   while (running)
   {
@@ -54,22 +56,22 @@ int main(int argc, char *argv[])
   
     handleInput(&event, &running, player_inputs);
     handlePlayerMovement(player.sprite, player_inputs);
-    handleCombat(&world, &player, player_inputs);
+    handleCombat(&player, player_inputs);
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
 
-    SDL_SetRenderDrawColor(renderer, 128, 235, 255, 255);
-    render_world(&world, renderer);
+    SDL_SetRenderDrawColor(renderer, 128, 235, 255, 100);
+    render_world(renderer);
 
-    SDL_RenderCopyF(renderer, texture_buffer[player.id], NULL, player.sprite);
+    SDL_RenderCopyF(renderer, entity_atlas, &entity_atlas_pos[0], player.sprite);// TODO: Replace Red
 
     SDL_RenderPresent(renderer);
     SDL_Delay(1000 / 60);
   }
 
   free_world(&world);
-  free_texture_buffer();
+  free_texture_buffers();
 
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);
