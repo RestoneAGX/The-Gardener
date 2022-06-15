@@ -8,21 +8,35 @@
 #define BitSet(v,n) (v | (1 << n))
 
 #define __OUT_OF_BOUNDS -2;
-#define Texture_Buffer_Length 20
 
 #define Renderable 0x1
 #define Item 0x2
-
-void *texture_buffer[Texture_Buffer_Length];
 
 typedef struct entity{
     unsigned int indicator : 4;
     unsigned int id;
     unsigned char *components;
-    void * sprite;
+    SDL_FRect * sprite;
 } entity;
 
-int init_entity(entity* e);
+int init_entity(entity *e, float x, float y){
+    // e->sprite = atlas_buffer[e->id].sprite;
+    e->sprite->x = x;
+    e->sprite->y = y;
+
+    switch(e->id){
+        case 1: e->components = (unsigned char*) calloc(4, 1); // HP, Atk, Def, Speed //Also Place default stats
+        e->components[0] = 255;
+        break;
+        case 0: e->components = (unsigned char*) calloc(10, 1); //Allocate memory according to ID
+        e->components[0] = 255;
+        e->components[1] = 5;
+        break;
+    }
+    if (e->components == NULL) return -1;
+    return 0;
+}
+
 
 typedef struct world_array{
     int cap;
@@ -42,11 +56,10 @@ void expand_world(world_array *arr, size_t add_size){ //Watch this function for 
     if (arr->elements != NULL) arr->cap += add_size;
 }
 
-int add_element(world_array *arr, entity newValue){
-    if (arr->size + 1> arr->cap) expand_world(arr, 1);
-
-    arr->elements[arr->size] = newValue;
-    int err = init_entity(&arr->elements[arr->size]);
+int add_element(world_array *arr, entity *atlas, int id, float x, float y){
+    if (arr->size + 1 >= arr->cap) expand_world(arr, 1);
+    arr->elements[arr->size] = atlas[id];
+    int err = init_entity(&arr->elements[arr->size], x, y);
     arr->size++;
     return err;
 }
@@ -72,39 +85,4 @@ void free_world(world_array *arr){
         free(arr->elements->components);
     
     free(arr->elements);
-}
-
-void render_world(world_array *arr, SDL_Renderer *renderer){
-    for (int i = 0; i < arr->size; i++)
-        SDL_RenderCopyF(renderer, texture_buffer[(arr->elements + i)->id], NULL, (arr->elements + i)->sprite);
-    // This may cause unexpect behavior due to a lack of testing and possibly weird pointer arithmatic
-}
-
-int init_entity(entity *e){
-    switch(e->id){
-        case 1: e->components = (unsigned char*) calloc(4, 1); // HP, Atk, Def, Speed //Also Place default stats
-        e->components[0] = 20;
-        break;
-        case 0: e->components = (unsigned char*) calloc(10, 1); //Allocate memory according to ID
-        break;
-    }
-    if (e->components == NULL) return -1;
-    return 0;
-}
-
-void init_presets(void * renderer){
-    SDL_Surface *image = SDL_LoadBMP("cocoa.bmp");
-    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, image);
-
-    // SDL_Surface *vil_img = SDL_LoadBMP("Vanilla.bmp");
-    // SDL_Texture *vil_txt = SDL_CreateTextureFromSurface(renderer, vil_img);
-
-    texture_buffer[0] = texture;
-    texture_buffer[1] = texture;
-    SDL_FreeSurface(image); // REMOVE: if freeing must be done at the end of execution
-}
-
-void free_texture_buffer(){
-    for (int i = 0; i < Texture_Buffer_Length; i++)
-        SDL_DestroyTexture(texture_buffer[i]);
 }
