@@ -83,10 +83,13 @@ void shrink_world(world_array *arr, size_t sub_size){
 }
 
 void free_world(world_array *arr){
-    for (int i = 0; i < arr->size; i++)
+    for (int i = 0; i < arr->size; i++){
         free(arr->elements->components);
+        printf("element %i was sucessfully freed!\n", i);
+    }
     
     free(arr->elements);
+    printf("World was successfully freed!\n");
 }
 
 void enemy_loot(int id){
@@ -114,7 +117,7 @@ void die(entity *target, int i){
 }
 
 void hitbox(entity *target, int i, int dmg, float hit_point, float range){
-  float target_point = target->sprite->x + target->sprite->y;
+  float target_point = target->sprite->x + target->sprite->y + ((target->sprite->w + target->sprite->h)/2);
 
   if(abs(target_point - hit_point) <= range){
     printf("Enemy HP: %i, ", target->components[0]);
@@ -125,3 +128,16 @@ void hitbox(entity *target, int i, int dmg, float hit_point, float range){
       die(target, i);
   }
 }
+
+// void handleEnemyAI(){
+//     for (int i = 0; i < world.size; i++){
+//         switch (world.elements[i].id)
+//         {
+//         case 3:
+//             break;
+        
+//         default:
+//             break;
+//         }
+//     }
+// }

@@ -7,18 +7,19 @@ Things I don't want to do:
 > Enemy AI ??? (I don't know about this one yet, it could be very fun)
 
 Things to get done:
+X> Atk cooldown / fire-rate
 X> Character sprites
+
 > Multiplayer
-> Dungeon generation
 > Overworld
 > Gardening
+> Dungeon generation
 > Moving between the 3
 
 > Rendering method
 > Loot tables
-> Atk cooldown / fire-rate
 > Multiple characters
-> Weapon upgrades
+[Scrapped]> Weapon upgrades
 > Seed mixing
 > Potion crafting
 
@@ -26,14 +27,14 @@ X> Character sprites
 > Inventory interface
 > Menus {Death, Starting and farming menus}
 
-> Farming system
-> Farming grid system
 > Farm saving
 > General saving
+> Farming system
+> Farming grid system
 > Time system for crops (based on dungeon crawls or some sort of event system)
 
-> Work on animations / visual affects (the sprites don't move, but there are animated vfx)
-> Balanced and fun gameplay with all characters
 > Boss fights
 > Proper collision
+> Balanced and fun gameplay with all characters
+> Work on animations / visual affects (the sprites don't move, but there are animated vfx)
 > Room making (making an interpreter and dungeon generation system) (Probably loading a char array and finding a good way to interpret it, maybe make an editor in golang that maps with the sprite sheet)

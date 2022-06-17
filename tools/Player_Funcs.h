@@ -1,17 +1,17 @@
 #include <SDL2/SDL.h>
-#include "tools/ECS.h"
+#include "ECS.h"
 #include "game_state.h"
-#include "tools/Rendering.h"
+#include "Rendering.h"
 
 #define Timer_len 3
-#define atk_range 65
+#define atk_range 10
 
 enum inputs{Left, Right, Up, Down, Dash, Atk, Side};
 
 unsigned char cooldowns = 0; // bits: 1 -> dash; 2 -> atk;
 
 Uint32 timer[Timer_len] = {};
-float timer_max[Timer_len] = {.75, .25, 2};
+float timer_max[Timer_len] = {.75, .25, .5};
 
 void UpdateTimers(){
   for (int i = 0; i < Timer_len; i++){
@@ -33,13 +33,13 @@ void handleInput(SDL_Event *event, int *game_active, int *keyInput)
     if (event->type == SDL_QUIT) *game_active = 0;
 
     else if(event->button.button == SDL_BUTTON_LEFT) {
-      if (event->type == SDL_MOUSEBUTTONDOWN) keyInput[Atk] = 1;
-      else if(event->type == SDL_MOUSEBUTTONUP) keyInput[Atk] = 0;
+        if (event->type == SDL_MOUSEBUTTONDOWN && !BitCheck(cooldowns, 1)) keyInput[Atk] = 1;
+        else if(event->type == SDL_MOUSEBUTTONUP) keyInput[Atk] = 0;
     }
     
     else if(event->button.button == SDL_BUTTON_RIGHT) {
-      if (event->type == SDL_MOUSEBUTTONDOWN) keyInput[Side] = 1;
-      else if(event->type == SDL_MOUSEBUTTONUP) keyInput[Side] = 0;
+        if (event->type == SDL_MOUSEBUTTONDOWN && BitCheck(cooldowns, 2) == 0) keyInput[Side] = 1;
+        else if(event->type == SDL_MOUSEBUTTONUP) keyInput[Side] = 0;
     }
 
     else if (event->type == SDL_KEYDOWN)
@@ -87,6 +87,18 @@ void handleInput(SDL_Event *event, int *game_active, int *keyInput)
       
       case SDL_SCANCODE_LSHIFT: keyInput[Dash] = 0;
       break;
+      
+      case SDL_SCANCODE_F: //Activate Ultimate
+      break;
+
+      case SDL_SCANCODE_Q: 
+      //Inventory_Active = !Inventory_Active; //Toggle inventory
+      game_state = !game_state;
+        break;
+
+      case SDL_SCANCODE_SPACE: inventory[1] = 5;
+      switch_location(game_location +1, free_world, init_world, &world);
+      break;
 
       default:
         break;
@@ -111,26 +123,35 @@ void handlePlayerMovement(SDL_FRect *p_sprite, int *directional_inputs)
 
 void handleCombat(entity* plr, int *inputs){
   if (inputs[Atk] || inputs[Side]){
-    for(int i = 0; i < world.size; i++)
-      if (BitCheck(world.elements[i].indicator, 1) == 0 && (BitCheck(cooldowns, 1) || BitCheck(cooldowns, 2)) == 0){
+    for(int i = 0; i < world.size; i++){
+      if (!BitCheck(world.elements[i].indicator, 1)){
           float ePoint = world.elements[i].sprite->x + world.elements[i].sprite->y;
           float pPoint;
           
-          if (inputs[Atk]){
-            int x, y;
-            SDL_GetMouseState(&x, &y);
-            pPoint = x+y;
-            cooldowns = BitSet(cooldowns, 1);
-          }else{
-            pPoint = plr->sprite->x + plr->sprite->y;
+          if (inputs[Atk]){ // Add switch statement here for different characters
+            if (inventory[1] > 1){
+              int x, y;
+              SDL_GetMouseState(&x, &y);
+              pPoint = x+y;
+              
+              inventory[1]--;
+              printf("Inventory Seeds: %i\n", inventory[0]);
+            }
+
+          }
+
+          if (inputs[Side]){
+            pPoint = plr->sprite->x + plr->sprite->y + ((plr->sprite->w + plr->sprite->h)/2);
             cooldowns = BitSet(cooldowns, 2);
           }
 
           printf("Enemy Point: %f, Player Point: %f, distance: %i\n", ePoint, pPoint, abs(ePoint - pPoint));
 
           hitbox(world.elements + i, i, plr->components[1], pPoint, atk_range);
-      }else{
+      }else if (BitCheck(world.elements[i].indicator, 1)){
         add_item(inventory, Inventory_Slots, world.elements[i].id, world.elements[i].components[0]);
+        remove_element(&world, i);
       }
+    }
   }
 }

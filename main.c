@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include "tools/ECS.h"
-#include "Player_Funcs.h"
+#include "tools/Player_Funcs.h"
 #include "tools/Rendering.h"
+#include "tools/DebugMode.h"
 
 #define W_HEIGHT 680
 #define W_WIDTH 1048
@@ -34,38 +35,51 @@ int main(int argc, char *argv[])
 
   int running = 1;
   SDL_Event event;
-  int player_inputs[6] = {0, 0, 0, 0, 0, 0};
+  int player_inputs[7] = {0, 0, 0, 0, 0, 0, 0};
 
   init_storage();
   init_textures(renderer);
-  
-  entity player = atlas_buffer[0]; // Put into an array for multiplayer purposes
-  init_entity(&player, (W_WIDTH - 50) / 2, (W_HEIGHT - 50) / 2);
+
+  entity player[3];
+  player[0] = atlas_buffer[0]; // Put into an array for multiplayer purposes
+  init_entity(&player[0], (W_WIDTH - 50) / 2, (W_HEIGHT - 50) / 2);
 
   init_world(&world, 1);
 
-  int err = add_element(&world, atlas_buffer, 1, (W_WIDTH - 50) /2, (W_HEIGHT - 50) / 2);
-  if (err) {
-    printf("World, new entity, ptr Init error");
-    running = 0;
-  }
- 
+  add_element(&world, atlas_buffer, 1, (W_WIDTH - 50) / 2, (W_HEIGHT - 50) / 2); // TODO: Do error handling later.
+
+  game_location = Dungeon; //TODO: REMOVE after shfiting base location to Dungeon
+
   while (running)
   {
-    UpdateTimers();
-  
-    handleInput(&event, &running, player_inputs);
-    handlePlayerMovement(player.sprite, player_inputs);
-    handleCombat(&player, player_inputs);
-
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
 
     SDL_SetRenderDrawColor(renderer, 128, 235, 255, 100);
-    render_world(renderer);
+    if (!DebugMode)
+    {
+      handleInput(&event, &running, player_inputs);
 
-    SDL_RenderCopyF(renderer, entity_atlas, &entity_atlas_pos[0], player.sprite);// TODO: Replace Red
+      if (!game_state)
+      {
 
+        UpdateTimers();
+
+        // Handle all players when multiplayer is added
+        handlePlayerMovement(player[0].sprite, player_inputs);
+        handleCombat(&player[0], player_inputs);
+
+        render_world(renderer);
+        // TODO: Render Items here
+        render_players(player, renderer);
+      }
+      else
+      {
+        // TODO: Render UI here
+      }
+    }else{
+      debugInput(&event, &running);
+    }
     SDL_RenderPresent(renderer);
     SDL_Delay(1000 / 60);
   }

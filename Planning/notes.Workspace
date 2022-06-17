@@ -12,3 +12,12 @@
 > 1 is tiles
 > 2 is Items
 > 3 is UI
+
+// Rect taht will perform a function if the mouse is clicked within it's area
+// Text Display
+
+If in UI state ->
+>> if mouse is pressed
+>> Loop through the elements
+>> find one within that position
+>> Call the function within || use a jumptable of UI functions

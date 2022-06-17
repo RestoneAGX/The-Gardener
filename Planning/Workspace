@@ -5,6 +5,8 @@ ON_LIST:
 > RNG
 
 > Mob drops {RNG usage}
-> Weapon System
 
 Complete:
+> Fixed a combat bug
+> Seed limit added
+> Sprite rotation tested
