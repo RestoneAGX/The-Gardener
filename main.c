@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include "tools/ECS.h"
-#include "tools/Player_Funcs.h"
 #include "tools/Rendering.h"
 #include "tools/DebugMode.h"
+#include "tools/Player_Funcs.h"
 
 #define W_HEIGHT 680
 #define W_WIDTH 1048
@@ -32,7 +32,6 @@ int main(int argc, char *argv[])
     SDL_Quit();
     return -1;
   }
-
   int running = 1;
   SDL_Event event;
   int player_inputs[7] = {0, 0, 0, 0, 0, 0, 0};
@@ -41,14 +40,15 @@ int main(int argc, char *argv[])
   init_textures(renderer);
 
   entity player[3];
-  player[0] = atlas_buffer[0]; // Put into an array for multiplayer purposes
+  player[0] = entity_buffer[0]; // Put into an array for multiplayer purposes
   init_entity(&player[0], (W_WIDTH - 50) / 2, (W_HEIGHT - 50) / 2);
 
   init_world(&world, 1);
 
-  add_element(&world, atlas_buffer, 1, (W_WIDTH - 50) / 2, (W_HEIGHT - 50) / 2); // TODO: Do error handling later.
+  add_element(&world, entity_buffer, 1, (W_WIDTH - 50) / 2, (W_HEIGHT - 50) / 2); // TODO: Do error handling later.
 
   game_location = Dungeon; //TODO: REMOVE after shfiting base location to Dungeon
+
 
   while (running)
   {
@@ -79,6 +79,7 @@ int main(int argc, char *argv[])
       }
     }else{
       debugInput(&event, &running);
+      render_background(renderer);
     }
     SDL_RenderPresent(renderer);
     SDL_Delay(1000 / 60);

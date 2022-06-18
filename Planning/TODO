@@ -1,6 +1,6 @@
 TODO Tomorrow:
 > Finish Debug Menu and editor
-> Finish debugging switching game state
+X > Finish debugging switching game state
 
 
 > Make worlds {Hub, Dungeon, Garden} //Make buffers containing the content of each work (only dynamic is Dungeon so static presets for others)

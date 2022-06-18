@@ -9,14 +9,13 @@
 
 #define __OUT_OF_BOUNDS -2;
 
-#define Renderable 0x1
-#define Item 0x2
+#define Item 0x1
 
 typedef struct entity{
     unsigned int indicator : 4;
     unsigned int id : 8;
     SDL_FRect * sprite;
-    SDL_FRect * src;
+    SDL_Rect * src;
     unsigned char *components;
 } entity;
 
@@ -36,7 +35,6 @@ int init_entity(entity *e, float x, float y){
     if (e->components == NULL) return -1;
     return 0;
 }
-
 
 typedef struct world_array{
     int cap;

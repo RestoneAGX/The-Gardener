@@ -2,6 +2,7 @@
     "makefile.extensionOutputFolder": "./.vscode",
     "files.associations": {
         "rendering.h": "c",
-        "sdl.h": "c"
+        "sdl.h": "c",
+        "ecs.h": "c"
     }
 }

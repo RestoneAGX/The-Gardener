@@ -7,6 +7,7 @@ ON_LIST:
 > Mob drops {RNG usage}
 
 Complete:
-> Fixed a combat bug
-> Seed limit added
-> Sprite rotation tested
+> Switching Game Location fixed
+> Fixed Spritesheet loading bug (crashed game due to not having the spritesheets available)
+> Made code more readable
+> 

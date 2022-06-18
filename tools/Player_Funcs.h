@@ -97,7 +97,8 @@ void handleInput(SDL_Event *event, int *game_active, int *keyInput)
         break;
 
       case SDL_SCANCODE_SPACE: inventory[1] = 5;
-      switch_location(game_location +1, free_world, init_world, &world);
+      // switch_location(game_location +1);
+      DebugMode = !DebugMode;
       break;
 
       default:
