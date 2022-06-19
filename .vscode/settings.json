@@ -3,6 +3,7 @@
     "files.associations": {
         "rendering.h": "c",
         "sdl.h": "c",
-        "ecs.h": "c"
+        "ecs.h": "c",
+        "game_state.h": "c"
     }
 }

@@ -7,7 +7,4 @@ ON_LIST:
 > Mob drops {RNG usage}
 
 Complete:
-> Switching Game Location fixed
-> Fixed Spritesheet loading bug (crashed game due to not having the spritesheets available)
-> Made code more readable
 > 

@@ -54,10 +54,10 @@ void render_world(SDL_Renderer *renderer)
 void init_textures(SDL_Renderer *renderer)
 {
     const char *name[4] = { // Fill the sheets in reverse (since the smaller sheets are ironically last)
-        "entity_sheet.bmp",
-        "Tile_Sheet.bmp",
-        "Item_Sheet.bmp",
-        "UI_Sheet.bmp",
+        "Resources/entity_sheet.bmp",
+        "Resources/Tile_Sheet.bmp",
+        "Resources/Item_Sheet.bmp",
+        "Resources/UI_Sheet.bmp",
     };
 
     for (int i = 0; i < 2; i++)

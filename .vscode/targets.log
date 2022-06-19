@@ -8,7 +8,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # This program built for i386-pc-mingw32
  
 
-# Make data base, printed on Sat Jun 18 13:51:17 2022
+# Make data base, printed on Sat Jun 18 22:19:01 2022
 
 # Variables
 
@@ -53,11 +53,12 @@ VSCODE_VERBOSE_LOGGING = true
 # environment
 PROGRAMW6432 = C:\Program Files
 # environment
-NVM_SYMLINK = C:\Program Files\nodejs
+NVM_SYMLINK  
+= C:\Program Files\nodejs
 # environment
 PROGRAMDATA = C:\ProgramData
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-d9026c4d-2982-4efa-a2b6-393ef7087f6a-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-102f7353-af24-492d-9c97-1d3ef0475fbb-sock
 # environment
 VSCODE_CWD = D:\Programs\Microsoft VS Code
 # environment
@@ -87,7 +88,7 @@ ANDROID_HOME = D:\Programs\Andriod\SDK
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_11492_YYZFXVXCOFVSKWPU
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_5292_VYISVLKWZVDRCGQG
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
@@ -97,7 +98,8 @@ PROGRAMFILES = C:\Program Files (x86)
 # environment
 DRIVERDATA = C:\Windows\System32\Drivers\DriverData
 # environment
-ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+ORIGINAL_XDG_CURRENT_DESKTOP = undefin 
+ed
 # environment
 USERNAME = redst
 # environment
@@ -113,7 +115,8 @@ COMMONPROGRAMFILES = C:\Program Files (x86)\Common Files
 # environment
 LOGONSERVER = \\ASCENDING-BLADE
 # environment
-ONEDRIVECONSUMER = C:\Users\redst\OneDrive
+ONEDRIVECONSUMER = C:\Users\redst\OneDr 
+ive
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # environment
@@ -135,7 +138,8 @@ PROGRAMFILES(X86) = C:\Program Files (x86)
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
-LOCALAPPDATA = C:\Users\redst\AppData\Local
+LOCALAPPDATA =  
+C:\Users\redst\AppData\Local
 # environment
 PSMODULEPATH = C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
 # default
@@ -153,7 +157,8 @@ OS = Windows_NT
 # environment
 VSCODE_IPC_HOOK = \\.\pipe\38868fae9532bae506ceecfd24fef13b-1.68.1-main-sock
 # environment
-HOMEPATH = \Users\redst
+HOME 
+PATH = \Users\redst
 # environment
 COMMONPROGRAMFILES(X86) = C:\Program Files (x86)\Common Files
 # environment
@@ -175,7 +180,8 @@ TEMP = C:\Users\redst\AppData\Local\Temp
 # environment
 AMDRMPATH = C:\Program Files\AMD\RyzenMaster\
 # environment
-COMSPEC = C:\WINDOWS\system32\cmd.exe
+COMSPEC = C:\WINDOW 
+S\system32\cmd.exe
 # default
 MAKEFILES := 
 # automatic
@@ -201,10 +207,11 @@ PROCESSOR_LEVEL = 23
 # environment
 FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
 # environment
-VSCODE_PID = 11492
+VSCODE_PID = 5292
 # environment
 USERDOMAIN_ROAMINGPROFILE = ASCENDING-BLADE
-# variable set hash-table stats:
+# variable s 
+et hash-table stats:
 # Load=96/1024=9%, Rehash=0, Collisions=12/118=10%
 
 # Pattern-specific Variable Values
@@ -216,16 +223,18 @@ USERDOMAIN_ROAMINGPROFILE = ASCENDING-BLADE
 # : could not be stat'd.
 # D:\Programs\JDK\bin (key D:/Programs/JDK/bin, mtime 1654446719): 122 files, no impossibilities.
 # C:\Program Files\Common Files\Oracle\Java\javapath (key C:/Program Files/Common Files/Oracle/Java/javapath, mtime 1654445792): 6 files, no impossibilities.
-# D:\Programs\Git\cmd (key D:/Programs/Git/cmd, mtime 1648602290): 8 files, no impossibilities.
+# D:\Programs\Git\cmd (key D:/Programs/Git/cmd, mtime 1648602290):  
+8 files, no impossibilities.
 # C:\WINDOWS\System32\WindowsPowerShell\v1.0\ (key C:/WINDOWS/System32/WindowsPowerShell/v1.0/, mtime 1648609456): 32 files, no impossibilities.
 # C:\WINDOWS\System32\Wbem (key C:/WINDOWS/System32/Wbem, mtime 1655329735): 155 files, no impossibilities.
-# . (key d:/Projects/C/The Gardener, mtime 1655574412): 13 files, no impossibilities.
+# . (key d:/Projects/C/The Gardener, mtime 1655578113): 11 files, no impossibilities.
 # D:\Programs\JetBrains\IntelliJ IDEA Community Edition 2022.1\bin (key D:/Programs/JetBrains/IntelliJ IDEA Community Edition 2022.1/bin, mtime 1651349133): 31 files, no impossibilities.
 # D:\Programs\programming_language\msgw\x86_64-8.1.0\mingw64\bin (key D:/Programs/programming_language/msgw/x86_64-8.1.0/mingw64/bin, mtime 1644112186): 58 files, no impossibilities.
 # C:\Program Files\dotnet\ (key C:/Program Files/dotnet/, mtime 1648941739): 13 files, no impossibilities.
 # C:\Program Files\nodejs (key C:/Program Files/nodejs, mtime 1653094863): 16 files, no impossibilities.
 # C:\Users\redst\.dotnet\tools: could not be stat'd.
-# D:\Programs\nvm (key D:/Programs/nvm, mtime 1653094598): 12 files, no impossibilities.
+# D:\Programs\nvm (ke 
+y D:/Programs/nvm, mtime 1653094598): 12 files, no impossibilities.
 # C:\WINDOWS\System32\OpenSSH\: could not be stat'd.
 # C:\Program Files (x86)\Common Files\Oracle\Java\javapath (key C:/Program Files (x86)/Common Files/Oracle/Java/javapath, mtime 1650715899): 5 files, no impossibilities.
 # D:\Programs\CMake\bin (key D:/Programs/CMake/bin, mtime 1654954996): 7 files, no impossibilities.
@@ -234,14 +243,15 @@ USERDOMAIN_ROAMINGPROFILE = ASCENDING-BLADE
 # C:\Users\redst\.cargo\bin (key C:/Users/redst/.cargo/bin, mtime 1648632463): 14 files, no impossibilities.
 # C:\Users\redst\AppData\Local\Microsoft\WindowsApps (key C:/Users/redst/AppData/Local/Microsoft/WindowsApps, mtime 1654821505): 13 files, no impossibilities.
 # D:\Programs\Microsoft VS Code\bin (key D:/Programs/Microsoft VS Code/bin, mtime 1655324714): 4 files, no impossibilities.
-# C:\WINDOWS\system32 (key C:/WINDOWS/system32, mtime 1655522053): 2958 files, no impossibilities.
+# C:\WINDOWS\system32 (key C:/WINDOWS/syst 
+em32, mtime 1655603535): 2958 files, no impossibilities.
 # C:\Users\redst\go\bin: could not be stat'd.
 # D:\Programs\Programming\Python\ (key D:/Programs/Programming/Python/, mtime 1649203353): 19 files, no impossibilities.
 # D:\Programs\Programming\Python\Scripts\ (key D:/Programs/Programming/Python/Scripts/, mtime 1649203374): 6 files, no impossibilities.
 # C:\Program Files (x86)\GnuWin32\bin (key C:/Program Files (x86)/GnuWin32/bin, mtime 1651096729): 5 files, no impossibilities.
 
-# 3624 files, no impo 
-ssibilities in 26 directories.
+# 3622 files, no imposs 
+ibilities in 26 directories.
 
 # Implicit Rules
 
@@ -285,7 +295,8 @@ makefile:
 
 # Not a target:
 .SUFFIXES:
-#  Implicit rule search has not been done.
+#  Implicit rule search ha 
+s not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
@@ -332,6 +343,7 @@ main:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Sat Jun 18 13:51:17 2022
+# Finished Make data base o 
+n Sat Jun 18 22:19:01 2022
 
  

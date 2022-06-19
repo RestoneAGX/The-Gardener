@@ -1,6 +1,7 @@
 #pragma once
 #include "ECS.h"
 #include <stdlib.h>
+#include "Rendering.h"
 
 #define In_Game 0
 #define UI 1
@@ -28,7 +29,7 @@ unsigned char DebugMode = 0;
 
 entity background[50] = {};
 
-void switch_location(int i){
+void switch_location(int i, entity e_buffer[]){
     if (i > Dungeon) game_location = Hub;
     else if (i < Hub) game_location = Dungeon;
     else game_location = i;
@@ -48,6 +49,7 @@ void switch_location(int i){
 
         case Dungeon:
         init_world(&world, 50);
+        add_element(&world, e_buffer, 1, (1048 - 50) / 2, (680 - 50) / 2); // TODO: Do error handling later.
         // Buffer itself has a finite size
         // Generate a dungeon with rooms
         // Load the first room into the buffer (The doors will choose which part of the dungeon will be loaded next into the render buffer)

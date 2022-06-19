@@ -1,0 +1,21 @@
+ECS:
+-------------
+Entity:
+> ID (indicates thier img and can be changed for the sake of upgrade attributes)
+> Components
+> Position
+
+(int 1): indicator
+[1]-> Renderable
+[2]-> static
+[3]-> UI
+[4]-> Item // 0 means entity
+
+
+Player {hp, def, speed, special?}
+Archer {hp, def, speed, special?} {Fire rate, arrow dmg, arrow}
+Mantis {Basic stats} {attack rate, attack range}
+
+
+BOSSES:
+> Sheif {Stats} {2 States (Sword and gun) inside of attack state}`
