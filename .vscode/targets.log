@@ -8,7 +8,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # This program built for i386-pc-mingw32
  
 
-# Make data base, printed on Sat Jun 25 21:38:29 2022
+# Make data base, printed on Sun Jun 26 10:52:43 2022
 
 # Variables
 
@@ -53,11 +53,12 @@ VSCODE_VERBOSE_LOGGING = true
 # environment
 PROGRAMW6432 = C:\Program Files
 # environment
-NVM_SYMLINK = C:\Program Files\nodejs
+NVM_SYMLINK  
+= C:\Program Files\nodejs
 # environment
 PROGRAMDATA = C:\ProgramData
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-5e6a1869-5399-485d-bf7d-748d4988b9f3-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-b6cc53a2-b5b8-48e3-a536-12ced4bf0c43-sock
 # environment
 VSCODE_CWD = D:\Programs\Microsoft VS Code
 # environment
@@ -87,7 +88,7 @@ ANDROID_HOME = D:\Programs\Andriod\SDK
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_13676_WLZGCOMPWNXOUJCJ
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_13012_MMVWXXHXAZWYAIRU
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
@@ -97,7 +98,8 @@ PROGRAMFILES = C:\Program Files (x86)
 # environment
 DRIVERDATA = C:\Windows\System32\Drivers\DriverData
 # environment
-ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+ORIGINAL_XDG_CURRENT_DESKTOP = undefin 
+ed
 # environment
 USERNAME = redst
 # environment
@@ -135,7 +137,8 @@ PROGRAMFILES(X86) = C:\Program Files (x86)
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
-LOCALAPPDATA = C:\Users\redst\AppData\Local
+LOCALAPPDATA =  
+C:\Users\redst\AppData\Local
 # environment
 PSMODULEPATH = C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
 # default
@@ -202,10 +205,11 @@ PROCESSOR_LEVEL = 23
 # environment
 FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
 # environment
-VSCODE_PID = 13676
+VSCODE_PID = 13012
 # environment
 USERDOMAIN_ROAMINGPROFILE = ASCENDING-BLADE
-# variable set hash-table stats:
+# variable  
+set hash-table stats:
 # Load=96/1024=9%, Rehash=0, Collisions=12/118=10%
 
 # Pattern-specific Variable Values
@@ -220,13 +224,15 @@ USERDOMAIN_ROAMINGPROFILE = ASCENDING-BLADE
 # D:\Programs\Git\cmd (key D:/Programs/Git/cmd, mtime 1648602290): 8 files, no impossibilities.
 # C:\WINDOWS\System32\WindowsPowerShell\v1.0\ (key C:/WINDOWS/System32/WindowsPowerShell/v1.0/, mtime 1648609456): 32 files, no impossibilities.
 # C:\WINDOWS\System32\Wbem (key C:/WINDOWS/System32/Wbem, mtime 1655329735): 155 files, no impossibilities.
-# . (key d:/Projects/C/The Gardener, mtime 1656181471): 11 files, no impossibilities.
-# D:\Programs\JetBrains\IntelliJ IDEA Community Edition 2022.1\bin (key D:/Programs/JetBrains/IntelliJ IDEA Community Edition 2022.1/bin, mtime 1651349133): 31 files, no impossibilities.
+# . (key d:/Projects/C/The Gardener, mtime 1656207896): 11 files, no impossibilities.
+# D:\Programs\JetBrains\IntelliJ IDEA Community Edition 2022.1\bin (key D:/Programs/JetBrains/IntelliJ IDEA Community Edition 2022.1/bin, mtime 
+ 1651349133): 31 files, no impossibilities.
 # D:\Programs\programming_language\msgw\x86_64-8.1.0\mingw64\bin (key D:/Programs/programming_language/msgw/x86_64-8.1.0/mingw64/bin, mtime 1644112186): 58 files, no impossibilities.
 # C:\Program Files\dotnet\ (key C:/Program Files/dotnet/, mtime 1648941739): 13 files, no impossibilities.
 # C:\Program Files\nodejs (key C:/Program Files/nodejs, mtime 1653094863): 16 files, no impossibilities.
 # C:\Users\redst\.dotnet\tools: could not be stat'd.
-# D:\Programs\nvm (key D:/Programs/nvm, mtime 1653094598): 12 files, no impossibilities.
+# D:\Programs\nvm (k 
+ey D:/Programs/nvm, mtime 1653094598): 12 files, no impossibilities.
 # C:\WINDOWS\System32\OpenSSH\: could not be stat'd.
 # C:\Program Files (x86)\Common Files\Oracle\Java\javapath (key C:/Program Files (x86)/Common Files/Oracle/Java/javapath, mtime 1650715899): 5 files, no impossibilities.
 # D:\Programs\CMake\bin (key D:/Programs/CMake/bin, mtime 1654954996): 7 files, no impossibilities.
@@ -236,13 +242,14 @@ USERDOMAIN_ROAMINGPROFILE = ASCENDING-BLADE
 # C:\Users\redst\.cargo\bin (key C:/Users/redst/.cargo/bin, mtime 1648632463): 14 files, no impossibilities.
 # C:\Users\redst\AppData\Local\Microsoft\WindowsApps (key C:/Users/redst/AppData/Local/Microsoft/WindowsApps, mtime 1656170040): 13 files, no impossibilities.
 # D:\Programs\Microsoft VS Code\bin (key D:/Programs/Microsoft VS Code/bin, mtime 1655324714): 4 files, no impossibilities.
-# C:\WINDOWS\system32 (key C:/WINDOWS/system32, mtime 1656206704): 2958 files, no impossibilities.
+# C:\WINDOWS\system32 (key C:/WINDOWS/system32, mtime 1656221170): 2958 files, no impossibilities.
 # C:\Users\redst\go\bin: could not be stat'd.
 # D:\Programs\Programming\Python\ (key D:/Programs/Programming/Python/, mtime 1649203353): 19 files, no impossibilities.
 # D:\Programs\Programming\Python\Scripts\ (key D:/Programs/Programming/Python/Scripts/, mtime 1649203374): 6 files, no impossibilities.
 # C:\Program Files (x86)\GnuWin32\bin (key C:/Program Files (x86)/GnuWin32/bin, mtime 1651096729): 5 files, no impossibilities.
 
-# 3623 files, no impossibilities in 26 directories.
+# 3623 files, no impos 
+sibilities in 26 directories.
 
 # Implicit Rules
 
@@ -267,7 +274,8 @@ all: main
 
 platformer:
 #  Implicit rule search has not been done.
-#  Modification time never checked.
+#  M 
+odification time never checked.
 #  File has not been updated.
 #  commands to execute (from `makefile', line 9):
 	gcc -o platformer ./example/platformer.c -Wall -lmingw32 -lSDL2main -lSDL2
@@ -334,6 +342,7 @@ main:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Sat Jun 25 21:38:29 2022
+# Finished Make data base  
+on Sun Jun 26 10:52:43 2022
 
  

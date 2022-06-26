@@ -7,6 +7,8 @@
         "game_state.h": "c",
         "debugmode.h": "c",
         "player_funcs.h": "c",
-        "player_systems.h": "c"
+        "player_systems.h": "c",
+        "storage_system.h": "c",
+        "systems.h": "c"
     }
 }

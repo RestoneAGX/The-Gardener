@@ -1,13 +1,10 @@
 #pragma once
 #include<stdlib.h>
-#include<SDL2/SDL.h>
 
 #define BitCheck(v,n) (v & (1 << n))
 #define BitToggle(v,n) (v ^ (1 << n))
 #define BitClear(v,n) (v & ~(1 << n))
 #define BitSet(v,n) (v | (1 << n))
-
-// #define __OUT_OF_BOUNDS -2; // TODO: Standardize error codes later
 
 #define Item 0x1 // Move this to a place where we're likely to actuall place and check for this attribute
                  // Or Move the other checks here
@@ -43,7 +40,6 @@ typedef struct world_array{
     entity *elements;
 } world_array;
 
-world_array world;
 
 void init_world(world_array *arr, size_t length){
     arr->size = 0;

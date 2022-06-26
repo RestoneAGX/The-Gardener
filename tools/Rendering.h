@@ -1,7 +1,5 @@
-#pragma once
-#include "ECS.h"
 #include <SDL2/SDL.h>
-#include "Game_State.h"
+// I have no Idea how it can use all of the ECS without even including it
 
 #define E_Width 20
 #define E_Height 25
@@ -11,11 +9,17 @@
 #define Item_Atlas_Len 20
 #define UI_Atlas_Len 20
 
-#define buffer_entry(i, width, height, src_x, src_y, base_w, base_h) \
-(entity){.id = i,  .sprite = &(SDL_FRect) {.w  = width, .h = height}, &(SDL_Rect) {.x = base_w * src_x, .y = base_h * src_y, .w = base_w, .h = base_h}}
+#define buffer_entry(i, width, height, src_x, src_y, base_w, base_h)                                                                                 \
+    (entity)                                                                                                                                         \
+    {                                                                                                                                                \
+        .id = i, .sprite = &(SDL_FRect){.w = width, .h = height}, &(SDL_Rect) { .x = base_w * src_x, .y = base_h * src_y, .w = base_w, .h = base_h } \
+    }
 
-#define custom_entry(i, width, height, src_x, src_y, src_w, src_h) \
-(entity){.id = i,  .sprite = &(SDL_FRect) {.w  = width, .h = height}, &(SDL_Rect) {.x = src_x, .y = src_y, .w = src_w, .h = src_h}}
+#define custom_entry(i, width, height, src_x, src_y, src_w, src_h)                                                               \
+    (entity)                                                                                                                     \
+    {                                                                                                                            \
+        .id = i, .sprite = &(SDL_FRect){.w = width, .h = height}, &(SDL_Rect) { .x = src_x, .y = src_y, .w = src_w, .h = src_h } \
+    }
 
 SDL_Texture *entity_texture_atlas;
 SDL_Texture *tile_texture_atlas;
@@ -32,14 +36,15 @@ entity tile_buffer[Tile_Atlas_Len] = {
     buffer_entry(1, 30, 30, 1, 0, 30, 30),
 };
 
-void render_players(entity plrs[3], SDL_Renderer *renderer)
+void render_players(SDL_Renderer *renderer, entity plrs[3])
 {
     for (int i = 0; i < 3; i++)
         SDL_RenderCopyF(renderer, entity_texture_atlas, plrs[i].src, plrs[i].sprite);
 }
 
-void render_background(SDL_Renderer *renderer){
-    for (int i = 0; i < 50; i++) //Less than the max amount of background items
+void render_background(SDL_Renderer *renderer)
+{
+    for (int i = 0; i < 50; i++) // Less than the max amount of background items
         SDL_RenderCopyF(renderer, tile_texture_atlas, background[i].src, background[i].sprite);
 }
 
@@ -50,15 +55,14 @@ void render_world(SDL_Renderer *renderer)
     // SDL_RenderCopyExF(renderer, entity_atlas, world.elements[i].src, world.elements[i].sprite, 0, NULL, SDL_FLIP_NONE); // Fill in the angle(0) with a value
 }
 
-void render_items(SDL_Renderer *renderer){
-}
+void render_items(SDL_Renderer *renderer) {}
 
-void render_UI(SDL_Renderer *renderer){
-}
+void render_UI(SDL_Renderer *renderer) {}
 
 void init_textures(SDL_Renderer *renderer)
 {
-    const char *name[4] = { // Fill the sheets in reverse (since the smaller sheets are ironically last)
+    const char *name[4] = {
+        // Fill the sheets in reverse (since the smaller sheets are ironically last)
         "Resources/entity_sheet.bmp",
         "Resources/Tile_Sheet.bmp",
         "Resources/Item_Sheet.bmp",

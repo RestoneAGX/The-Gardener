@@ -1,14 +1,13 @@
-#include "ECS.h"
-#include <stdio.h>
 #include <SDL2/SDL.h>
 #include "Systems.h"
+#include "Storage_System.h"
 
 #define Timer_len 3
 #define atk_range 10
 
 enum inputs{Left, Right, Up, Down, Dash, Atk, Side};
 
-unsigned char cooldowns = 0; // bits: 1 -> dash; 2 -> atk;
+unsigned char cooldowns = 0; // bits: 1 -> dash; 2 -> atk; 3 -> side;
 
 Uint32 timer[Timer_len] = {};
 float timer_max[Timer_len] = {.75, .25, .5};

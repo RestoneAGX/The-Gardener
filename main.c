@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include "tools/UI.h"
-#include "tools/ECS.h"
 #include "tools/Systems.h"
 #include "tools/Rendering.h"
 #include "tools/Player_Systems.h"
@@ -65,7 +64,7 @@ int main(int argc, char *argv[])
       // render_background(renderer); // TODO: Make a prettier background
       render_world(renderer);
       // render_items(renderer); // TODO: Make items rendering function
-      render_players(player, renderer);
+      render_players(renderer, player);
     }
     else
     {
