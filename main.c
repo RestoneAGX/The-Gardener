@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
+#include "tools/UI.h"
 #include "tools/ECS.h"
+#include "tools/Systems.h"
 #include "tools/Rendering.h"
-#include "tools/DebugMode.h"
-#include "tools/Player_Funcs.h"
+#include "tools/Player_Systems.h"
 
 #define W_HEIGHT 680
 #define W_WIDTH 1048
@@ -32,55 +33,46 @@ int main(int argc, char *argv[])
     SDL_Quit();
     return -1;
   }
+
   int running = 1;
-  SDL_Event event;
   int player_inputs[7] = {0, 0, 0, 0, 0, 0, 0};
+  SDL_Event event;
 
   init_storage();
   init_textures(renderer);
 
   entity player[3];
-  player[0] = entity_buffer[0]; // Put into an array for multiplayer purposes
+  player[0] = entity_buffer[0]; // Enhance array when multiplayer is added
   init_entity(&player[0], (W_WIDTH - 50) / 2, (W_HEIGHT - 50) / 2);
 
-  init_world(&world, 1);
-
-  add_element(&world, entity_buffer, 1, (W_WIDTH - 50) / 2, (W_HEIGHT - 50) / 2); // TODO: Do error handling later.
-
-  game_location = Dungeon; //TODO: REMOVE after shfiting base location to Dungeon
-
+  switch_location(Dungeon, entity_buffer); // REMOVE: this call after properly setting up the Hub and Dungeon Generation
 
   while (running)
   {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
 
-    SDL_SetRenderDrawColor(renderer, 128, 235, 255, 100);
-    if (!DebugMode)
+    handleInput(&event, &running, player_inputs);
+
+    if (!game_state)
     {
-      handleInput(&event, &running, player_inputs);
+      UpdateTimers();
 
-      if (!game_state)
-      {
+      handlePlayerMovement(player[0].sprite, player_inputs); // TODO: Handle all players instead of just one
+      handleCombat(&player[0], player_inputs); // TODO: Handle all players instead of one
+      handleEnemies();
 
-        UpdateTimers();
-
-        // Handle all players when multiplayer is added
-        handlePlayerMovement(player[0].sprite, player_inputs);
-        handleCombat(&player[0], player_inputs);
-
-        render_world(renderer);
-        // TODO: Render Items here
-        render_players(player, renderer);
-      }
-      else
-      {
-        // TODO: Render UI here
-      }
-    }else{
-      debugInput(&event, &running);
-      render_background(renderer);
+      // render_background(renderer); // TODO: Make a prettier background
+      render_world(renderer);
+      // render_items(renderer); // TODO: Make items rendering function
+      render_players(player, renderer);
     }
+    else
+    {
+      // handleInput_UI(&event,);
+      // render_UI(renderer); // TODO: Render UI here
+    }
+    
     SDL_RenderPresent(renderer);
     SDL_Delay(1000 / 60);
   }
@@ -90,6 +82,7 @@ int main(int argc, char *argv[])
 
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);
+ 
   SDL_Quit();
   return 0;
 }

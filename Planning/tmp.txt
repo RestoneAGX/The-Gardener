@@ -1,0 +1,29 @@
+<----------------------------------------------------------->
+Dungeon Generation: (first account for)
+> Collision
+> Dungeon size
+> Actual door transport
+> Generation of things like pillars and chests
+<----------------------------------------------------------->
+Entity AI (Generally):
+> Loop through world arr
+> Check the indicator for what aspect of the AI is present
+> Perform AI based on that
+{Maybe check the indicator and find the values based on such}
+example: if indicator for bit 1 is for chasing, then it will check the first component for that
+<----------------------------------------------------------->
+Timers:
+> When an event occurs (like switching to the dungeon or entering a room)
+-> Increment a timer based on such (rooms for portable farm and dungeon entries for house farm)
+<----------------------------------------------------------->
+Location Switching:
+[HUB]> Load a static version of the living room
+[Garden]>
+[Dungeon]> 
+-> Generate a set of rooms,
+-> Generate a set of connections, 
+-> Generate a random amount of enemies (from a biome and level pool) at random positions (within the bounds of the wall)
+-> Check loot pool based on player's stats (Lvl, kills, resources) [basically just make it hell for the player based on their lvl using more info to determine how hard the punishment should be]
+
+-> Randomly select which one will have a door to the next Biome,
+<----------------------------------------------------------->

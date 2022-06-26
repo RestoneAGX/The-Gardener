@@ -1,7 +1,7 @@
-#include <SDL2/SDL.h>
 #include "ECS.h"
-#include "game_state.h"
-#include "Rendering.h"
+#include <stdio.h>
+#include <SDL2/SDL.h>
+#include "Systems.h"
 
 #define Timer_len 3
 #define atk_range 10
@@ -98,7 +98,6 @@ void handleInput(SDL_Event *event, int *game_active, int *keyInput)
 
       case SDL_SCANCODE_SPACE: inventory[1] = 5;
       switch_location(game_location +1, entity_buffer);
-      // DebugMode = !DebugMode;
       break;
 
       default:
@@ -119,6 +118,13 @@ void handlePlayerMovement(SDL_FRect *p_sprite, int *directional_inputs)
 
   p_sprite->x += (-directional_inputs[Left] + directional_inputs[Right]) * speed;
   p_sprite->y += (-directional_inputs[Up] + directional_inputs[Down]) * speed;
+
+  // Collision
+  if (p_sprite->x < 0) p_sprite->x = 0;
+  if (p_sprite->x > 1048 - p_sprite->w) p_sprite->x = 1048 - p_sprite->w; // Screen width
+
+  if (p_sprite->y < 0) p_sprite->y = 0;
+  if (p_sprite->y > 680 - p_sprite->h) p_sprite->y = 680 - p_sprite->h; // Screen width
 }
 
 
@@ -130,15 +136,14 @@ void handleCombat(entity* plr, int *inputs){
           float pPoint;
           
           if (inputs[Atk]){ // Add switch statement here for different characters
-            if (inventory[1] > 1){
+            // if (inventory[1] > 1){
               int x, y;
               SDL_GetMouseState(&x, &y);
               pPoint = x+y;
               
               inventory[1]--;
               printf("Inventory Seeds: %i\n", inventory[0]);
-            }
-
+            // }
           }
 
           if (inputs[Side]){

@@ -7,9 +7,10 @@
 #define BitClear(v,n) (v & ~(1 << n))
 #define BitSet(v,n) (v | (1 << n))
 
-#define __OUT_OF_BOUNDS -2;
+// #define __OUT_OF_BOUNDS -2; // TODO: Standardize error codes later
 
-#define Item 0x1
+#define Item 0x1 // Move this to a place where we're likely to actuall place and check for this attribute
+                 // Or Move the other checks here
 
 typedef struct entity{
     unsigned int indicator : 4;
@@ -65,7 +66,7 @@ int add_element(world_array *arr, entity *atlas, int id, float x, float y){
 }
 
 int remove_element(world_array *arr, int index){
-    if (index < 0 || index > arr->size) return __OUT_OF_BOUNDS;
+    // if (index < 0 || index > arr->size) return __OUT_OF_BOUNDS;
     arr->elements[index] = arr->elements[arr->size-1];
     arr->elements[arr->size-1] = (entity) {};
     arr->size -= 1;
@@ -89,53 +90,3 @@ void free_world(world_array *arr){
     free(arr->elements);
     printf("World was successfully freed!\n");
 }
-
-void enemy_loot(int id){
-    //TODO: Uncomment when you have all 3 plr characters
-    // if (id < 3){
-    //     //Drop inventory
-    // }else{}
-    switch(id){
-        case 1:
-        //Drop a basic seed       
-        break;
-        default:
-        break;
-    }
-}
-
-void die(entity *target, int i){
-    //TODO: Uncomment when you have all 3 plr characters
-    // if (target->id < 3){}
-    //     //Kill Player
-    // else{
-        enemy_loot(target->id);
-        remove_element(&world, i);
-    // }
-}
-
-void hitbox(entity *target, int i, int dmg, float hit_point, float range){
-  float target_point = target->sprite->x + target->sprite->y + ((target->sprite->w + target->sprite->h)/2);
-
-  if(abs(target_point - hit_point) <= range){
-    printf("Enemy HP: %i, ", target->components[0]);
-    
-    if((int) target->components[0] - dmg > 0)
-      target->components[0] -= dmg;
-    else
-      die(target, i);
-  }
-}
-
-// void handleEnemyAI(){
-//     for (int i = 0; i < world.size; i++){
-//         switch (world.elements[i].id)
-//         {
-//         case 3:
-//             break;
-        
-//         default:
-//             break;
-//         }
-//     }
-// }

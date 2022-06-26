@@ -4,6 +4,9 @@
         "rendering.h": "c",
         "sdl.h": "c",
         "ecs.h": "c",
-        "game_state.h": "c"
+        "game_state.h": "c",
+        "debugmode.h": "c",
+        "player_funcs.h": "c",
+        "player_systems.h": "c"
     }
 }

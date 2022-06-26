@@ -1,23 +1,11 @@
-TODO Tomorrow:
-> Finish Debug Menu and editor
-X > Finish debugging switching game state
-
-
-> Make worlds {Hub, Dungeon, Garden} //Make buffers containing the content of each work (only dynamic is Dungeon so static presets for others)
-
-> Work on a death State and respawning
-
-Other:
-- Slash based on rotation
-
-- Global State
-
-Next Day:
-> Work on UI library
-> Work on setting up menus easily (Probably using some sort of debug tool)
-> Work on setting backgrounds
-> Work on the rendering priority system
-
-> Work on switching state
+> Slash based on rotation
 > Work on collision
 > Time system
+> Work on a death State and respawning
+
+Multiplayer Draft:
+- Have a menu to ask for single player or multiplayer
+- If Multiplayer is selected
+- > fork the process
+- > exec the server application that this comes with
+- > Open up a thread for [a server pipe, wait to kill the server]

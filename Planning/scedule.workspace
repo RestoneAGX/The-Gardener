@@ -34,7 +34,7 @@ X> Moving between the 3
 > Time system for crops (based on dungeon crawls or some sort of event system)
 
 > Boss fights
-> Proper collision
+> Proper collision [only need to collide with the walls]
 > Balanced and fun gameplay with all characters
 > Work on animations / visual affects (the sprites don't move, but there are animated vfx)
 > Room making (making an interpreter and dungeon generation system) (Probably loading a char array and finding a good way to interpret it, maybe make an editor in golang that maps with the sprite sheet)

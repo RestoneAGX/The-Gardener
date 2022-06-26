@@ -21,3 +21,8 @@ If in UI state ->
 >> Loop through the elements
 >> find one within that position
 >> Call the function within || use a jumptable of UI functions
+
+Define width
+Define height
+Specify the wall tile
+Specify the filling tile
