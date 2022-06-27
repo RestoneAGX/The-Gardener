@@ -37,22 +37,23 @@ void handleInput_UI(SDL_Event *event, int *game_active, world_array *UI)
 {
     while (SDL_PollEvent(event))
     {
-        if (event->type == SDL_QUIT) *game_active = 0;
+        if (event->type == SDL_QUIT)
+            *game_active = 0;
 
-        else if (event->button.button == SDL_BUTTON_LEFT)
+        else if (event->type == SDL_MOUSEBUTTONDOWN)
         {
-            if (event->type == SDL_MOUSEBUTTONDOWN)
+            if (event->button.button == SDL_BUTTON_LEFT)
             {
                 for (int i = 0; i < UI->cap; i++)
                 {
                     int x, y;
                     SDL_GetMouseState(&x, &y);
                     SDL_FRect *rPtr = UI->elements[i].sprite;
-                    
+
                     // NOTE: Implict conversion, but I have no idea how this will go
                     if (x >= rPtr->x && x <= rPtr->x + rPtr->w &&
                         y >= rPtr->y && y <= rPtr->y + rPtr->h)
-                            Interact(UI->elements + i);
+                        Interact(UI->elements + i);
                 }
             }
             // else if (event->type == SDL_MOUSEBUTTONUP) {}

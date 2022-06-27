@@ -4,9 +4,9 @@
 #define E_Width 20
 #define E_Height 25
 
-#define Tile_Atlas_Len 20
 #define Entity_Atlas_Len 20
 #define Item_Atlas_Len 20
+#define Tile_Atlas_Len 20
 #define UI_Atlas_Len 20
 
 #define buffer_entry(i, width, height, src_x, src_y, base_w, base_h)                                                                                 \
@@ -36,28 +36,24 @@ entity tile_buffer[Tile_Atlas_Len] = {
     buffer_entry(1, 30, 30, 1, 0, 30, 30),
 };
 
-void render_players(SDL_Renderer *renderer, entity plrs[3])
-{
+void render_game(SDL_Renderer *renderer, entity plrs[3]){
+    // for (int i = 0; i < 50; i++) // Less than the max amount of background items
+    //     SDL_RenderCopyF(renderer, tile_texture_atlas, background[i].src, background[i].sprite);
+
+    for (int i = 0; i < world.size; i++)
+        SDL_RenderCopyF(renderer, entity_texture_atlas, world.elements[i].src, world.elements[i].sprite);
+    // SDL_RenderCopyExF(renderer, entity_atlas, world.elements[i].src, world.elements[i].sprite, 0, NULL, SDL_FLIP_NONE); // Fill in the angle(0) with a value
+
+    //TODO: Render Items
+
     for (int i = 0; i < 3; i++)
         SDL_RenderCopyF(renderer, entity_texture_atlas, plrs[i].src, plrs[i].sprite);
 }
 
-void render_background(SDL_Renderer *renderer)
-{
-    for (int i = 0; i < 50; i++) // Less than the max amount of background items
-        SDL_RenderCopyF(renderer, tile_texture_atlas, background[i].src, background[i].sprite);
+void render_UI(SDL_Renderer *renderer, world_array *UI){
+    for (int i = 0; i < UI->size; i++)
+        SDL_RenderCopyF(renderer, entity_texture_atlas, UI->elements[i].src, UI->elements[i].sprite);
 }
-
-void render_world(SDL_Renderer *renderer)
-{
-    for (int i = 0; i < world.size; i++)
-        SDL_RenderCopyF(renderer, entity_texture_atlas, world.elements[i].src, world.elements[i].sprite);
-    // SDL_RenderCopyExF(renderer, entity_atlas, world.elements[i].src, world.elements[i].sprite, 0, NULL, SDL_FLIP_NONE); // Fill in the angle(0) with a value
-}
-
-void render_items(SDL_Renderer *renderer) {}
-
-void render_UI(SDL_Renderer *renderer) {}
 
 void init_textures(SDL_Renderer *renderer)
 {

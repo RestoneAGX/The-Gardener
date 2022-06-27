@@ -3,6 +3,9 @@
 > Time system
 > Work on a death State and respawning
 
+Testing TODO:
+> Write and test ECS system
+
 Multiplayer Draft:
 - Have a menu to ask for single player or multiplayer
 - If Multiplayer is selected

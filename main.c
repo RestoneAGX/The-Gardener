@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
 
-    handleInput(&event, &running, player_inputs);
+    handleInput(&event, &running, player_inputs); //TODO: fix crashing bug here
 
     if (!game_state)
     {
@@ -61,15 +61,12 @@ int main(int argc, char *argv[])
       handleCombat(&player[0], player_inputs); // TODO: Handle all players instead of one
       handleEnemies();
 
-      // render_background(renderer); // TODO: Make a prettier background
-      render_world(renderer);
-      // render_items(renderer); // TODO: Make items rendering function
-      render_players(renderer, player);
+      render_game(renderer, player);
     }
     else
     {
       // handleInput_UI(&event,);
-      // render_UI(renderer); // TODO: Render UI here
+      // render_UI(renderer); //TODO: Write UI rendering
     }
     
     SDL_RenderPresent(renderer);

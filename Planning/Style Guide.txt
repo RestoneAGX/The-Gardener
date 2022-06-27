@@ -1,0 +1,3 @@
+REMOVE = remove it
+TODO = A task to do later
+DEV = keep it only in the development build

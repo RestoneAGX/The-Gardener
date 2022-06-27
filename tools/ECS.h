@@ -17,7 +17,7 @@ typedef struct entity{
     unsigned char *components;
 } entity;
 
-int init_entity(entity *e, float x, float y){
+void init_entity(entity *e, float x, float y){
     e->sprite->x = x;
     e->sprite->y = y;
 
@@ -30,8 +30,6 @@ int init_entity(entity *e, float x, float y){
         e->components[1] = 5;
         break;
     }
-    if (e->components == NULL) return -1;
-    return 0;
 }
 
 typedef struct world_array{
@@ -45,44 +43,24 @@ void init_world(world_array *arr, size_t length){
     arr->size = 0;
     arr->cap = length;
     arr->elements = (entity *) calloc(length, sizeof(*arr->elements));
-    if (!arr->elements) return; //Return some sort of error indicating this
 }
 
-void expand_world(world_array *arr, size_t add_size){ //Watch this function for memory bugs [weird outputs]
-    arr->elements = (entity *) realloc(arr->elements, (arr->cap + add_size) * sizeof(*arr->elements));
-    if (arr->elements != NULL) arr->cap += add_size;
-}
+void add_element(world_array *arr, entity *atlas, int id, float x, float y){
+    if (++arr->size >= arr->cap)
+        arr->elements = (entity *) realloc(arr->elements, ++arr->cap * sizeof(*arr->elements)); // ++arr->cap might cause a problem
 
-int add_element(world_array *arr, entity *atlas, int id, float x, float y){
-    if (arr->size + 1 >= arr->cap) expand_world(arr, 1);
     arr->elements[arr->size] = atlas[id];
-    int err = init_entity(&arr->elements[arr->size], x, y);
-    arr->size++;
-    return err;
+    init_entity(arr->elements + arr->size, x, y);
 }
 
-int remove_element(world_array *arr, int index){
-    // if (index < 0 || index > arr->size) return __OUT_OF_BOUNDS;
-    arr->elements[index] = arr->elements[arr->size-1];
-    arr->elements[arr->size-1] = (entity) {};
-    arr->size -= 1;
-    //Shrink if neccassary
-    return 0;
-}
-
-void shrink_world(world_array *arr, size_t sub_size){
-    arr->elements = (entity *) realloc(arr->elements, (arr->cap - sub_size) * sizeof(*arr->elements));
-    arr->cap -= sub_size;
-
-    if (arr->size == arr->cap) arr->size--;
+void remove_element(world_array *arr, int index){
+    arr->elements[index] = arr->elements[--arr->size];
+    arr->elements[arr->size] = (entity) {};
 }
 
 void free_world(world_array *arr){
-    for (int i = 0; i < arr->size; i++){
+    for (int i = 0; i < arr->size; i++)
         free(arr->elements->components);
-        printf("element %i was sucessfully freed!\n", i);
-    }
     
     free(arr->elements);
-    printf("World was successfully freed!\n");
 }

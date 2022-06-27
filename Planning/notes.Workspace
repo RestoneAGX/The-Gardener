@@ -26,3 +26,9 @@ Define width
 Define height
 Specify the wall tile
 Specify the filling tile
+<--------------------------------------------------------------------------------->
+Notes for errors:
+Memory{
+    calloc and malloc should not have error checking simply due to use having enough memory. (Most PC's running should have enough bytes due to how small they are)
+    realloc should not have any memory bugs due to the fact that it will be written to after being allocated (used when expanding the world arr)
+}
