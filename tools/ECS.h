@@ -1,5 +1,6 @@
 #pragma once
 #include<stdlib.h>
+#include<SDL2/SDL.h>
 
 #define BitCheck(v,n) (v & (1 << n))
 #define BitToggle(v,n) (v ^ (1 << n))
@@ -21,11 +22,22 @@ void init_entity(entity *e, float x, float y){
     e->sprite->x = x;
     e->sprite->y = y;
 
-    switch(e->id){
-        case 1: e->components = (unsigned char*) calloc(4, 1); // HP, Atk, Def, Speed //Also Place default stats
+    switch(e->id){ //Allocate memory according to ID
+        case 3: 
+        e->components = (unsigned char*) calloc(4, 1);
         e->components[0] = 255;
         break;
-        case 0: e->components = (unsigned char*) calloc(10, 1); //Allocate memory according to ID
+
+        case 2:
+        break;
+
+        case 1:  // HP, Atk, Def, Speed //Also Place default stats
+        e->components = (unsigned char*) calloc(10, 1);
+        e->components[0] = 255;
+        break;
+
+        case 0: 
+        e->components = (unsigned char*) calloc(10, 1); 
         e->components[0] = 255;
         e->components[1] = 5;
         break;
@@ -42,15 +54,14 @@ typedef struct world_array{
 void init_world(world_array *arr, size_t length){
     arr->size = 0;
     arr->cap = length;
-    arr->elements = (entity *) calloc(length, sizeof(*arr->elements));
+    arr->elements = (entity *) calloc(length, sizeof(entity));
 }
 
 void add_element(world_array *arr, entity *atlas, int id, float x, float y){
-    if (++arr->size >= arr->cap)
-        arr->elements = (entity *) realloc(arr->elements, ++arr->cap * sizeof(*arr->elements)); // ++arr->cap might cause a problem
-
     arr->elements[arr->size] = atlas[id];
     init_entity(arr->elements + arr->size, x, y);
+    if (++arr->size >= arr->cap)
+        arr->elements = (entity *) realloc(arr->elements, ++arr->cap * sizeof(*arr->elements)); // ++arr->cap might cause a problem
 }
 
 void remove_element(world_array *arr, int index){

@@ -9,6 +9,7 @@
         "player_funcs.h": "c",
         "player_systems.h": "c",
         "storage_system.h": "c",
-        "systems.h": "c"
+        "systems.h": "c",
+        "world_tests.h": "c"
     }
 }

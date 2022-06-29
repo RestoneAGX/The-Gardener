@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include "game_state.h"
 // I have no Idea how it can use all of the ECS without even including it
 
 #define E_Width 20
