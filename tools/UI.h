@@ -22,13 +22,11 @@ typedef struct
 
 void Interact(entity *UI_element)
 {
-    if (BitCheck(UI_element->indicator, 0)) // Check if interactable
-        switch (UI_element->id)
-        {
-        default: // Button Default
-            break;
-        }
-
+    switch (UI_element->id)
+    {
+    default: // Button Default
+        break;
+    }
     // Check indicator (Determines if interactable and stuff)
     // Perform operation according to id (id can indicate if it is a button, slider, dropdown, etc)
 }
@@ -46,23 +44,27 @@ void handleInput_UI(SDL_Event *event, int *game_active, world_array *UI)
             {
                 for (int i = 0; i < UI->cap; i++)
                 {
-                    int x, y;
-                    SDL_GetMouseState(&x, &y);
+                    if (BitCheck(UI->elements[i].indicator, 0)) // Check if interactable
+                    {
+                        int x, y;
+                        SDL_GetMouseState(&x, &y);
                     SDL_FRect *rPtr = UI->elements[i].sprite;
 
-                    // NOTE: Implict conversion, but I have no idea how this will go
+                        // NOTE: Implict conversion, but I have no idea how this will go
                     if (x >= rPtr->x && x <= rPtr->x + rPtr->w &&
                         y >= rPtr->y && y <= rPtr->y + rPtr->h)
-                        Interact(UI->elements + i);
+                            Interact(UI->elements + i);
+                    }
                 }
             }
-            // else if (event->type == SDL_MOUSEBUTTONUP) {}
+
+            // else if (event->button.button == SDL_BUTTON_RIGHT)
+            // {
+            //     if (event->type == SDL_MOUSEBUTTONDOWN)    {}
+            //     else if (event->type == SDL_MOUSEBUTTONUP) {}
+            // }
         }
 
-        // else if (event->button.button == SDL_BUTTON_RIGHT)
-        // {
-        //     if (event->type == SDL_MOUSEBUTTONDOWN)    {}
-        //     else if (event->type == SDL_MOUSEBUTTONUP) {}
-        // }
+        // else if (event->type == SDL_MOUSEBUTTONUP) {}
     }
 }

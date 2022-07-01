@@ -1,8 +1,0 @@
-make.exe --dry-run --keep-going --print-directory
-make.exe: Entering directory `d:/Projects/C/The Gardener'
-gcc -o main main.c -Wall -lmingw32 -lSDL2main -lSDL2
-./main.exe
-del main.exe
- 
-make.exe: Leaving directory `d:/Projects/C/The Gardener'
- 
