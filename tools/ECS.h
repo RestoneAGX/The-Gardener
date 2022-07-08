@@ -16,11 +16,17 @@ typedef struct entity{
     SDL_FRect * sprite;
     SDL_Rect * src;
     unsigned char *components;
+    float x, y;
 } entity;
 
 void init_entity(entity *e, float x, float y){
-    e->sprite->x = x;
-    e->sprite->y = y;
+    float w = e->sprite->w, h =  e->sprite->h;
+    e->sprite = malloc(4 * sizeof(float)); 
+    *e->sprite = (SDL_FRect) {.x = x, .y = y, .w = w, .h = h};
+    
+    // printf("Entity's: x: %f, y: %f, w: %f, h: %f\n", e->sprite->x, e->sprite->y, e->sprite->w, e->sprite->h);
+    // printf("Player's sprite: %p, NULL: %p\n", sprite, NULL);
+
 
     switch(e->id){ //Allocate memory according to ID
         case 3: 
@@ -70,8 +76,10 @@ void remove_element(world_array *arr, int index){
 }
 
 void free_world(world_array *arr){
-    for (int i = 0; i < arr->size; i++)
-        free(arr->elements->components);
+    for (int i = 0; i < arr->size; i++){
+        free((arr->elements+i)->components);
+        free((arr->elements+i)->sprite);
+    }
     
     free(arr->elements);
 }

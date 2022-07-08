@@ -46,7 +46,8 @@ void render_game(SDL_Renderer *renderer, entity plrs[3]){
 
     //TODO: Render Items
 
-    for (int i = 0; i < 3; i++)
+
+    for (int i = 0; i < 1; i++) // NOTE: Change 1 -> 3
         SDL_RenderCopyF(renderer, entity_texture_atlas, plrs[i].src, plrs[i].sprite);
 }
 

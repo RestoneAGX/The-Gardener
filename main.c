@@ -39,10 +39,15 @@ int main(int argc, char *argv[])
 
   init_storage();
   init_textures(renderer);
+  
 
   entity player[3];
+    printf("Player's sprite: %p, NULL: %p\n", player[0].sprite, NULL);
+
   player[0] = entity_buffer[0]; // Enhance array when multiplayer is added
+
   init_entity(&player[0], (W_WIDTH - 50) / 2, (W_HEIGHT - 50) / 2);
+  printf("Player's: x: %f, y: %f, w: %f, h: %f\n", player[0].sprite->x, player[0].sprite->y, player[0].sprite->w, player[0].sprite->h);
 
   switch_location(Dungeon, entity_buffer); // REMOVE: this call after properly setting up the Hub and Dungeon Generation
 
