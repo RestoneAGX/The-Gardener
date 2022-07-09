@@ -24,10 +24,6 @@ void init_entity(entity *e, float x, float y){
     e->sprite = malloc(4 * sizeof(float)); 
     *e->sprite = (SDL_FRect) {.x = x, .y = y, .w = w, .h = h};
     
-    // printf("Entity's: x: %f, y: %f, w: %f, h: %f\n", e->sprite->x, e->sprite->y, e->sprite->w, e->sprite->h);
-    // printf("Player's sprite: %p, NULL: %p\n", sprite, NULL);
-
-
     switch(e->id){ //Allocate memory according to ID
         case 3: 
         e->components = (unsigned char*) calloc(4, 1);

@@ -1,5 +1,6 @@
 #include "../tools/ECS.h"
 #include "../tools/Rendering.h"
+#include <stdio.h>
 
 #define MAX 100
 
@@ -20,7 +21,7 @@ int world_test(){
     }
 
     for (int i = 0; i < MAX; i++)
-        add_element(arr, entity_buffer, 3, 0,0);
+        add_element(arr, entity_buffer, 3, 3.0, 3.0);
 
     for (int i = 0; i < MAX; i++){
         // DEBUG
@@ -43,8 +44,33 @@ int world_test(){
             return -1;
         }
 
+        if (arr->elements[i].sprite->w != entity_buffer[3].sprite->w){
+            printf("entity %i's width is not equal to preset\n", i);
+            return -1;
+        }
+
+        if (arr->elements[i].sprite->h != entity_buffer[3].sprite->h){
+            printf("entity %i's height is not equal to preset\n", i);
+            return -1;
+        }
+
+        if (arr->elements[i].sprite->x != 3.0){
+            printf("entity %i's x is not 3, but rather %f\n", i, arr->elements[i].sprite->x);
+            return -1;
+        }
+
+        if (arr->elements[i].sprite->y != 3.0){
+            printf("entity %i's y is not 3, but rather %f\n", i, arr->elements[i].sprite->y);
+            return -1;
+        }
+
         if (arr->elements[i].src == NULL){
             printf("entity %i's src is NULL\n", i);
+            return -1;
+        }
+
+        if (arr->elements[i].src != entity_buffer[3].src){
+            printf("entity %i's src does not point to the preset\n", i);
             return -1;
         }
 
