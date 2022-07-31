@@ -21,7 +21,7 @@ int world_test(){
     }
 
     for (int i = 0; i < MAX; i++)
-        add_element(arr, entity_buffer, 3, 3.0, 3.0);
+        add_element(arr, entity_buffer + 3, 3.0, 3.0);
 
     for (int i = 0; i < MAX; i++){
         // DEBUG

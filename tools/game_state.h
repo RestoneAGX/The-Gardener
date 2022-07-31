@@ -11,7 +11,7 @@ unsigned char game_location = 0;
 entity background[50] = {};
 world_array world;
 
-void switch_location(int i, entity e_buffer[]){
+void switch_location(int i, entity *e_buffer){
     if (i > Dungeon) game_location = Hub;
     else if (i < Hub) game_location = Dungeon;
     else game_location = i;
@@ -31,7 +31,7 @@ void switch_location(int i, entity e_buffer[]){
 
         case Dungeon:
         init_world(&world, 50);
-        add_element(&world, e_buffer, 1, (1048 - 50) / 2, (680 - 50) / 2); // TODO: Do error handling later.
+        add_element(&world, e_buffer + 1, (1048 - 50) / 2, (680 - 50) / 2); // TODO: Do error handling later.
         // Buffer itself has a finite size
         // Generate a dungeon with rooms
         // Load the first room into the buffer (The doors will choose which part of the dungeon will be loaded next into the render buffer)

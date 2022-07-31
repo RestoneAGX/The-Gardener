@@ -16,7 +16,6 @@ typedef struct entity{
     SDL_FRect * sprite;
     SDL_Rect * src;
     unsigned char *components;
-    float x, y;
 } entity;
 
 void init_entity(entity *e, float x, float y){
@@ -26,7 +25,7 @@ void init_entity(entity *e, float x, float y){
     
     switch(e->id){ //Allocate memory according to ID
         case 3: 
-        e->components = (unsigned char*) calloc(4, 1);
+        e->components = (unsigned char*) calloc (4, 1);
         e->components[0] = 255;
         break;
 
@@ -34,12 +33,12 @@ void init_entity(entity *e, float x, float y){
         break;
 
         case 1:  // HP, Atk, Def, Speed //Also Place default stats
-        e->components = (unsigned char*) calloc(10, 1);
+        e->components = (unsigned char*) calloc (10, 1);
         e->components[0] = 255;
         break;
 
         case 0: 
-        e->components = (unsigned char*) calloc(10, 1); 
+        e->components = (unsigned char*) calloc (10, 1); 
         e->components[0] = 255;
         e->components[1] = 5;
         break;
@@ -59,8 +58,8 @@ void init_world(world_array *arr, size_t length){
     arr->elements = (entity *) calloc(length, sizeof(entity));
 }
 
-void add_element(world_array *arr, entity *atlas, int id, float x, float y){
-    arr->elements[arr->size] = atlas[id];
+void add_element(world_array *arr, entity *atlas, float x, float y){
+    arr->elements[arr->size] = *atlas;
     init_entity(arr->elements + arr->size, x, y);
     if (++arr->size >= arr->cap)
         arr->elements = (entity *) realloc(arr->elements, ++arr->cap * sizeof(*arr->elements)); // ++arr->cap might cause a problem

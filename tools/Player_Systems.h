@@ -108,7 +108,7 @@ void handleInput(SDL_Event *event, int *game_active, int *keyInput)
 
 void handlePlayerMovement(SDL_FRect *p_sprite, int *directional_inputs)
 {
-  int speed = 3;
+  int speed = 7;
 
   if(directional_inputs[Dash] > 0 && BitCheck(cooldowns, 0) == 0){
     speed = 100;
