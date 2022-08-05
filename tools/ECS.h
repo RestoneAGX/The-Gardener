@@ -18,6 +18,12 @@ typedef struct entity{
     unsigned char *components;
 } entity;
 
+typedef struct world_array{
+    int cap;
+    int size;
+    entity *elements;
+} world_array;
+
 void init_entity(entity *e, float x, float y){
     float w = e->sprite->w, h =  e->sprite->h;
     e->sprite = malloc(4 * sizeof(float)); 
@@ -30,27 +36,13 @@ void init_entity(entity *e, float x, float y){
         break;
 
         case 2:
-        break;
-
-        case 1:  // HP, Atk, Def, Speed //Also Place default stats
-        e->components = (unsigned char*) calloc (10, 1);
-        e->components[0] = 255;
-        break;
-
-        case 0: 
-        e->components = (unsigned char*) calloc (10, 1); 
+        case 1: // HP, Atk, Def, Speed //Also Place default stats
+        case 0: e->components = (unsigned char*) calloc (10, 1); 
         e->components[0] = 255;
         e->components[1] = 5;
         break;
     }
 }
-
-typedef struct world_array{
-    int cap;
-    int size;
-    entity *elements;
-} world_array;
-
 
 void init_world(world_array *arr, size_t length){
     arr->size = 0;

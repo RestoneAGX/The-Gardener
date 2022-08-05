@@ -22,14 +22,14 @@ void add_item(unsigned char *storage, size_t max, unsigned char id, unsigned cha
 }
 
 void move_item(unsigned char *storage, size_t max, int old_slot, int new_slot){
-    if (new_slot >= max || new_slot % 2 == 1) return;
+    // if (new_slot >= max || new_slot % 2 == 1) return; // No need to add this check since the behaviour itself would be wrong to begin with
     
+    storage[new_slot++] = storage[old_slot++];
     storage[new_slot] = storage[old_slot];
-    storage[new_slot+1] = storage[old_slot+1];
 }
 
 void remove_item(unsigned char *storage, size_t max, int slot){
-    if (slot >= max || slot % 2 == 1) return;
+    // if (slot >= max || slot % 2 == 1) return;
     storage[slot] = 0;
 }
 

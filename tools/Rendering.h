@@ -10,15 +10,8 @@
 #define UI_Atlas_Len 20
 
 #define buffer_entry(i, width, height, src_x, src_y, base_w, base_h)                                                                                 \
-    (entity)                                                                                                                                         \
-    {                                                                                                                                                \
+    (entity){                                                                                                                                        \
         .id = i, .sprite = &(SDL_FRect){.w = width, .h = height}, &(SDL_Rect) { .x = base_w * src_x, .y = base_h * src_y, .w = base_w, .h = base_h } \
-    }
-
-#define custom_entry(i, width, height, src_x, src_y, src_w, src_h)                                                               \
-    (entity)                                                                                                                     \
-    {                                                                                                                            \
-        .id = i, .sprite = &(SDL_FRect){.w = width, .h = height}, &(SDL_Rect) { .x = src_x, .y = src_y, .w = src_w, .h = src_h } \
     }
 
 SDL_Texture *entity_texture_atlas;
@@ -80,6 +73,8 @@ void init_textures(SDL_Renderer *renderer)
             tile_texture_atlas = SDL_CreateTextureFromSurface(renderer, optimized_image);
             break;
         case 2:
+            break;
+        case 3:
             break;
         }
 

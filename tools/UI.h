@@ -3,14 +3,19 @@
 
 #define Interactable 0x1
 
-#define current_UI_elements 1
+#define Menus 1
+#define Menu_Lens 3
 
-typedef struct
+typedef struct button
 {
-    void *rect;
+    unsigned char indicator : 4;
+    SDL_FRect *rect;
+    void (*func)();
     void *content;
-    void *function;
 } button;
+
+button menus[Menus][Menu_Lens];
+unsigned char active_menu = 0;
 
 // For Clicking:
 // get interaction
@@ -18,20 +23,7 @@ typedef struct
 // -> Check mouse pos against other UI objects
 // --> If instance is within range -> Pass it's ID into interact with UI
 
-// int interaction_idx = 0; // the index of the current interaction
-
-void Interact(entity *UI_element)
-{
-    switch (UI_element->id)
-    {
-    default: // Button Default
-        break;
-    }
-    // Check indicator (Determines if interactable and stuff)
-    // Perform operation according to id (id can indicate if it is a button, slider, dropdown, etc)
-}
-
-void handleInput_UI(SDL_Event *event, int *game_active, world_array *UI)
+void handleInput_UI(SDL_Event *event, int *game_active)
 {
     while (SDL_PollEvent(event))
     {
@@ -41,22 +33,18 @@ void handleInput_UI(SDL_Event *event, int *game_active, world_array *UI)
         else if (event->type == SDL_MOUSEBUTTONDOWN)
         {
             if (event->button.button == SDL_BUTTON_LEFT)
-            {
-                for (int i = 0; i < UI->cap; i++)
-                {
-                    if (BitCheck(UI->elements[i].indicator, 0)) // Check if interactable
+                for (int i = 0; i < Menu_Lens; i++){
+                    if (BitCheck(menus[active_menu][i].indicator, 0)) // Check if interactable
                     {
                         int x, y;
                         SDL_GetMouseState(&x, &y);
-                    SDL_FRect *rPtr = UI->elements[i].sprite;
+                        SDL_FRect *rPtr = menus[active_menu][i].rect;
 
-                        // NOTE: Implict conversion, but I have no idea how this will go
-                    if (x >= rPtr->x && x <= rPtr->x + rPtr->w &&
-                        y >= rPtr->y && y <= rPtr->y + rPtr->h)
-                            Interact(UI->elements + i);
+                        if (x >= rPtr->x && x <= rPtr->x + rPtr->w && // NOTE: Implict conversion, but I have no idea how this will go
+                            y >= rPtr->y && y <= rPtr->y + rPtr->h)
+                                menus[active_menu][i].func(); // Possibly check indicator, if slider and things of that sort are implemented
                     }
                 }
-            }
 
             // else if (event->button.button == SDL_BUTTON_RIGHT)
             // {

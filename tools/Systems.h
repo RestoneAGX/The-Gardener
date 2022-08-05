@@ -4,20 +4,17 @@
 
 void enemy_loot(int id)
 {
-    if (id < 3)
+    switch (id)
     {
-        // Drop inventory
-    }
-    else
-    {
-        switch (id)
-        {
-        case 3:
-            // Drop a tomato seed
-            break;
-        default:
-            break;
-        }
+    case 3:
+        // Drop a tomato seed
+        break;
+    case 2:
+    case 1:
+    case 0: // Drop Inventory
+    break;
+    default:
+        break;
     }
 }
 
@@ -42,8 +39,8 @@ void hitbox(entity *target, int i, int dmg, float hit_point, float range)
     {
         printf("Enemy HP: %i, ", target->components[0]);
 
-        if ((int)target->components[0] - dmg > 0)
-            target->components[0] -= dmg; // Maybe add defense calculation
+        if ((int) target->components[0] - dmg > 0)
+            target->components[0] -= dmg; // TODO: Maybe add defense calculation
         else
             die(target, i);
     }
