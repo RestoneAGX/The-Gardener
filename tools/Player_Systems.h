@@ -13,17 +13,15 @@ Uint32 timer[Timer_len] = {};
 float timer_max[Timer_len] = {.75, .25, .5};
 
 void UpdateTimers(){
-  for (int i = 0; i < Timer_len; i++){
+  for (int i = 0; i < Timer_len; i++)
     if (BitCheck(cooldowns, i)){
-      if (!timer[i]){
+      if (!timer[i])
         timer[i] = SDL_GetTicks();
-      }
       else if((float) (SDL_GetTicks() - timer[i]) / 1000 >= timer_max[i]){
         cooldowns = BitClear(cooldowns, i);
         timer[i] = 0;
       }
     }
-  }
 }
 
 void handleInput(SDL_Event *event, int *game_active, int *keyInput)
@@ -120,7 +118,7 @@ void handlePlayerMovement(SDL_FRect *p_sprite, int *directional_inputs)
 
   // Collision
   if (p_sprite->x < 0) p_sprite->x = 0;
-  if (p_sprite->x > 1048 - p_sprite->w) p_sprite->x = 1048 - p_sprite->w; // Screen width
+  if (p_sprite->x > 948 - p_sprite->w) p_sprite->x = 948 - p_sprite->w; // Screen width
 
   if (p_sprite->y < 0) p_sprite->y = 0;
   if (p_sprite->y > 680 - p_sprite->h) p_sprite->y = 680 - p_sprite->h; // Screen width

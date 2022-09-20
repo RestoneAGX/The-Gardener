@@ -51,16 +51,15 @@ void render_UI(SDL_Renderer *renderer, world_array *UI){
 
 void init_textures(SDL_Renderer *renderer)
 {
-    const char *name[4] = {
-        // Fill the sheets in reverse (since the smaller sheets are ironically last)
+    const char *name[4] = { // Fill the sheets in reverse (since the smaller sheets are ironically last)
         "Resources/entity_sheet.bmp",
         "Resources/Tile_Sheet.bmp",
         "Resources/Item_Sheet.bmp",
         "Resources/UI_Sheet.bmp",
     };
 
-    for (int i = 0; i < 2; i++)
-    { // Replace "< 2" with "< 4"
+    for (int i = 0; i < 2; i++) // Replace "< 2" with "< 4"
+    {
         SDL_Surface *image = SDL_LoadBMP(name[i]);
         SDL_Surface *optimized_image = SDL_ConvertSurface(image, image->format, 0);
 

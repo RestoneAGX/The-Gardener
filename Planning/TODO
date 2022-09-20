@@ -1,4 +1,4 @@
-> Slash based on rotation
+> Slash based on rotation (get the slope of the player to mouse, then convert that to an angle then convert that to a x and y, to which we multiply by a constant to get a limited rotation)
 > Work on collision
 > Time system
 > Work on a death State and respawning
