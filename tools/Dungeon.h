@@ -7,6 +7,11 @@
 int instances = 0;
 int current_stage = 0;
 
+typedef struct room{
+    int door: 4;
+    int enemy_length;
+}room;
+
 int random(){
     srand(time(0) * instances++);
     return rand();
@@ -21,21 +26,10 @@ int generate_range(int min, int max){
 
 void generateRoom(world_array *world){
     unsigned char moves = generate_range(4, 12);
-    unsigned char x[12], y[12];
-    unsigned char last_dir = 0;
+    room rooms[moves];
     
     for (int i = 0; i < moves; i++){
-        switch (generate_range(0, 3)){ // Generate a direction
-            case 3:
-            break;
-            
-            case 2:
-            break;
-
-            case 1:
-            break;
-
-            default:
-            break;}
-    } 
+        rooms[i].door = generate_range(0, 3);
+        rooms[i].enemy_length = generate_range(3, 12);
+    }
 }

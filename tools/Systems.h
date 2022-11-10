@@ -1,6 +1,6 @@
 #pragma once
 #include <stdio.h>
-#include "Game_State.h"
+#include "game_state.h"
 
 void enemy_loot(int id)
 {

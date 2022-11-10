@@ -1,16 +1,28 @@
-all: main
+OS := $(shell uname)
 
-main:
-	gcc -o main main.c -Wall -lmingw32 -lSDL2main -lSDL2
-	./main.exe
-	del main.exe
+ifeq ( $(OS), windows ) 
+	LDFLAGS := -Wall -lmingw32 -lSDL2main -lSDL2
+	EXTENSION := .exe
+	KILL := del
+else
+	LDFLAGS := -L/usr/local/lib -lSDL2 -Wl,-rpath=/usr/local/lib
+	EXTENSION :=
+	KILL :=  rm -f
 
-test:
-	gcc -o test test_main.c -Wall -lmingw32 -lSDL2main -lSDL2
-	./test.exe
-	del test.exe
+endif
 
-platformer:
-	gcc -o platformer ./example/platformer.c -Wall -lmingw32 -lSDL2main -lSDL2
-	./platformer.exe
-	del platformer.exe
+all: test main
+
+os:
+	echo $(OS)
+
+test: test_main
+
+main: $@
+
+# platformer: ./example/platformer
+
+%:
+	gcc -o $@ $@.c -Wall $(LDFLAGS)
+	./$@$(EXTENSION)
+	$(KILL) $@$(EXTENSION)

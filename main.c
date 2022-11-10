@@ -6,7 +6,7 @@
 #include "tools/Player_Systems.h"
 
 #define W_HEIGHT 680
-#define W_WIDTH 948
+#define W_WIDTH 1048
 
 int main(int argc, char *argv[])
 {
@@ -34,17 +34,19 @@ int main(int argc, char *argv[])
   }
 
   int running = 1;
-  int player_inputs[7] = {};
+  int player_inputs[7] = {0, 0, 0, 0, 0, 0, 0};
   SDL_Event event;
 
   init_storage();
   init_textures(renderer);
+  
 
   entity player[3];
+    printf("Player's sprite: %p, NULL: %p\n", player[0].sprite, NULL);
 
   player[0] = entity_buffer[0]; // Enhance array when multiplayer is added
 
-  init_entity(player, (W_WIDTH - 50) / 2, (W_HEIGHT - 50) / 2);
+  init_entity(&player[0], (W_WIDTH - 50) / 2, (W_HEIGHT - 50) / 2);
 
   switch_location(Dungeon, entity_buffer); // REMOVE: this call after properly setting up the Hub and Dungeon Generation
 
@@ -68,7 +70,7 @@ int main(int argc, char *argv[])
     else
     {
       // handleInput_UI(&event,);
-      // render_UI(renderer); // TODO: Write UI rendering
+      // render_UI(renderer); //TODO: Write UI rendering
     }
     
     SDL_RenderPresent(renderer);
