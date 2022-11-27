@@ -1,7 +1,7 @@
 OS := $(shell uname)
 
 ifeq ( $(OS), windows ) 
-	LDFLAGS := -Wall -lmingw32 -lSDL2main -lSDL2
+	LDFLAGS := -Wall -lmingw32 -lSDL2main -lSDL2 -O3 -Os
 	EXTENSION := .exe
 	KILL := del
 else
@@ -11,18 +11,18 @@ else
 
 endif
 
+.PHONY: all os test main
 all: test main
 
 os:
 	echo $(OS)
 
-test: test_main
-
-main: $@
+test: _test
+main: _main
 
 # platformer: ./example/platformer
 
-%:
+_%:
 	gcc -o $@ $@.c -Wall $(LDFLAGS)
 	./$@$(EXTENSION)
-	$(KILL) $@$(EXTENSION)
+#	$(KILL) $@$(EXTENSION)
