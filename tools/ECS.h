@@ -13,8 +13,8 @@
 typedef struct entity{
     unsigned int indicator : 4;
     unsigned int id : 8;
-    SDL_FRect * sprite;
-    SDL_Rect * src;
+    SDL_FRect sprite;
+    SDL_Rect *src;
     unsigned char *components;
 } entity;
 
@@ -58,8 +58,9 @@ void add_element(world_array *arr, entity *atlas, float x, float y){
 }
 
 void remove_element(world_array *arr, int index){
-    arr->elements[index] = arr->elements[--arr->size];
-    arr->elements[arr->size] = (entity) {};
+    free(arr->elements[index].components);
+    arr->elements[index] = arr->elements[arr->size];
+    arr->elements[arr->size--] = (entity) {};
 }
 
 void free_world(world_array *arr){

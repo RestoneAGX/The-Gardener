@@ -94,7 +94,8 @@ void handleInput(SDL_Event *event, int *game_active, int *keyInput)
         break;
 
       case SDL_SCANCODE_SPACE: inventory[1] = 5;
-      switch_location(game_location +1, entity_buffer);
+      // DISABLE FOR DEMO
+      // switch_location(game_location +1, entity_buffer);
       break;
 
       default:
@@ -124,11 +125,11 @@ void handlePlayerMovement(SDL_FRect *p_sprite, int *directional_inputs)
   if (p_sprite->y > 680 - p_sprite->h) p_sprite->y = 680 - p_sprite->h; // Screen width
 }
 
-
 void handleCombat(entity* plr, int *inputs){
   if (inputs[Atk] || inputs[Side]){
     for(int i = 0; i < world.size; i++){
-      if (!BitCheck(world.elements[i].indicator, 1)){
+      
+      if (!BitCheck(world.elements[i].indicator, 1)){ // Checking if it's an item
           float ePoint = world.elements[i].sprite->x + world.elements[i].sprite->y;
           float pPoint;
           
@@ -151,7 +152,7 @@ void handleCombat(entity* plr, int *inputs){
           printf("Enemy Point: %f, Player Point: %f, distance: %i\n", ePoint, pPoint, abs(ePoint - pPoint));
 
           hitbox(world.elements + i, i, plr->components[1], pPoint, atk_range);
-      }else if (BitCheck(world.elements[i].indicator, 1)){
+      }else{
         add_item(inventory, Inventory_Slots, world.elements[i].id, world.elements[i].components[0]);
         remove_element(&world, i);
       }

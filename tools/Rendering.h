@@ -11,7 +11,7 @@
 
 #define buffer_entry(i, width, height, src_x, src_y, base_w, base_h)                                                                                 \
     (entity){                                                                                                                                        \
-        .id = i, .sprite = &(SDL_FRect){.w = width, .h = height}, &(SDL_Rect) { .x = base_w * src_x, .y = base_h * src_y, .w = base_w, .h = base_h } \
+        .id = i, .sprite = (SDL_FRect){.w = width, .h = height}, &(SDL_Rect) { .x = base_w * src_x, .y = base_h * src_y, .w = base_w, .h = base_h } \
     }
 
 SDL_Texture *entity_texture_atlas;

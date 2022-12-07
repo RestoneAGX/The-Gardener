@@ -1,4 +1,5 @@
 OS := $(shell uname)
+DISTRO := $(shell lsb_release -si)
 
 ifeq ( $(OS), windows ) 
 	LDFLAGS := -Wall -lmingw32 -lSDL2main -lSDL2 -O3 -Os
@@ -19,6 +20,8 @@ os:
 
 test: _test
 main: _main
+clean:
+	rm -r _main _test
 
 # platformer: ./example/platformer
 
