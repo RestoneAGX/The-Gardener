@@ -125,12 +125,37 @@ void handlePlayerMovement(SDL_FRect *p_sprite, int *directional_inputs)
   if (p_sprite->y > 680 - p_sprite->h) p_sprite->y = 680 - p_sprite->h; // Screen width
 }
 
+void Atk(entity *plr){
+    for (int i = 0; i < world.size; i++){
+        // TODO: Check if it's in range first
+        if (BitCheck(world.elements[i].indicator, 1) {
+            add_item(inventory, Inventory_Slots, world.elements[i].id, world.elements[i].components[0]);
+            remove_element(&world, i);
+        }else{
+            // if (inventory[1] > 1){
+              int x, y;
+              SDL_GetMouseState(&x, &y);
+              pPoint = x+y;
+              
+              inventory[1]--;
+              printf("Inventory Seeds: %i\n", inventory[0]);
+            // }
+        }
+    }
+}
+
+void SideAtk(entity *plr){
+    for (int i = 0; i < world.size; i++){
+        // CHECK if in range
+    }
+}
+
 void handleCombat(entity* plr, int *inputs){
   if (inputs[Atk] || inputs[Side]){
     for(int i = 0; i < world.size; i++){
       
       if (!BitCheck(world.elements[i].indicator, 1)){ // Checking if it's an item
-          float ePoint = world.elements[i].sprite->x + world.elements[i].sprite->y;
+          float ePoint = world.elements[i].sprite.x + world.elements[i].sprite.y;
           float pPoint;
           
           if (inputs[Atk]){ // Add switch statement here for different characters
@@ -145,7 +170,7 @@ void handleCombat(entity* plr, int *inputs){
           }
 
           if (inputs[Side]){
-            pPoint = plr->sprite->x + plr->sprite->y + ((plr->sprite->w + plr->sprite->h)/2);
+            pPoint = plr->sprite.x + plr->sprite.y + ((plr->sprite.w + plr->sprite.h)/2);
             cooldowns = BitSet(cooldowns, 2);
           }
 

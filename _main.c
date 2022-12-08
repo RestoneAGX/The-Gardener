@@ -37,18 +37,15 @@ int main(int argc, char *argv[])
   int player_inputs[7] = {0, 0, 0, 0, 0, 0, 0};
   SDL_Event event;
 
+  init_presets();
   init_storage();
   init_textures(renderer);
   
-
   entity player[3];
-    printf("Player's sprite: %p, NULL: %p\n", player[0].sprite, NULL);
-
   player[0] = entity_buffer[0]; // Enhance array when multiplayer is added
-
   init_entity(&player[0], (W_WIDTH - 50) / 2, (W_HEIGHT - 50) / 2);
 
-  switch_location(Dungeon, entity_buffer); // REMOVE: this call after properly setting up the Hub and Dungeon Generation
+  // switch_location(Dungeon, entity_buffer); // REMOVE: this call after properly setting up the Hub and Dungeon Generation
 
   while (running)
   {
@@ -61,7 +58,7 @@ int main(int argc, char *argv[])
     {
       UpdateTimers();
 
-      handlePlayerMovement(player[0].sprite, player_inputs); // TODO: Handle all players instead of just one
+      handlePlayerMovement(&player[0].sprite, player_inputs); // TODO: Handle all players instead of just one
       handleCombat(&player[0], player_inputs); // TODO: Handle all players instead of one
       handleEnemies();
 

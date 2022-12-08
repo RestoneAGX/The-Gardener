@@ -37,8 +37,6 @@ int world_test(){
 
         assert(arr->elements[i].components != NULL);
 
-        assert(arr->elements[i].sprite != NULL);
-
         assert(arr->elements[i].src != NULL);
 
         assert(arr->elements[i].src == entity_buffer[3].src);

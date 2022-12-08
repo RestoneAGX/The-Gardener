@@ -9,44 +9,48 @@
 #define Tile_Atlas_Len 20
 #define UI_Atlas_Len 20
 
-#define buffer_entry(i, width, height, src_x, src_y, base_w, base_h)                                                                                 \
-    (entity){                                                                                                                                        \
-        .id = i, .sprite = (SDL_FRect){.w = width, .h = height}, &(SDL_Rect) { .x = base_w * src_x, .y = base_h * src_y, .w = base_w, .h = base_h } \
+#define buffer_entry(i, src_x, src_y, base_w, base_h)                                                                                 \
+    (entity){ .id = i, .src = &(SDL_Rect) { .x = base_w * src_x, .y = base_h * src_y, .w = base_w, .h = base_h } \
     }
 
 SDL_Texture *entity_texture_atlas;
 SDL_Texture *tile_texture_atlas;
 
 entity entity_buffer[Entity_Atlas_Len] = {
-    buffer_entry(0, 50, 65, 0, 0, E_Width, E_Height),
-    buffer_entry(1, 50, 55, 1, 0, E_Width, E_Height),
-    buffer_entry(2, 50, 55, 2, 0, E_Width, E_Height),
-    buffer_entry(3, 50, 55, 3, 0, E_Width, E_Height),
+    buffer_entry(0, 0, 0, E_Width, E_Height),
+    buffer_entry(1, 1, 0, E_Width, E_Height),
+    buffer_entry(2, 2, 0, E_Width, E_Height),
+    buffer_entry(3, 3, 0, E_Width, E_Height),
 };
 
 entity tile_buffer[Tile_Atlas_Len] = {
-    buffer_entry(0, 30, 30, 0, 0, 30, 30),
-    buffer_entry(1, 30, 30, 1, 0, 30, 30),
+    buffer_entry(0, 0, 0, 30, 30),
+    buffer_entry(1, 1, 0, 30, 30),
 };
+
+void init_presets() {
+    entity_buffer[0].sprite.h = 65;
+    entity_buffer[0].sprite.w = 50;
+}
 
 void render_game(SDL_Renderer *renderer, entity plrs[3]){
     // for (int i = 0; i < 50; i++) // Less than the max amount of background items
     //     SDL_RenderCopyF(renderer, tile_texture_atlas, background[i].src, background[i].sprite);
 
     for (int i = 0; i < world.size; i++)
-        SDL_RenderCopyF(renderer, entity_texture_atlas, world.elements[i].src, world.elements[i].sprite);
+        SDL_RenderCopyF(renderer, entity_texture_atlas, world.elements[i].src, &world.elements[i].sprite);
     // SDL_RenderCopyExF(renderer, entity_atlas, world.elements[i].src, world.elements[i].sprite, 0, NULL, SDL_FLIP_NONE); // Fill in the angle(0) with a value
 
     //TODO: Render Items
 
 
     for (int i = 0; i < 1; i++) // NOTE: Change 1 -> 3
-        SDL_RenderCopyF(renderer, entity_texture_atlas, plrs[i].src, plrs[i].sprite);
+        SDL_RenderCopyF(renderer, entity_texture_atlas, plrs[i].src, &plrs[i].sprite);
 }
 
 void render_UI(SDL_Renderer *renderer, world_array *UI){
     for (int i = 0; i < UI->size; i++)
-        SDL_RenderCopyF(renderer, entity_texture_atlas, UI->elements[i].src, UI->elements[i].sprite);
+        SDL_RenderCopyF(renderer, entity_texture_atlas, UI->elements[i].src, &UI->elements[i].sprite);
 }
 
 void init_textures(SDL_Renderer *renderer)

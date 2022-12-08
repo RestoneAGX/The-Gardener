@@ -25,10 +25,9 @@ typedef struct world_array{
 } world_array;
 
 void init_entity(entity *e, float x, float y){
-    float w = e->sprite->w, h =  e->sprite->h;
-    e->sprite = malloc(4 * sizeof(float)); 
-    *e->sprite = (SDL_FRect) {.x = x, .y = y, .w = w, .h = h};
-    
+    e->sprite.x = x;
+    e->sprite.y = y;
+
     switch(e->id){ //Allocate memory according to ID
         case 3: 
         e->components = (unsigned char*) calloc (4, 1);
@@ -64,10 +63,8 @@ void remove_element(world_array *arr, int index){
 }
 
 void free_world(world_array *arr){
-    for (int i = 0; i < arr->size; i++){
+    for (int i = 0; i < arr->size; i++)
         free((arr->elements+i)->components);
-        free((arr->elements+i)->sprite);
-    }
     
     free(arr->elements);
 }

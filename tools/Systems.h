@@ -33,7 +33,7 @@ void die(entity *target, int i)
 
 void hitbox(entity *target, int i, int dmg, float hit_point, float range)
 {
-    float target_point = target->sprite->x + target->sprite->y + ((target->sprite->w + target->sprite->h) / 2);
+    float target_point = target->sprite.x + target->sprite.y + ((target->sprite.w + target->sprite.h) / 2);
 
     if (abs(target_point - hit_point) <= range)
     {
