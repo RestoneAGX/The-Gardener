@@ -175,7 +175,7 @@ void handleItems(entity *plr) {
     int iPoint = item_buffer[i]->sprite.x + item_buffer[i]->sprite.y + ((item_buffer[i]->sprite.w + item_buffer[i]->sprite.h) / 2);
     if (abs(pPoint - iPoint) <= range){
       add_item(inventory, Inventory_Slots, item_buffer[i].id, item_buffer[i].amount);
-      item_buffer[i] = item_buffer[item_buff_size--]; // TODO: check if this works as expected
+      item_buffer[i] = item_buffer[item_buff_size--]; // TODO: check if this works as expectedt
     }
   }
 }
