@@ -7,11 +7,8 @@
 #define BitClear(v,n) (v & ~(1 << n))
 #define BitSet(v,n) (v | (1 << n))
 
-#define Item 0x1 // Move this to a place where we're likely to actuall place and check for this attribute
-                 // Or Move the other checks here
-
 typedef struct entity{
-    // unsigned int indicator : 4;
+    unsigned int indicator : 4;
     unsigned int id : 8;
     SDL_FRect sprite;
     SDL_Rect *src;

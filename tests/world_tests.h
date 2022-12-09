@@ -23,17 +23,17 @@ int world_test(){
         // printf("Entity %d, indicator: %d, id: %d, sprite: %p, src: %p\n", i, arr->elements[i].indicator, arr->elements[i].id, arr->elements[i].sprite, arr->elements[i].src);
 
         // Verify that the elements in the structs match
-        assert(arr->elements[i].indicator == entity_buffer[3].indicator);
+        // assert(arr->elements[i].indicator == entity_buffer[3].indicator);
 
         assert(arr->elements[i].id == entity_buffer[3].id);
 
-        assert(arr->elements[i].sprite->w == entity_buffer[3].sprite->w);
+        assert(arr->elements[i].sprite.w == entity_buffer[3].sprite.w);
 
-        assert(arr->elements[i].sprite->h == entity_buffer[3].sprite->h);
+        assert(arr->elements[i].sprite.h == entity_buffer[3].sprite.h);
 
-        assert(arr->elements[i].sprite->x == 3.0);
+        assert(arr->elements[i].sprite.x == 3.0);
 
-        assert(arr->elements[i].sprite->y == 3.0);
+        assert(arr->elements[i].sprite.y == 3.0);
 
         assert(arr->elements[i].components != NULL);
 

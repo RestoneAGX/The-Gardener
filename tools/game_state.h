@@ -1,6 +1,6 @@
 #pragma once
 #include "ECS.h"
-#include "Systems.h"
+#include "Storage_System.h"
 
 #define Hub 0
 #define Garden 1
@@ -11,10 +11,9 @@
 unsigned char game_state = 0;
 unsigned char game_location = 0;
 
-
 entity background[50] = {};
 item item_buffer[ITEM_BUFFER_LEN] = {};
-int item_buff_size = 1;
+int item_buff_size = 0;
 
 world_array world;
 

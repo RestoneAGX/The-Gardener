@@ -51,14 +51,14 @@ int main(int argc, char *argv[])
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
 
-    handleInput(&event, &running, player_inputs); //TODO: fix crashing bug here
+    handleInput(&event, player, &running, player_inputs); //TODO: fix crashing bug here
 
     if (!game_state)
     {
       UpdateTimers();
 
       handlePlayerMovement(&player[0].sprite, player_inputs); // TODO: Handle all players instead of just one
-      handleCombat(&player[0], player_inputs); // TODO: Handle all players instead of one
+      // handleCombat(&player[0], player_inputs); // TODO: Handle all players instead of one
       handleEnemies();
 
       render_game(renderer, player);

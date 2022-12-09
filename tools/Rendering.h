@@ -41,8 +41,11 @@ void render_game(SDL_Renderer *renderer, entity plrs[3]){
         SDL_RenderCopyF(renderer, entity_texture_atlas, world.elements[i].src, &world.elements[i].sprite);
     // SDL_RenderCopyExF(renderer, entity_atlas, world.elements[i].src, world.elements[i].sprite, 0, NULL, SDL_FLIP_NONE); // Fill in the angle(0) with a value
 
-    //TODO: Render Items
-
+    // TODO: re-enable when you add items
+    /*
+    for (int i = 0; i < item_buff_size; i++)
+        SDL_RenderCopyF(renderer, entity_texture_atlas, world.elements[i].src, &item_buffer[i].sprite);
+    */
 
     for (int i = 0; i < 1; i++) // NOTE: Change 1 -> 3
         SDL_RenderCopyF(renderer, entity_texture_atlas, plrs[i].src, &plrs[i].sprite);

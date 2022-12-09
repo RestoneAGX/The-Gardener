@@ -24,24 +24,80 @@ void UpdateTimers() {
     }
 }
 
-void handleInput(SDL_Event *event, int *game_active, int *keyInput) {
+void handlePlayerMovement(SDL_FRect *p_sprite, int *directional_inputs) {
+  int speed = 7;
+
+  if (directional_inputs[Dash] > 0 && BitCheck(cooldowns, 0) == 0) {
+    speed = 100;
+    cooldowns = BitSet(cooldowns, 0);
+  }
+
+  p_sprite->x +=
+      (-directional_inputs[Left] + directional_inputs[Right]) * speed;
+  p_sprite->y += (-directional_inputs[Up] + directional_inputs[Down]) * speed;
+
+  // Collision
+  if (p_sprite->x < 0)
+    p_sprite->x = 0;
+  if (p_sprite->x > 948 - p_sprite->w)
+    p_sprite->x = 948 - p_sprite->w; // Screen width
+
+  if (p_sprite->y < 0)
+    p_sprite->y = 0;
+  if (p_sprite->y > 680 - p_sprite->h)
+    p_sprite->y = 680 - p_sprite->h; // Screen width
+}
+
+void handleCombat(entity *plr, unsigned char isAtk) {
+  int pPoint;
+  if (isAtk) {
+    // if (inventory[1] > 1){
+    int x, y;
+    SDL_GetMouseState(&x, &y);
+    pPoint = x + y;
+
+    inventory[1]--;
+    // printf("Inventory Seeds: %i\n", inventory[0]);
+    // }
+  } else {
+    pPoint = plr->sprite.x + plr->sprite.y + ((plr->sprite.w + plr->sprite.h) / 2);
+    cooldowns = BitSet(cooldowns, 2);
+  }
+
+  for (int i = 0; i < world.size; i++) {
+    hitbox(world.elements + i, i, plr->components[1], pPoint, atk_range);
+  }
+    printf("HP: %d\n", (int) plr->components[0]);
+}
+
+#define range 30
+void handleItems(entity *plr) {
+  
+  int pPoint = plr->sprite.x + plr->sprite.y + ((plr->sprite.w + plr->sprite.h) / 2);
+  for (int i = ITEM_BUFFER_LEN; i > -1 ; i -= 2) {
+    int iPoint = item_buffer[i].sprite.x + item_buffer[i].sprite.y + ((item_buffer[i].sprite.w + item_buffer[i].sprite.h) / 2);
+    if (abs(pPoint - iPoint) <= range){
+      add_item(inventory, Inventory_Slots, item_buffer[i].id, item_buffer[i].amount);
+      item_buffer[i] = item_buffer[item_buff_size--]; // TODO: check if this works as expectedt
+    }
+  }
+}
+
+void handleInput(SDL_Event *event, entity * plr, int *game_active, int *keyInput) {
   while (SDL_PollEvent(event))
     if (event->type == SDL_QUIT)
       *game_active = 0;
 
     else if (event->button.button == SDL_BUTTON_LEFT) {
-      if (event->type == SDL_MOUSEBUTTONDOWN && !BitCheck(cooldowns, 1))
-        handle
-        // keyInput[Atk] = 1;
-      else if (event->type == SDL_MOUSEBUTTONUP)
-        // keyInput[Atk] = 0;
+      if (event->type == SDL_MOUSEBUTTONDOWN && !BitCheck(cooldowns, 1)){
+            handleCombat(plr, 1);
+            handleItems(plr); 
+        }
     }
 
     else if (event->button.button == SDL_BUTTON_RIGHT) {
       if (event->type == SDL_MOUSEBUTTONDOWN && BitCheck(cooldowns, 2) == 0)
-        keyInput[Side] = 1;
-      else if (event->type == SDL_MOUSEBUTTONUP)
-        keyInput[Side] = 0;
+        handleCombat(plr, 0);
     }
 
     else if (event->type == SDL_KEYDOWN)
@@ -122,60 +178,3 @@ void handleInput(SDL_Event *event, int *game_active, int *keyInput) {
   // keyInput[2], keyInput[3]);
 }
 
-void handlePlayerMovement(SDL_FRect *p_sprite, int *directional_inputs) {
-  int speed = 7;
-
-  if (directional_inputs[Dash] > 0 && BitCheck(cooldowns, 0) == 0) {
-    speed = 100;
-    cooldowns = BitSet(cooldowns, 0);
-  }
-
-  p_sprite->x +=
-      (-directional_inputs[Left] + directional_inputs[Right]) * speed;
-  p_sprite->y += (-directional_inputs[Up] + directional_inputs[Down]) * speed;
-
-  // Collision
-  if (p_sprite->x < 0)
-    p_sprite->x = 0;
-  if (p_sprite->x > 948 - p_sprite->w)
-    p_sprite->x = 948 - p_sprite->w; // Screen width
-
-  if (p_sprite->y < 0)
-    p_sprite->y = 0;
-  if (p_sprite->y > 680 - p_sprite->h)
-    p_sprite->y = 680 - p_sprite->h; // Screen width
-}
-
-void handleCombat(entity *plr, unsigned char isAtk) {
-  int pPoint;
-  if (isAtk) {
-    // if (inventory[1] > 1){
-    int x, y;
-    SDL_GetMouseState(&x, &y);
-    pPoint = x + y;
-
-    inventory[1]--;
-    printf("Inventory Seeds: %i\n", inventory[0]);
-    // }
-  } else {
-    pPoint = plr->sprite.x + plr->sprite.y + ((plr->sprite.w + plr->sprite.h) / 2);
-    cooldowns = BitSet(cooldowns, 2);
-  }
-
-  for (int i = 0; i < world.size; i++) {
-    hitbox(world.elements + i, i, plr->components[1], pPoint, atk_range);
-  }
-}
-
-#define range 30
-void handleItems(entity *plr) {
-  
-  int pPoint = plr->sprite.x + plr->sprite.y + ((plr->sprite.w + plr->sprite.h) / 2);
-  for (int i = ITEM_BUFFER_LEN; i > -1 ; i -= 2) {
-    int iPoint = item_buffer[i]->sprite.x + item_buffer[i]->sprite.y + ((item_buffer[i]->sprite.w + item_buffer[i]->sprite.h) / 2);
-    if (abs(pPoint - iPoint) <= range){
-      add_item(inventory, Inventory_Slots, item_buffer[i].id, item_buffer[i].amount);
-      item_buffer[i] = item_buffer[item_buff_size--]; // TODO: check if this works as expectedt
-    }
-  }
-}

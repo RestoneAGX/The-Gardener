@@ -1,3 +1,4 @@
+#pragma once
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -13,7 +14,7 @@ typedef struct item{
    unsigned char id;
    unsigned char amount;
    SDL_Rect *src;
-   SDL_Frect spirte; 
+   SDL_FRect sprite; 
 }item;
 
 
