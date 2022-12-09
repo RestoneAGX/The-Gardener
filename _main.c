@@ -38,7 +38,6 @@ int main(int argc, char *argv[])
   SDL_Event event;
 
   init_presets();
-  init_storage();
   init_textures(renderer);
   
   entity player[3];

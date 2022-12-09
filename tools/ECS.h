@@ -11,7 +11,7 @@
                  // Or Move the other checks here
 
 typedef struct entity{
-    unsigned int indicator : 4;
+    // unsigned int indicator : 4;
     unsigned int id : 8;
     SDL_FRect sprite;
     SDL_Rect *src;

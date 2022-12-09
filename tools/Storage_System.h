@@ -1,17 +1,21 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 #define Armor_Slots 4
 #define Inventory_Slots 32 //Actually 16 but 2 uint8 per slot
 
 enum armor_types {Accessory, Chest, Legs, Shoes};
 
-unsigned char *armor;
-unsigned char *inventory;
+unsigned char armor[Armor_Slots];
+unsigned char inventory[Inventory_Slots];
 
-void init_storage(){
-    armor = (unsigned char *) calloc(Armor_Slots, 1);
-    inventory = (unsigned char *) calloc(Inventory_Slots, 1);
-}
+typedef struct item{
+   unsigned char id;
+   unsigned char amount;
+   SDL_Rect *src;
+   SDL_Frect spirte; 
+}item;
+
 
 void add_item(unsigned char *storage, size_t max, unsigned char id, unsigned char amount){
     for (int i = 0; i < max; i += 2)
@@ -31,4 +35,23 @@ void remove_item(unsigned char *storage, int slot){
 }
 
 
-//Save and Load functions here
+void Save_Game(){
+    FILE* fd = fopen("Game.save", "w+");
+
+    fwrite(armor, 1, Armor_Slots, fd);
+    fwrite(inventory, 1, Inventory_Slots, fd);
+
+    fclose(fd);
+}
+
+void Load_Game(){
+    FILE* fd = fopen("Game.save", "r");
+
+    for (int i = 0; i < Armor_Slots;  i++)
+        armor[i] = (unsigned char) fgetc(fd);
+
+    for (int i = 0; i < Inventory_Slots; i++)
+        inventory[i] = (unsigned char) fgetc(fd);
+
+    fclose(fd);
+}

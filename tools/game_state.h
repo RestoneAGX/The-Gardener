@@ -1,14 +1,21 @@
 #pragma once
 #include "ECS.h"
+#include "Systems.h"
 
 #define Hub 0
 #define Garden 1
 #define Dungeon 2
- 
+
+#define ITEM_BUFFER_LEN 1236
+
 unsigned char game_state = 0;
 unsigned char game_location = 0;
 
+
 entity background[50] = {};
+item item_buffer[ITEM_BUFFER_LEN] = {};
+int item_buff_size = 1;
+
 world_array world;
 
 void switch_location(int i, entity *e_buffer){
