@@ -31,6 +31,13 @@ entity tile_buffer[Tile_Atlas_Len] = {
 void init_presets() {
     entity_buffer[0].sprite.h = 65;
     entity_buffer[0].sprite.w = 50;
+
+    entity_buffer[1].sprite.h = 65;
+    entity_buffer[1].sprite.w = 50;
+
+    entity_buffer[2].sprite.h = 65;
+    entity_buffer[2].sprite.w = 50;
+
 }
 
 void render_game(SDL_Renderer *renderer, entity plrs[3]){

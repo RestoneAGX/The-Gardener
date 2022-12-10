@@ -4,6 +4,7 @@
 #include "tools/Systems.h"
 #include "tools/Rendering.h"
 #include "tools/Player_Systems.h"
+#include "tools/Demo_System.h" // REMOVE: after finishing the 1 week demo
 
 #define W_HEIGHT 680
 #define W_WIDTH 1048
@@ -44,7 +45,7 @@ int main(int argc, char *argv[])
   player[0] = entity_buffer[0]; // Enhance array when multiplayer is added
   init_entity(&player[0], (W_WIDTH - 50) / 2, (W_HEIGHT - 50) / 2);
 
-  // switch_location(Dungeon, entity_buffer); // REMOVE: this call after properly setting up the Hub and Dungeon Generation
+  switch_location(Dungeon, entity_buffer); // REMOVE: this call after properly setting up the Hub and Dungeon Generation
 
   while (running)
   {
@@ -56,10 +57,11 @@ int main(int argc, char *argv[])
     if (!game_state)
     {
       UpdateTimers();
+      enemy_generation(&world, entity_buffer);
 
       handlePlayerMovement(&player[0].sprite, player_inputs); // TODO: Handle all players instead of just one
       // handleCombat(&player[0], player_inputs); // TODO: Handle all players instead of one
-      handleEnemies();
+      handleEnemies(player);
 
       render_game(renderer, player);
     }

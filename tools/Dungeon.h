@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <time.h>
-#include <ECS.h>
+#include "ECS.h"
 
 #define Max_Enemies 12
 
@@ -12,9 +12,9 @@ typedef struct room{
     int enemy_length;
 }room;
 
-int random(){
+int generate_random(){
     srand(time(0) * instances++);
-    return rand();
+    return (rand());
 }
 
 int generate_range(int min, int max){

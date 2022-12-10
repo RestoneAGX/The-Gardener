@@ -17,7 +17,6 @@ typedef struct item{
    SDL_FRect sprite; 
 }item;
 
-
 void add_item(unsigned char *storage, size_t max, unsigned char id, unsigned char amount){
     for (int i = 0; i < max; i += 2)
         if (!storage[i]){

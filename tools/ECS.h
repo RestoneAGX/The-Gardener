@@ -25,14 +25,15 @@ void init_entity(entity *e, float x, float y){
     e->sprite.x = x;
     e->sprite.y = y;
 
+    // HP, ATK, DEF, SPEED (are the defaults for entities)
     switch(e->id){ //Allocate memory according to ID
-        case 3: 
-        e->components = (unsigned char*) calloc (4, 1);
+        case 3: e->components = (unsigned char*) calloc (4, 1);
         e->components[0] = 255;
         break;
-
-        case 2:
-        case 1: // HP, Atk, Def, Speed //Also Place default stats
+        case 2: e->components = (unsigned char*) calloc (1, 1);
+        e->components[0] = 255;
+        case 1: e->components = (unsigned char*) calloc (1, 1);
+        e->components[0] = 255;
         case 0: e->components = (unsigned char*) calloc (10, 1); 
         e->components[0] = 255;
         e->components[1] = 5;

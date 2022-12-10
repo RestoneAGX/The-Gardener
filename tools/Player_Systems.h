@@ -3,7 +3,7 @@
 #include <SDL2/SDL.h>
 
 #define Timer_len 3
-#define atk_range 10
+#define atk_range 30
 
 enum inputs { Left, Right, Up, Down, Dash, Atk, Side };
 
@@ -17,7 +17,7 @@ void UpdateTimers() {
     if (BitCheck(cooldowns, i)) {
       if (!timer[i])
         timer[i] = SDL_GetTicks();
-      else if ((float)(SDL_GetTicks() - timer[i]) / 1000 >= timer_max[i]) {
+      else if ( (float) (SDL_GetTicks() - timer[i]) / 1000 >= timer_max[i]) {
         cooldowns = BitClear(cooldowns, i);
         timer[i] = 0;
       }
@@ -64,9 +64,8 @@ void handleCombat(entity *plr, unsigned char isAtk) {
     cooldowns = BitSet(cooldowns, 2);
   }
 
-  for (int i = 0; i < world.size; i++) {
+  for (int i = 0; i < world.size; i++)
     hitbox(world.elements + i, i, plr->components[1], pPoint, atk_range);
-  }
     printf("HP: %d\n", (int) plr->components[0]);
 }
 
@@ -89,15 +88,16 @@ void handleInput(SDL_Event *event, entity * plr, int *game_active, int *keyInput
       *game_active = 0;
 
     else if (event->button.button == SDL_BUTTON_LEFT) {
-      if (event->type == SDL_MOUSEBUTTONDOWN && !BitCheck(cooldowns, 1)){
+      // if (event->type == SDL_MOUSEBUTTONDOWN && !BitCheck(cooldowns, 1)){
             handleCombat(plr, 1);
             handleItems(plr); 
-        }
+      //  }
     }
 
     else if (event->button.button == SDL_BUTTON_RIGHT) {
-      if (event->type == SDL_MOUSEBUTTONDOWN && BitCheck(cooldowns, 2) == 0)
-        handleCombat(plr, 0);
+      // if (event->type == SDL_MOUSEBUTTONDOWN && BitCheck(cooldowns, 2) == 0)
+        if (BitCheck(cooldowns, 2) == 0)
+            handleCombat(plr, 0);
     }
 
     else if (event->type == SDL_KEYDOWN)
