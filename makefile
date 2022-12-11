@@ -18,6 +18,8 @@ all: test main
 os:
 	echo $(OS)
 
+win:
+	clang -o testing _test.c -target x86_64-win32
 test: _test
 main: _main
 clean:
