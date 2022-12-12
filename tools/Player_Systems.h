@@ -1,6 +1,5 @@
-#include "Storage_System.h"
 #include "Systems.h"
-#include <SDL2/SDL.h>
+#include "Storage_System.h"
 
 #define Timer_len 3
 #define atk_range 30
@@ -60,22 +59,22 @@ void handleCombat(entity *plr, unsigned char isAtk) {
     // printf("Inventory Seeds: %i\n", inventory[0]);
     // }
   } else {
-    pPoint = plr->sprite.x + plr->sprite.y + ((plr->sprite.w + plr->sprite.h) / 2);
+    pPoint = xPoint(plr->sprite);
     cooldowns = BitSet(cooldowns, 2);
   }
 
   for (int i = 0; i < world.size; i++)
     hitbox(world.elements + i, i, plr->components[1], pPoint, atk_range);
-    printf("HP: %d\n", (int) plr->components[0]);
+
+  printf("HP: %d\n", (int) plr->components[0]);
 }
 
-#define range 30
 void handleItems(entity *plr) {
   
-  int pPoint = plr->sprite.x + plr->sprite.y + ((plr->sprite.w + plr->sprite.h) / 2);
+  int pPoint = xPoint(plr->sprite)
   for (int i = ITEM_BUFFER_LEN; i > -1 ; i -= 2) {
-    int iPoint = item_buffer[i].sprite.x + item_buffer[i].sprite.y + ((item_buffer[i].sprite.w + item_buffer[i].sprite.h) / 2);
-    if (abs(pPoint - iPoint) <= range){
+    int iPoint = xPoint(item_buffer[i].sprite);
+    if (abs(pPoint - iPoint) <= 50){
       add_item(inventory, Inventory_Slots, item_buffer[i].id, item_buffer[i].amount);
       item_buffer[i] = item_buffer[item_buff_size--]; // TODO: check if this works as expectedt
     }
@@ -174,7 +173,6 @@ void handleInput(SDL_Event *event, entity * plr, int *game_active, int *keyInput
         break;
       }
 
-  // printf("left: %d, Right: %d, Up: %d, Down: %d\n", keyInput[0], keyInput[1],
-  // keyInput[2], keyInput[3]);
+  // printf("left: %d, Right: %d, Up: %d, Down: %d\n", keyInput[0], keyInput[1], keyInput[2], keyInput[3]);
 }
 

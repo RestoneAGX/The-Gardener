@@ -1,6 +1,6 @@
 #pragma once
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #define Armor_Slots 4
 #define Inventory_Slots 32 //Actually 16 but 2 uint8 per slot
@@ -9,13 +9,6 @@ enum armor_types {Accessory, Chest, Legs, Shoes};
 
 unsigned char armor[Armor_Slots];
 unsigned char inventory[Inventory_Slots];
-
-typedef struct item{
-   unsigned char id;
-   unsigned char amount;
-   SDL_Rect *src;
-   SDL_FRect sprite; 
-}item;
 
 void add_item(unsigned char *storage, size_t max, unsigned char id, unsigned char amount){
     for (int i = 0; i < max; i += 2)

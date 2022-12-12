@@ -7,6 +7,13 @@
 #define BitClear(v,n) (v & ~(1 << n))
 #define BitSet(v,n) (v | (1 << n))
 
+typedef struct item{
+   unsigned char id;
+   unsigned char amount;
+   SDL_Rect *src;
+   SDL_FRect sprite; 
+}item;
+
 typedef struct entity{
     unsigned int indicator : 4;
     unsigned int id : 8;

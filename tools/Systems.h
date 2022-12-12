@@ -1,33 +1,18 @@
 #pragma once
-#include <stdio.h>
 #include "game_state.h"
 
-void enemy_loot(int id)
+void die(entity *target, int i) // TODO: Make the switch statement branchless
 {
-    switch (id)
-    {
-    case 3:
-        // Drop a tomato seed
-        break;
-    case 2:
+    switch (target->id) {
+    case 0: 
     case 1:
-    case 0: // Drop Inventory
-    break;
-    default:
+    case 2: // Drop Inventory
         break;
-    }
-}
 
-void die(entity *target, int i)
-{
-    if (target->id == 0) // TODO: change "==1" -> "< 3"
-    {
-        // Kill Player
-    }
-    else
-    {
-        enemy_loot(target->id);
+    case 3: // Drop a tomato seed
+    default:
         remove_element(&world, i);
+        break;
     }
 }
 
@@ -55,7 +40,7 @@ void handleEnemies(entity *plr)
         int y_dir = ( world.elements[i].sprite.y < plr->sprite.y ) + 
                   ( ( world.elements[i].sprite.y > plr->sprite.y ) * -1 );
 
-        world.elements[i].sprite.x += x_dir; // NOTE: 30 is a temp speed
+        world.elements[i].sprite.x += x_dir;
         world.elements[i].sprite.y += y_dir;
 
         float target_point = xPoint(world.elements[i].sprite); 

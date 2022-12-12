@@ -1,5 +1,3 @@
-#include<SDL2/SDL.h>
-#include "ECS.h"
 #include "Dungeon.h"
 
 float target_time = 2;

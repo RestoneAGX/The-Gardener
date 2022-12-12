@@ -1,6 +1,6 @@
-#include <stdlib.h>
-#include <time.h>
 #include "ECS.h"
+#include <time.h>
+#include <stdlib.h>
 
 #define Max_Enemies 12
 

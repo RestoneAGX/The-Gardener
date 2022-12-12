@@ -1,6 +1,7 @@
 #pragma once
+#include "UI.h"
 #include "ECS.h"
-#include "Storage_System.h"
+#include <stdio.h>
 
 #define Hub 0
 #define Garden 1
