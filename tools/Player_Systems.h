@@ -71,7 +71,7 @@ void handleCombat(entity *plr, unsigned char isAtk) {
 
 void handleItems(entity *plr) {
   
-  int pPoint = xPoint(plr->sprite)
+  int pPoint = xPoint(plr->sprite);
   for (int i = ITEM_BUFFER_LEN; i > -1 ; i -= 2) {
     int iPoint = xPoint(item_buffer[i].sprite);
     if (abs(pPoint - iPoint) <= 50){

@@ -18,7 +18,7 @@ enum {
   tile_texture_atlas,
   item_texture_atlas,
   UI_texture_atlas
-}
+};
 
 SDL_Texture *texture_atlas[4];
 

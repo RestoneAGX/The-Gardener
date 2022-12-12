@@ -10,7 +10,6 @@
 #define ITEM_BUFFER_LEN 1236
 #define xPoint(sprite) ( sprite.x + sprite.y + ( (sprite.w + sprite.h) / 2) )
 
-
 unsigned char game_state = 0;
 unsigned char game_location = 0;
 

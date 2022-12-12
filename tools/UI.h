@@ -1,3 +1,4 @@
+#include "ECS.h"
 #include <SDL2/SDL.h>
 
 #define Interactable 0x1

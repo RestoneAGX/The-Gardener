@@ -23,7 +23,7 @@ int generate_range(int min, int max){
 }
 
 // if world size == 0; if ++current_stage == Boss_Room -> Start_boss; else -> generateRoom;
-
+/*
 void generateRoom(world_array *world){
     unsigned char moves = generate_range(4, 12);
     room rooms[moves];
@@ -33,3 +33,4 @@ void generateRoom(world_array *world){
         rooms[i].enemy_length = generate_range(3, 12);
     }
 }
+*/
