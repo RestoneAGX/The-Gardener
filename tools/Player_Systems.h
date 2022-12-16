@@ -38,8 +38,8 @@ void handlePlayerMovement(SDL_FRect *p_sprite, int *directional_inputs) {
   // Collision
   if (p_sprite->x < 0)
     p_sprite->x = 0;
-  if (p_sprite->x > 948 - p_sprite->w)
-    p_sprite->x = 948 - p_sprite->w; // Screen width
+  if (p_sprite->x > 1048 - p_sprite->w)
+    p_sprite->x = 1048 - p_sprite->w; // Screen width
 
   if (p_sprite->y < 0)
     p_sprite->y = 0;
@@ -65,8 +65,6 @@ void handleCombat(entity *plr, unsigned char isAtk) {
 
   for (int i = 0; i < world.size; i++)
     hitbox(world.elements + i, i, plr->components[1], pPoint, atk_range);
-
-  printf("HP: %d\n", (int) plr->components[0]);
 }
 
 void handleItems(entity *plr) {
@@ -88,14 +86,14 @@ void handleInput(SDL_Event *event, entity * plr, int *game_active, int *keyInput
 
     else if (event->button.button == SDL_BUTTON_LEFT) {
       // if (event->type == SDL_MOUSEBUTTONDOWN && !BitCheck(cooldowns, 1)){
+      if (event->type == SDL_MOUSEBUTTONDOWN && !BitCheck(cooldowns, 1)){
             handleCombat(plr, 1);
             handleItems(plr); 
-      //  }
+      }
     }
 
     else if (event->button.button == SDL_BUTTON_RIGHT) {
-      // if (event->type == SDL_MOUSEBUTTONDOWN && BitCheck(cooldowns, 2) == 0)
-        if (BitCheck(cooldowns, 2) == 0)
+       if (event->type == SDL_MOUSEBUTTONDOWN && BitCheck(cooldowns, 2) == 0)
             handleCombat(plr, 0);
     }
 

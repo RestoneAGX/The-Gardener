@@ -63,8 +63,8 @@ void add_element(world_array *arr, entity *atlas, float x, float y){
 
 void remove_element(world_array *arr, int index){
     free(arr->elements[index].components);
-    arr->elements[index] = arr->elements[arr->size];
-    arr->elements[arr->size--] = (entity) {};
+    arr->elements[index] = arr->elements[--arr->size];
+    arr->elements[arr->size] = (entity) {};
 }
 
 void free_world(world_array *arr){
