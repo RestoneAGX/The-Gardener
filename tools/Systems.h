@@ -1,5 +1,6 @@
 #pragma once
 #include "game_state.h"
+#include <math.h>
 
 #define xPoint(sprite) ( sprite.x + sprite.y + ( (sprite.w + sprite.h) * 0.5 ) )
 
