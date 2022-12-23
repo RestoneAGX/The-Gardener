@@ -9,8 +9,8 @@
 #define Tile_Atlas_Len 20
 #define UI_Atlas_Len 20
 
-#define buffer_entry(i, src_x, src_y, base_w, base_h)                                                                                 \
-    (entity){ .id = i, .src = &(SDL_Rect) { .x = base_w * src_x, .y = base_h * src_y, .w = base_w, .h = base_h } \
+#define buffer_entry(i, sprite_width, sprite_height, src_x, src_y, base_w, base_h)                                                                                 \
+    (entity){ .id = i, .sprite = {.w = sprite_width, .h = sprite_height}, .src = &(SDL_Rect) { .x = base_w * src_x, .y = base_h * src_y, .w = base_w, .h = base_h } \
     }
 
 enum {
@@ -23,29 +23,16 @@ enum {
 SDL_Texture *texture_atlas[4];
 
 entity entity_buffer[Entity_Atlas_Len] = {
-    buffer_entry(0, 0, 0, E_Width, E_Height),
-    buffer_entry(1, 1, 0, E_Width, E_Height),
-    buffer_entry(2, 2, 0, E_Width, E_Height),
-    buffer_entry(3, 3, 0, E_Width, E_Height),
+    buffer_entry(0, 50, 65, 0, 0, E_Width, E_Height),
+    buffer_entry(1, 50, 65, 1, 0, E_Width, E_Height),
+    buffer_entry(2, 50, 65, 2, 0, E_Width, E_Height),
+    buffer_entry(3, 50, 50, 3, 0, E_Width, E_Height),
 };
 
 entity tile_buffer[Tile_Atlas_Len] = {
-    buffer_entry(0, 0, 0, 30, 30),
-    buffer_entry(1, 1, 0, 30, 30),
+    buffer_entry(0, 30, 30, 0, 0, 30, 30),
+    buffer_entry(1, 30, 30, 1, 0, 30, 30),
 };
-
-// TODO: FIGURE HOW THE HELL YOU FILL THIS IN AT COMPILE TIME
-void init_presets() {
-    entity_buffer[0].sprite.h = 65;
-    entity_buffer[0].sprite.w = 50;
-
-    entity_buffer[1].sprite.h = 65;
-    entity_buffer[1].sprite.w = 50;
-
-    entity_buffer[2].sprite.h = 65;
-    entity_buffer[2].sprite.w = 50;
-
-}
 
 void render_game(SDL_Renderer *renderer, entity plrs[3]){
     // for (int i = 0; i < 50; i++) // Less than the max amount of background items

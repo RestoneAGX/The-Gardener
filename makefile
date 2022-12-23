@@ -3,7 +3,7 @@ DISTRO := $(shell lsb_release -si)
 
 WIN_CHAIN := $(HOME)/.toolchains/x86_64-w64-mingw32
 
-ARGS := -Wall -03 -0s
+ARGS := -Wall -O3 -Os
 
 ifeq ( $(OS), windows ) 
 	LDFLAGS := -lmingw32 -lSDL2main -lSDL2

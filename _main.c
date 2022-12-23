@@ -7,7 +7,7 @@
 
 int main(int argc, char *argv[])
 {
-  if (SDL_Init(SDL_INIT_EVERYTHING)) // Initializes the timer, audio, video, joystick, haptic, gamecontroller and events subsystems
+  if (SDL_Init(SDL_INIT_EVERYTHING)) 
   {
     printf("Error initializing SDL: %s\n", SDL_GetError());
     return -1;
@@ -34,7 +34,6 @@ int main(int argc, char *argv[])
   int player_inputs[7] = {0, 0, 0, 0, 0, 0, 0};
   SDL_Event event;
 
-  init_presets();
   init_textures(renderer);
   
   entity player[3];
