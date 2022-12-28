@@ -54,10 +54,7 @@ int main(int argc, char *argv[])
         UpdateTimers();
         // enemy_generation(&world, entity_buffer);
         // DEBUG
-        float pPoint = xPoint(player[0].sprite);
-        float tPoint = xPoint(world.elements[0].sprite);
-        float dist = pPoint - tPoint;
-        printf("pPoint: %f, tPoint: %f, Distance: %f, abs_dist: %f\n", pPoint, tPoint, dist, fabs(dist));
+        printf("Distance: %f\n", dist(player[0].sprite, world.elements[0].sprite));
 
         handlePlayerMovement(&player[0].sprite, player_inputs); // TODO: Handle all players instead of just one
         handleEnemies(player);

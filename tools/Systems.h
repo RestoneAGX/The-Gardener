@@ -2,7 +2,10 @@
 #include "game_state.h"
 #include <math.h>
 
-#define xPoint(sprite) ( sprite.x + sprite.y + ( (sprite.w + sprite.h) * 0.5 ) )
+#define xPoint(sprite) ( sprite.x + sprite.y )
+#define dist(spriteA, spriteB) (sqrt(                               \
+    ( (spriteB.x - spriteA.x) * (spriteB.x - spriteA.x) ) + \
+    ( (spriteB.y - spriteA.y) * (spriteB.y - spriteA.y) ) ) * 0.1)
 
 void die(entity *target, int i) // TODO: Make the switch statement branchless
 {
@@ -23,19 +26,21 @@ void die(entity *target, int i) // TODO: Make the switch statement branchless
     }
 }
 
-void hitbox(entity *target, int i, int dmg, float hit_point, float range)
+int hitbox(entity *target, int i, entity *caller, float range)
 {
-    float target_point = xPoint(target->sprite);
+    float distance = dist(target->sprite, caller->sprite);
 
-    if (fabs(hit_point - target_point) <= range)
+    if ( distance <= range)
     {
-        printf("Enemy HP: %i, Distance: %f\n", target->components[0], fabs(target_point - hit_point));
+        printf("Enemy HP: %i, Distance: %f\n", target->components[0], distance);
 
-        if ((int) target->components[0] - dmg > 0)
-            target->components[0] -= dmg; // TODO: Maybe add defense calculation
+        if (target->components[0] - caller->components[1] > 0)
+            target->components[0] -= caller->components[1]; // TODO: Add def into Calculation
         else
             die(target, i);
+        return 1;
     }
+    return 0;
 }
 
 void handleEnemies(entity *plr)
@@ -50,10 +55,7 @@ void handleEnemies(entity *plr)
         // world.elements[i].sprite.x += x_dir;
         // world.elements[i].sprite.y += y_dir;
 
-        float target_point = xPoint(world.elements[i].sprite); 
-   
-
-        hitbox(plr, i, 10, target_point, 50);
+        hitbox(plr, i, world.elements + i, 10);
         /*
         if (BitCheck(world.elements[i].indicator, 0))
         {

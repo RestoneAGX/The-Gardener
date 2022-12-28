@@ -25,6 +25,7 @@ os:
 win:
 	clang -o The_Gardener _main.c $(ARGS) --target=x86_64-w64-mingw32 --sysroot=$(WIN_CHAIN) -fuse-ld=lld -lSDL2main -lSDL2
 
+	
 test: _test
 main: _main
 clean:
@@ -33,6 +34,6 @@ clean:
 # platformer: ./example/platformer
 
 _%:
-	gcc -o $@ $@.c $(ARGS) $(LDFLAGS)
+	zig cc -o $@ $@.c $(ARGS) $(LDFLAGS)
 	./$@$(EXTENSION)
 #	$(KILL) $@$(EXTENSION)

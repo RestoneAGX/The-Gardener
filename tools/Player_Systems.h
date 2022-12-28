@@ -2,7 +2,7 @@
 #include "Storage_System.h"
 
 #define Timer_len 3
-#define atk_range 30
+#define atk_range 10
 
 enum inputs { Left, Right, Up, Down, Dash, Atk, Side };
 
@@ -64,7 +64,7 @@ void handleCombat(entity *plr, unsigned char isAtk) {
   }
 
   for (int i = 0; i < world.size; i++)
-    hitbox(world.elements + i, i, plr->components[1], pPoint, atk_range);
+    hitbox(world.elements + i, i, plr, atk_range);
 }
 
 void handleItems(entity *plr) {
