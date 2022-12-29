@@ -45,7 +45,7 @@ void render_game(SDL_Renderer *renderer, entity plrs[3]){
     // for (int i = 0; i < item_buff_size; i++)
     //     SDL_RenderCopyF(renderer, texture_atlas[item_texture_atlas], item_buffer[i].src, &item_buffer[i].sprite);
 
-    for (int i = 0; i < 1; i++) // NOTE: Change 1 -> 3
+    for (int i = 0; i < 1; i++) // NOTE: Change 1 -> 2 or 4, depending on how development goes
         SDL_RenderCopyF(renderer, texture_atlas[entity_texture_atlas], plrs[i].src, &plrs[i].sprite);
 }
 
@@ -63,7 +63,7 @@ void init_textures(SDL_Renderer *renderer)
         "Resources/UI_Sheet.bmp",
     };
 
-    for (int i = 0; i < 2; i++) // Replace "< 2" with "< 4"
+    for (int i = 0; i < 2; i++) // TODO: Replace "< 2" with "< 4"
     {
         SDL_Surface *image = SDL_LoadBMP(name[i]);
         SDL_Surface *optimized_image = SDL_ConvertSurface(image, image->format, 0);

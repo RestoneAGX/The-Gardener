@@ -53,14 +53,14 @@ int main(int argc, char *argv[])
         UpdateTimers();
 
         handlePlayerMovement(&player[0].sprite, player_inputs); // TODO: Handle all players instead of just one
-        handleEnemies(player);
+        // handleEnemies(player);
 
         render_game(renderer, player);
     }
     else
     {
       // handleInput_UI(&event,);
-      // render_UI(renderer); //TODO: Write UI rendering
+      // render_UI(renderer); 
     }
     
     SDL_RenderPresent(renderer);
