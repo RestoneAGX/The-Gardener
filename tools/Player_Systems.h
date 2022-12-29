@@ -147,14 +147,13 @@ void handleInput(SDL_Event *event, entity * plr, int *game_active, int *keyInput
             case SDL_SCANCODE_F: // Activate Ultimate
               break;
 
-            case SDL_SCANCODE_Q:
+            case SDL_SCANCODE_Q: 
               game_state = !game_state;
               break;
 
             case SDL_SCANCODE_SPACE:
                 switch_location(game_location +1, entity_buffer);
               break;
-
             default:
                 break;
             }

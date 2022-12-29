@@ -1,16 +1,33 @@
 #pragma once
 
-typedef struct entity{
-    unsigned int indicator : 4;
-    unsigned char id;
-    int src_idx; // Pointer may be faster, but uses more memory
-    int component_idx;
-    SDL_FRect sprite;
-} entity;
+#define BitCheck(v,n) (v & (1 << n))
+#define BitToggle(v,n) (v ^ (1 << n))
+#define BitClear(v,n) (v & ~(1 << n))
+#define BitSet(v,n) (v | (1 << n))
 
-typedef struct world_array{
-    int cap, size;
-    entity *elements;
-    T
-    // Perhaps Texture atlas ptr
+// TODO: Replace All lengths will the theoretical amount needed
+#define ITEM_BUFF_LEN 60
+#define ENTITY_BUFF_LEN 60
+#define PROJECTILE_BUFF_LEN 255
+
+typedef struct ItemBuffer {
+    unsigned char current_idx;
+    unsigned char id[ITEM_BUFF_LEN];
+    unsigned char amount[ITEM_BUFF_LEN];
+    SDL_Rect *src[ITEM_BUFF_LEN];
+    SDL_FRect sprite[ITEM_BUFF_LEN];
 }
+
+typedef struct EntityBuffer {
+    unsigned char id[ENTITY_BUFF_LEN];
+    SDL_FRect sprite[ENTITY_BUFF_LEN];
+    SDL_Rect *src[ENTITY_BUFF_LEN];
+    unsigned char components[ENTITY_BUFF_LEN][3]; // TODO: 3 is a dummy value 
+}
+
+typedef struct ProjectileBuffer {
+    unsigned int effects:4[PROJECTILE_BUFF_LEN];
+    SDL_FRect sprite[PROJECTILE_BUFF_LEN];
+    SDL_Rect *src[PROJECTILE_BUFF_LEN];
+}
+

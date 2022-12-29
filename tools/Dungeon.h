@@ -2,7 +2,7 @@
 #include <time.h>
 #include <stdlib.h>
 
-#define Max_Enemies 12
+#define Max_Enemies 5
 
 int instances = 0;
 int current_stage = 0;
