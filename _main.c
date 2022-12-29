@@ -1,5 +1,4 @@
 #include "tools/Rendering.h"
-#include "tools/Demo_System.h" // REMOVE: after finishing the 1 week demo
 #include "tools/Player_Systems.h"
 
 #define W_HEIGHT 680
@@ -31,7 +30,7 @@ int main(int argc, char *argv[])
   }
 
   int running = 1;
-  int player_inputs[7] = {0, 0, 0, 0, 0, 0, 0};
+  int player_inputs[8] = {};
   SDL_Event event;
 
   init_textures(renderer);
@@ -47,14 +46,11 @@ int main(int argc, char *argv[])
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
 
-    handleInput(&event, player, &running, player_inputs); //TODO: fix crashing bug here
+    handleInput(&event, player, &running, player_inputs);
 
     if (!game_state)
     {
         UpdateTimers();
-        // enemy_generation(&world, entity_buffer);
-        // DEBUG
-        printf("Distance: %f\n", dist(player[0].sprite, world.elements[0].sprite));
 
         handlePlayerMovement(&player[0].sprite, player_inputs); // TODO: Handle all players instead of just one
         handleEnemies(player);

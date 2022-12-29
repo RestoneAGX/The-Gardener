@@ -4,7 +4,7 @@
 #define Timer_len 3
 #define atk_range 10
 
-enum inputs { Left, Right, Up, Down, Dash, Atk, Side };
+enum inputs { Left, Right, Up, Down, Dash, Atk, Side, Ult };
 
 unsigned char cooldowns = 0; // bits: 1 -> dash; 2 -> atk; 3 -> side;
 
@@ -31,8 +31,7 @@ void handlePlayerMovement(SDL_FRect *p_sprite, int *directional_inputs) {
     cooldowns = BitSet(cooldowns, 0);
   }
 
-  p_sprite->x +=
-      (-directional_inputs[Left] + directional_inputs[Right]) * speed;
+  p_sprite->x += (-directional_inputs[Left] + directional_inputs[Right]) * speed;
   p_sprite->y += (-directional_inputs[Up] + directional_inputs[Down]) * speed;
 
   // Collision
@@ -81,96 +80,94 @@ void handleItems(entity *plr) {
 
 void handleInput(SDL_Event *event, entity * plr, int *game_active, int *keyInput) {
   while (SDL_PollEvent(event))
-    if (event->type == SDL_QUIT)
-      *game_active = 0;
+    switch(event->type){
+        case SDL_MOUSEBUTTONDOWN:
+            // TODO: Maybe add cooldowns
+            handleCombat(plr, (event->button.button == SDL_BUTTON_LEFT) & (event->button.button != SDL_BUTTON_RIGHT) );
+            handleItems(plr); // TODO: Perhaps make this automatically go into your inventory, while also having a menu showing all dropped loot through the dungeon. You can choose what you will keep and what you will toss
+            break;
+        case SDL_QUIT: *game_active = 0;
+            break;
+        case SDL_KEYDOWN:
+            switch (event->key.keysym.scancode) {
+            case SDL_SCANCODE_LEFT:
+            case SDL_SCANCODE_A:
+                keyInput[Left] = 1;
+                break;
 
-    else if (event->button.button == SDL_BUTTON_LEFT) {
-      // if (event->type == SDL_MOUSEBUTTONDOWN && !BitCheck(cooldowns, 1)){
-      if (event->type == SDL_MOUSEBUTTONDOWN && !BitCheck(cooldowns, 1)){
-            handleCombat(plr, 1);
-            handleItems(plr); 
-      }
+            case SDL_SCANCODE_RIGHT:
+            case SDL_SCANCODE_D:
+                keyInput[Right] = 1;
+                break;
+
+            case SDL_SCANCODE_UP:
+            case SDL_SCANCODE_W:
+                keyInput[Up] = 1;
+                break;
+
+            case SDL_SCANCODE_DOWN:
+            case SDL_SCANCODE_S:
+                keyInput[Down] = 1;
+                break;
+
+            case SDL_SCANCODE_LSHIFT:
+                keyInput[Dash] = 1;
+                break;
+
+            default:
+                break;
+            }
+            break;
+        case SDL_KEYUP:
+            switch (event->key.keysym.scancode) {
+            case SDL_SCANCODE_LEFT:
+            case SDL_SCANCODE_A:
+              keyInput[Left] = 0;
+              break;
+
+            case SDL_SCANCODE_RIGHT:
+            case SDL_SCANCODE_D:
+              keyInput[Right] = 0;
+              break;
+
+            case SDL_SCANCODE_UP:
+            case SDL_SCANCODE_W:
+              keyInput[Up] = 0;
+              break;
+
+            case SDL_SCANCODE_DOWN:
+            case SDL_SCANCODE_S:
+              keyInput[Down] = 0;
+              break;
+
+            case SDL_SCANCODE_LSHIFT:
+              keyInput[Dash] = 0;
+              break;
+
+            case SDL_SCANCODE_F: // Activate Ultimate
+              break;
+
+            case SDL_SCANCODE_Q:
+              game_state = !game_state;
+              break;
+
+            case SDL_SCANCODE_SPACE:
+                switch_location(game_location +1, entity_buffer);
+              break;
+
+            default:
+                break;
+            }
+            break;
+        default:
+            break;
     }
-
-    else if (event->button.button == SDL_BUTTON_RIGHT) {
-       if (event->type == SDL_MOUSEBUTTONDOWN && BitCheck(cooldowns, 2) == 0)
-            handleCombat(plr, 0);
-    }
-
-    else if (event->type == SDL_KEYDOWN)
-      switch (event->key.keysym.scancode) {
-      case SDL_SCANCODE_LEFT:
-      case SDL_SCANCODE_A:
-        keyInput[Left] = 1;
-        break;
-
-      case SDL_SCANCODE_RIGHT:
-      case SDL_SCANCODE_D:
-        keyInput[Right] = 1;
-        break;
-
-      case SDL_SCANCODE_UP:
-      case SDL_SCANCODE_W:
-        keyInput[Up] = 1;
-        break;
-
-      case SDL_SCANCODE_DOWN:
-      case SDL_SCANCODE_S:
-        keyInput[Down] = 1;
-        break;
-
-      case SDL_SCANCODE_LSHIFT:
-        keyInput[Dash] = 1;
-        break;
-
-      default:
-        break;
-      }
-
-    else if (event->type == SDL_KEYUP)
-      switch (event->key.keysym.scancode) {
-      case SDL_SCANCODE_LEFT:
-      case SDL_SCANCODE_A:
-        keyInput[Left] = 0;
-        break;
-
-      case SDL_SCANCODE_RIGHT:
-      case SDL_SCANCODE_D:
-        keyInput[Right] = 0;
-        break;
-
-      case SDL_SCANCODE_UP:
-      case SDL_SCANCODE_W:
-        keyInput[Up] = 0;
-        break;
-
-      case SDL_SCANCODE_DOWN:
-      case SDL_SCANCODE_S:
-        keyInput[Down] = 0;
-        break;
-
-      case SDL_SCANCODE_LSHIFT:
-        keyInput[Dash] = 0;
-        break;
-
-      case SDL_SCANCODE_F: // Activate Ultimate
-        break;
-
-      case SDL_SCANCODE_Q:
-        // Inventory_Active = !Inventory_Active; //Toggle inventory
-        game_state = !game_state;
-        break;
-
-      case SDL_SCANCODE_SPACE:
-        inventory[1] = 5;
-        // DISABLE FOR DEMO
-        // switch_location(game_location +1, entity_buffer);
-        break;
-
-      default:
-        break;
-      }
 
   // printf("left: %d, Right: %d, Up: %d, Down: %d\n", keyInput[0], keyInput[1], keyInput[2], keyInput[3]);
 }
 
+#include "Systems.h"
+#include "Storage_System.h"
+
+#define Timer_len 3
+#define atk_range 10
