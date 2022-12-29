@@ -22,20 +22,21 @@ enum {
 
 SDL_Texture *texture_atlas[4];
 
-entity entity_buffer[Entity_Atlas_Len] = {
+entity entity_presets[Entity_Atlas_Len] = {
     buffer_entry(0, 50, 65, 0, 0, E_Width, E_Height),
     buffer_entry(1, 50, 65, 1, 0, E_Width, E_Height),
     buffer_entry(2, 50, 65, 2, 0, E_Width, E_Height),
     buffer_entry(3, 50, 50, 3, 0, E_Width, E_Height),
 };
 
-entity tile_buffer[Tile_Atlas_Len] = {
+entity tile_presets[Tile_Atlas_Len] = {
     buffer_entry(0, 30, 30, 0, 0, 30, 30),
     buffer_entry(1, 30, 30, 1, 0, 30, 30),
 };
 
 void render_game(SDL_Renderer *renderer, entity plrs[3]){
     // for (int i = 0; i < 50; i++) // Less than the max amount of background items
+    //
     //     SDL_RenderCopyF(renderer, texture_atlas[tile_texture_atlas], background[i].src, background[i].sprite);
 
     for (int i = 0; i < world.size; i++)

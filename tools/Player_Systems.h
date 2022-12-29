@@ -152,7 +152,7 @@ void handleInput(SDL_Event *event, entity * plr, int *game_active, int *keyInput
               break;
 
             case SDL_SCANCODE_SPACE:
-                switch_location(game_location +1, entity_buffer);
+                switch_location(game_location +1, entity_presets);
               break;
             default:
                 break;

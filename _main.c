@@ -36,10 +36,10 @@ int main(int argc, char *argv[])
   init_textures(renderer);
   
   entity player[3];
-  player[0] = entity_buffer[0]; // Enhance array when multiplayer is added
+  player[0] = entity_presets[0]; // Enhance array when multiplayer is added
   init_entity(player, (W_WIDTH - 50) / 2, (W_HEIGHT - 50) / 2);
 
-  switch_location(Dungeon, entity_buffer); // REMOVE: this call after properly setting up the Hub and Dungeon Generation
+  switch_location(Dungeon, entity_presets); // REMOVE: this call after properly setting up the Hub and Dungeon Generation
 
   while (running)
   {
