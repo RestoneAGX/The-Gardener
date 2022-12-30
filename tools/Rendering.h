@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include "game_state.h"
+#include "v2/ECS2.h"
 
 #define E_Width 20
 #define E_Height 25
@@ -34,20 +35,16 @@ entity tile_presets[Tile_Atlas_Len] = {
     buffer_entry(1, 30, 30, 1, 0, 30, 30),
 };
 
-void render_game(SDL_Renderer *renderer, entity plrs[3]){
+void render_game(SDL_Renderer *renderer){
     // for (int i = 0; i < 50; i++) // Less than the max amount of background items
-    //
     //     SDL_RenderCopyF(renderer, texture_atlas[tile_texture_atlas], background[i].src, background[i].sprite);
 
     for (int i = 0; i < world.size; i++)
-        SDL_RenderCopyF(renderer, texture_atlas[entity_texture_atlas], world.elements[i].src, &world.elements[i].sprite);
+        SDL_RenderCopyF(renderer, texture_atlas[entity_texture_atlas], world.src[i], &world.sprite[i]);
     // SDL_RenderCopyExF(renderer, texture_atlas[entity_atlas], world.elements[i].src, world.elements[i].sprite, 0, NULL, SDL_FLIP_NONE); // Fill in the angle(0) with a value
 
-    // for (int i = 0; i < item_buff_size; i++)
-    //     SDL_RenderCopyF(renderer, texture_atlas[item_texture_atlas], item_buffer[i].src, &item_buffer[i].sprite);
-
-    for (int i = 0; i < 1; i++) // NOTE: Change 1 -> 2 or 4, depending on how development goes
-        SDL_RenderCopyF(renderer, texture_atlas[entity_texture_atlas], plrs[i].src, &plrs[i].sprite);
+    // for (int i = 0; i < items.size; i++)
+    //     SDL_RenderCopyF(renderer, texture_atlas[item_texture_atlas], items.src[i], &items.sprite[i]);
 }
 
 void render_UI(SDL_Renderer *renderer, world_array *UI){

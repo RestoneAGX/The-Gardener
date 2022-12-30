@@ -35,9 +35,7 @@ int main(int argc, char *argv[])
 
   init_textures(renderer);
   
-  entity player[3];
-  player[0] = entity_presets[0]; // Enhance array when multiplayer is added
-  init_entity(player, (W_WIDTH - 50) / 2, (W_HEIGHT - 50) / 2);
+  add_entity(&world, entity_presets, (W_WIDTH - 50) / 2, (W_HEIGHT - 50) / 2);
 
   switch_location(Dungeon, entity_presets); // REMOVE: this call after properly setting up the Hub and Dungeon Generation
 
@@ -46,14 +44,14 @@ int main(int argc, char *argv[])
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
 
-    handleInput(&event, player, &running, player_inputs);
+    handleInput(&event, &running, player_inputs);
 
     if (!game_state)
     {
         UpdateTimers();
 
-        handlePlayerMovement(&player[0].sprite, player_inputs); // TODO: Handle all players instead of just one
-        // handleEnemies(player);
+        handlePlayerMovement(world.sprite, player_inputs); // TODO: Handle all players instead of just one
+        // handleEnemies();
 
         render_game(renderer, player);
     }
@@ -67,7 +65,6 @@ int main(int argc, char *argv[])
     SDL_Delay(1000 / 60);
   }
 
-  free_world(&world);
   free_texture_buffers();
 
   SDL_DestroyRenderer(renderer);

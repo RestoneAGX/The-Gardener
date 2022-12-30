@@ -46,45 +46,38 @@ void handlePlayerMovement(SDL_FRect *p_sprite, int *directional_inputs) {
     p_sprite->y = 680 - p_sprite->h; // Screen width
 }
 
-void handleCombat(entity *plr, unsigned char isAtk) {
-  int pPoint;
-  if (isAtk) {
-    // if (inventory[1] > 1){
-    int x, y;
-    SDL_GetMouseState(&x, &y);
-    pPoint = x + y;
+void handleCombat() {
+  // if (isAtk) {
+  //   if (inventory[1] > 1){
+  //   inventory[1]--;
+  //   }
+  // } else {
+  //   cooldowns = BitSet(cooldowns, 2);
+  // }
 
-    inventory[1]--;
-    // printf("Inventory Seeds: %i\n", inventory[0]);
-    // }
-  } else {
-    pPoint = xPoint(plr->sprite);
-    cooldowns = BitSet(cooldowns, 2);
-  }
-
-  for (int i = 0; i < world.size; i++)
-    hitbox(world.elements + i, i, plr, atk_range);
+  for (int i = 1; i < world.size; i++) // Replace: 1 with the expected multiplayer [2 || 4]
+    hitbox(0, i, atk_range);
 }
 
-void handleItems(entity *plr) {
-  
-  int pPoint = xPoint(plr->sprite);
-  for (int i = ITEM_BUFFER_LEN; i > -1 ; i -= 2) {
-    int iPoint = xPoint(item_buffer[i].sprite);
-    if (abs(pPoint - iPoint) <= 50){
-      add_item(inventory, Inventory_Slots, item_buffer[i].id, item_buffer[i].amount);
-      item_buffer[i] = item_buffer[item_buff_size--]; // TODO: check if this works as expectedt
-    }
-  }
-}
+// NOTE: Replace with a menu to select all non-seed items (or things that were not filled)
+// void handleItems(entity *plr) {
+//   int pPoint = xPoint(plr->sprite);
+//   for (int i = ITEM_BUFFER_LEN; i > -1 ; i -= 2) {
+//     int iPoint = xPoint(item_buffer[i].sprite);
+//     if (abs(pPoint - iPoint) <= 50){
+//       add_item(inventory, Inventory_Slots, item_buffer[i].id, item_buffer[i].amount);
+//       item_buffer[i] = item_buffer[item_buff_size--]; // TODO: check if this works as expectedt
+//     }
+//   }
+// }
 
-void handleInput(SDL_Event *event, entity * plr, int *game_active, int *keyInput) {
+void handleInput(SDL_Event *event, int *game_active, int *keyInput) {
   while (SDL_PollEvent(event))
     switch(event->type){
         case SDL_MOUSEBUTTONDOWN:
             // TODO: Maybe add cooldowns
-            handleCombat(plr, (event->button.button == SDL_BUTTON_LEFT) & (event->button.button != SDL_BUTTON_RIGHT) );
-            handleItems(plr); // TODO: Perhaps make this automatically go into your inventory, while also having a menu showing all dropped loot through the dungeon. You can choose what you will keep and what you will toss
+            handleCombat();
+            // handleItems(plr); // TODO: Perhaps make this automatically go into your inventory, while also having a menu showing all dropped loot through the dungeon. You can choose what you will keep and what you will toss
             break;
         case SDL_QUIT: *game_active = 0;
             break;
@@ -161,12 +154,4 @@ void handleInput(SDL_Event *event, entity * plr, int *game_active, int *keyInput
         default:
             break;
     }
-
-  // printf("left: %d, Right: %d, Up: %d, Down: %d\n", keyInput[0], keyInput[1], keyInput[2], keyInput[3]);
 }
-
-#include "Systems.h"
-#include "Storage_System.h"
-
-#define Timer_len 3
-#define atk_range 10

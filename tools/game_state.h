@@ -1,6 +1,7 @@
 #pragma once
 #include "UI.h"
-#include "ECS.h"
+// #include "ECS.h"
+#include "v2/ECS2.h"
 #include <stdio.h>
 
 #define Hub 0
@@ -12,34 +13,27 @@
 unsigned char game_state = 0;
 unsigned char game_location = 0;
 
-entity background[50] = {};
-item item_buffer[ITEM_BUFFER_LEN] = {};
-int item_buff_size = 0;
+itemBuffer items;
+entityBuffer world;
 
-world_array world;
+entity background[50] = {};
 
 void switch_location(int i, entity *e_buffer){
     if (i > Dungeon) game_location = Hub;
     else if (i < Hub) game_location = Dungeon;
     else game_location = i;
 
-    free_world(&world);
-
     switch(game_location){
         case Hub:
-        init_world(&world, 25);
         // Load a preset Hub room
         break;
         
         case Garden:
-        init_world(&world, 50);
         // Load the basic grid with the garden's plant data loaded
         break;
 
         case Dungeon:
-        init_world(&world, 50);
-        add_element(&world, e_buffer + 1, (1048 - 50) / 2, (680 - 50) / 2); // TODO: Do error handling later.
-        // Buffer itself has a finite size
+        add_entity(entity_buffer, e_buffer + 1, (1048 - 50) / 2, (680 - 50) / 2); // TODO: check if bitshifting is viable
         // Generate a dungeon with rooms
         // Load the first room into the buffer (The doors will choose which part of the dungeon will be loaded next into the render buffer)
         break;

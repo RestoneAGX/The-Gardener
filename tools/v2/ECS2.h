@@ -12,7 +12,7 @@
 #define PROJECTILE_BUFF_LEN 255
 
 typedef struct itemBuffer {
-    unsigned char current_idx;
+    unsigned char size;
     unsigned char id[ITEM_BUFF_LEN];
     unsigned char amount[ITEM_BUFF_LEN];
     SDL_Rect *src[ITEM_BUFF_LEN];
@@ -22,7 +22,7 @@ typedef struct itemBuffer {
 typedef struct Components { unsigned char Hp, Atk, Def, x, y; } Components;
 
 typedef struct entityBuffer {
-    unsigned char current_idx;
+    unsigned char size;
     unsigned char id[ENTITY_BUFF_LEN];
     SDL_Rect *src[ENTITY_BUFF_LEN];
     Components components[ENTITY_BUFF_LEN]; 
@@ -30,7 +30,7 @@ typedef struct entityBuffer {
 }entityBuffer;
 
 typedef struct projectileBuffer {
-    unsigned char current_idx;
+    unsigned char size;
     unsigned char id[PROJECTILE_BUFF_LEN];
     unsigned char effects[PROJECTILE_BUFF_LEN];
     SDL_Rect *src[PROJECTILE_BUFF_LEN];
@@ -58,12 +58,14 @@ typedef struct projectile {
     SDL_FRect sprite;
 }projectile;
 
-#define cIdx buff->current_idx
+#define cIdx buff->size
 #define BUFFER_FUNCS(val, sp_case, reverse_sp_case) \
-void add_##val (val##Buffer* buff, val * val##_presets, unsigned char id){ \
-    buff->id[cIdx] = id; \
-    buff->src[cIdx] = val##_presets[id].src; \
-    buff->sprite[cIdx++] = val##_presets[id].sprite; \
+void add_##val (val##Buffer* buff, val * val##_preset,float x, float y){ \
+    buff->id[cIdx] = val##_preset->id; \
+    buff->src[cIdx] = val##_preset->src; \
+    buff->sprite[cIdx] = val##_preset->sprite; \
+    buff->sprite[cIdx].x = x;
+    buff->sprite[cIdx].y = y;
     sp_case; \
 } \
 void remove_##val (val##Buffer* buff, unsigned char idx){ \
@@ -75,11 +77,11 @@ void remove_##val (val##Buffer* buff, unsigned char idx){ \
 
 
 BUFFER_FUNCS(item,
-             buff->amount[cIdx] = item_presets[id].amount,
+             buff->amount[cIdx++] = item_presets->amount,
              buff->amount[idx] = buff->amount[cIdx])
 
 BUFFER_FUNCS(entity, 
-             buff->components[cIdx] = entity_presets[id].components,
+             buff->components[cIdx++] = entity_presets->components,
              buff->components[idx] = buff->components[cIdx])
 
 BUFFER_FUNCS(projectile, , )

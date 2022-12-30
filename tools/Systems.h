@@ -7,9 +7,9 @@
     ( (spriteB.x - spriteA.x) * (spriteB.x - spriteA.x) ) + \
     ( (spriteB.y - spriteA.y) * (spriteB.y - spriteA.y) ) ) * 0.1)
 
-void die(entity *target, int i) // TODO: Make the switch statement branchless
+void die(int id, int i) // TODO: Make the switch statement branchless
 {
-    switch (target->id) {
+    switch (id) {
         case 0: // NOTE: Uncomment the ones below, they're DEMO changes
             // printf("Player Dead\n");
             break;
@@ -26,34 +26,33 @@ void die(entity *target, int i) // TODO: Make the switch statement branchless
     }
 }
 
-int hitbox(entity *target, int i, entity *caller, float range)
-{
-    float distance = dist(target->sprite, caller->sprite);
 
-    if ( distance <= range)
+int hitbox(int caller, int opp, float range)
+{
+    if ( dist(world.sprite[caller], world.sprite[opp]) <= range)
     {
-        target->components[0] -= caller->components[1]; // TODO: Add def into Calculation
-        if (target->components[0] < 1)
-            die(target, i);
-       
+        world.components[opp].Hp -= world.components[caller].Atk; // TODO: Add def into Calculation
+        if (world.components[opp].Hp < 1)
+            die(world.id[opp], opp);
+
         return 1;
     }
     return 0;
 }
 
-void handleEnemies(entity *plr)
+void handleEnemies()
 { 
     for (int i = 0; i < world.size; i++)
     {
         // CHASING
-        // int x_dir = ( world.elements[i].sprite.x < plr->sprite.x ) + 
-                  ( ( world.elements[i].sprite.x > plr->sprite.x ) * -1 ); 
-        // int y_dir = ( world.elements[i].sprite.y < plr->sprite.y ) + 
-                  ( ( world.elements[i].sprite.y > plr->sprite.y ) * -1 );
+        // int x_dir = ( world.sprite[i].x < plr->sprite.x ) + 
+                  ( ( world.sprite[i].x > plr->sprite.x ) * -1 ); 
+        // int y_dir = ( world.sprite[i].y < plr->sprite.y ) + 
+                  ( ( world.sprite[i].y > plr->sprite.y ) * -1 );
 
-        // world.elements[i].sprite.x += x_dir;
-        // world.elements[i].sprite.y += y_dir;
+        // world.sprite[i].x += x_dir;
+        // world.sprite[i].y += y_dir;
 
-        hitbox(plr, i, world.elements + i, 10);
+        hitbox(0, i, 10); // TODO: Loop over other players
     }
 }
