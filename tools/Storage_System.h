@@ -10,7 +10,7 @@ enum armor_types {Accessory, Chest, Legs, Shoes};
 unsigned char armor[Armor_Slots];
 unsigned char inventory[Inventory_Slots];
 
-void add_item(unsigned char *storage, size_t max, unsigned char id, unsigned char amount){
+void fill_slot(unsigned char *storage, size_t max, unsigned char id, unsigned char amount){
     for (int i = 0; i < max; i += 2)
         if (!storage[i]){
             storage[i] = id;
@@ -18,12 +18,12 @@ void add_item(unsigned char *storage, size_t max, unsigned char id, unsigned cha
         }
 }
 
-void move_item(unsigned char *storage, size_t max, int old_slot, int new_slot){
+void move_slot(unsigned char *storage, size_t max, int old_slot, int new_slot){
     storage[new_slot++] = storage[old_slot++];
     storage[new_slot] = storage[old_slot];
 }
 
-void remove_item(unsigned char *storage, int slot){
+void empty_slot(unsigned char *storage, int slot){
     storage[slot] = 0;
 }
 

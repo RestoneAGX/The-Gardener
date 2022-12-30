@@ -21,7 +21,7 @@ void die(int id, int i) // TODO: Make the switch statement branchless
             printf ("3, ");
         default:
             printf("Now in your mom\n");
-            remove_element(&world, i);
+            remove_entity(&world, i);
             break;
     }
 }
@@ -46,9 +46,9 @@ void handleEnemies()
     {
         // CHASING
         // int x_dir = ( world.sprite[i].x < plr->sprite.x ) + 
-                  ( ( world.sprite[i].x > plr->sprite.x ) * -1 ); 
+        //          ( ( world.sprite[i].x > plr->sprite.x ) * -1 ); 
         // int y_dir = ( world.sprite[i].y < plr->sprite.y ) + 
-                  ( ( world.sprite[i].y > plr->sprite.y ) * -1 );
+        //          ( ( world.sprite[i].y > plr->sprite.y ) * -1 );
 
         // world.sprite[i].x += x_dir;
         // world.sprite[i].y += y_dir;

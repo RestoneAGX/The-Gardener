@@ -1,6 +1,5 @@
 #pragma once
 #include "UI.h"
-// #include "ECS.h"
 #include "v2/ECS2.h"
 #include <stdio.h>
 
@@ -33,13 +32,11 @@ void switch_location(int i, entity *e_buffer){
         break;
 
         case Dungeon:
-        add_entity(entity_buffer, e_buffer + 1, (1048 - 50) / 2, (680 - 50) / 2); // TODO: check if bitshifting is viable
+        add_entity(&world, e_buffer + 1, (1048 - 50) / 2, (680 - 50) / 2); // TODO: check if bitshifting is viable
         // Generate a dungeon with rooms
         // Load the first room into the buffer (The doors will choose which part of the dungeon will be loaded next into the render buffer)
         break;
     }
-
-    printf("World Size: %i and capacity: %i\n", world.size, world.cap);
 
     // Switch rendering to whichever buffer is needed
     // Set World = {insert preset buffer or Hub dungeon generation}

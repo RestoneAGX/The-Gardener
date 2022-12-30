@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
         handlePlayerMovement(world.sprite, player_inputs); // TODO: Handle all players instead of just one
         // handleEnemies();
 
-        render_game(renderer, player);
+        render_game(renderer);
     }
     else
     {

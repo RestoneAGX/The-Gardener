@@ -1,6 +1,5 @@
 #include <SDL2/SDL.h>
 #include "game_state.h"
-#include "v2/ECS2.h"
 
 #define E_Width 20
 #define E_Height 25
@@ -47,10 +46,12 @@ void render_game(SDL_Renderer *renderer){
     //     SDL_RenderCopyF(renderer, texture_atlas[item_texture_atlas], items.src[i], &items.sprite[i]);
 }
 
-void render_UI(SDL_Renderer *renderer, world_array *UI){
+/*
+void render_UI(SDL_Renderer *renderer, entityBuffer*UI){
     for (int i = 0; i < UI->size; i++)
         SDL_RenderCopyF(renderer, texture_atlas[UI_texture_atlas], UI->elements[i].src, &UI->elements[i].sprite);
 }
+*/
 
 void init_textures(SDL_Renderer *renderer)
 {
