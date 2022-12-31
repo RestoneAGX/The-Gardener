@@ -6,7 +6,7 @@
 
 enum inputs { Left, Right, Up, Down, Dash, Atk, Side, Ult };
 
-unsigned char cooldowns = 0; // bits: 1 -> dash; 2 -> atk; 3 -> side;
+unsigned char cooldowns = 0; // bits: 1 -> dash; 2 -> atk;
 
 Uint32 timer[Timer_len] = {};
 float timer_max[Timer_len] = {.75, .25, .5};
@@ -23,11 +23,33 @@ void UpdateTimers() {
     }
 }
 
+#define DeltaTime 60
+#define DashForce  7175
+
+float velocity = 0;
+float dash_time = 0;
+
 void handlePlayerMovement(SDL_FRect *p_sprite, int *directional_inputs) {
   int speed = 7;
+  
+  int xDir = (-directional_inputs[Left] + directional_inputs[Right]);
+  int yDir = (-directional_inputs[Up] + directional_inputs[Down]);
 
-  if (directional_inputs[Dash] > 0 && BitCheck(cooldowns, 0) == 0) {
-    speed = 100;
+  if (directional_inputs[Dash]) {
+    dash_time += 0.1;
+    velocity += DashForce / (DeltaTime * DeltaTime);
+    velocity -= dash_time;
+
+    if (velocity < 0){
+        directional_inputs[Dash] = 0;
+        velocity = 0;
+        dash_time = 0;
+        handleCombat(); 
+    }
+
+    p_sprite->x += xDir * velocity;
+    p_sprite->y += yDir * velocity;
+
     cooldowns = BitSet(cooldowns, 0);
   }
 
@@ -59,23 +81,11 @@ void handleCombat() {
     hitbox(0, i, atk_range);
 }
 
-// NOTE: Replace with a menu to select all non-seed items (or things that were not filled)
-// void handleItems(entity *plr) {
-//   int pPoint = xPoint(plr->sprite);
-//   for (int i = ITEM_BUFFER_LEN; i > -1 ; i -= 2) {
-//     int iPoint = xPoint(item_buffer[i].sprite);
-//     if (abs(pPoint - iPoint) <= 50){
-//       add_item(inventory, Inventory_Slots, item_buffer[i].id, item_buffer[i].amount);
-//       item_buffer[i] = item_buffer[item_buff_size--]; // TODO: check if this works as expectedt
-//     }
-//   }
-// }
-
 void handleInput(SDL_Event *event, int *game_active, int *keyInput) {
   while (SDL_PollEvent(event))
     switch(event->type){
         case SDL_MOUSEBUTTONDOWN:
-            // TODO: Maybe add cooldowns
+            keyInput[Dash] = ( !BitCheck(cooldowns, 0) ) & ( event->button.button == SDL_BUTTON_RIGHT );
             handleCombat();
             // handleItems(plr); // TODO: Perhaps make this automatically go into your inventory, while also having a menu showing all dropped loot through the dungeon. You can choose what you will keep and what you will toss
             break;
@@ -131,10 +141,6 @@ void handleInput(SDL_Event *event, int *game_active, int *keyInput) {
             case SDL_SCANCODE_DOWN:
             case SDL_SCANCODE_S:
               keyInput[Down] = 0;
-              break;
-
-            case SDL_SCANCODE_LSHIFT:
-              keyInput[Dash] = 0;
               break;
 
             case SDL_SCANCODE_F: // Activate Ultimate
