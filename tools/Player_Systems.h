@@ -23,51 +23,6 @@ void UpdateTimers() {
     }
 }
 
-#define DeltaTime 60
-#define DashForce  7175
-
-float velocity = 0;
-float dash_time = 0;
-
-void handlePlayerMovement(SDL_FRect *p_sprite, int *directional_inputs) {
-  int speed = 7;
-  
-  int xDir = (-directional_inputs[Left] + directional_inputs[Right]);
-  int yDir = (-directional_inputs[Up] + directional_inputs[Down]);
-
-  if (directional_inputs[Dash]) {
-    dash_time += 0.1;
-    velocity += DashForce / (DeltaTime * DeltaTime);
-    velocity -= dash_time;
-
-    if (velocity < 0){
-        directional_inputs[Dash] = 0;
-        velocity = 0;
-        dash_time = 0;
-        handleCombat(); 
-    }
-
-    p_sprite->x += xDir * velocity;
-    p_sprite->y += yDir * velocity;
-
-    cooldowns = BitSet(cooldowns, 0);
-  }
-
-  p_sprite->x += (-directional_inputs[Left] + directional_inputs[Right]) * speed;
-  p_sprite->y += (-directional_inputs[Up] + directional_inputs[Down]) * speed;
-
-  // Collision
-  if (p_sprite->x < 0)
-    p_sprite->x = 0;
-  if (p_sprite->x > 1048 - p_sprite->w)
-    p_sprite->x = 1048 - p_sprite->w; // Screen width
-
-  if (p_sprite->y < 0)
-    p_sprite->y = 0;
-  if (p_sprite->y > 680 - p_sprite->h)
-    p_sprite->y = 680 - p_sprite->h; // Screen width
-}
-
 void handleCombat() {
   // if (isAtk) {
   //   if (inventory[1] > 1){
@@ -79,6 +34,46 @@ void handleCombat() {
 
   for (int i = 1; i < world.size; i++) // Replace: 1 with the expected multiplayer [2 || 4]
     hitbox(0, i, atk_range);
+}
+
+#define DeltaTime 60
+#define DashForce  7175
+#define pSpeed 7
+
+float velocity = 0;
+float dash_time = 0;
+
+void handlePlayerMovement(SDL_FRect *p_sprite, int *directional_inputs) {
+  int xDir = (-directional_inputs[Left] + directional_inputs[Right]);
+  int yDir = (-directional_inputs[Up] + directional_inputs[Down]);
+
+  if (directional_inputs[Dash]) {
+    cooldowns = BitSet(cooldowns, 0);
+    
+    dash_time += 0.1;
+    velocity += DashForce / (DeltaTime * DeltaTime);
+    velocity -= dash_time;
+
+    if (velocity < 0){
+        directional_inputs[Dash] = 0;
+        velocity = 0;
+        dash_time = 0;
+        handleCombat(); 
+    }
+
+    p_sprite->x += xDir * velocity * pSpeed;
+    p_sprite->y += yDir * velocity * pSpeed;
+  }
+
+  p_sprite->x += (-directional_inputs[Left] + directional_inputs[Right]) * pSpeed;
+  p_sprite->y += (-directional_inputs[Up] + directional_inputs[Down]) * pSpeed;
+
+#define screen_width (1048 - p_sprite->w)
+  // Collision
+  p_sprite->x = (int) p_sprite->x & ( (p_sprite->x < 0) - 1 );
+  p_sprite->y = (int) p_sprite->y & ( (p_sprite->y < 0) - 1 );
+  if (p_sprite->y > 680 - p_sprite->h)
+    p_sprite->y = 680 - p_sprite->h; // Screen width
 }
 
 void handleInput(SDL_Event *event, int *game_active, int *keyInput) {
